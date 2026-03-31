@@ -4,6 +4,7 @@ import ModeSelector from './components/ModeSelector'
 import NodeGraph from './components/NodeGraph'
 import SegmentTray from './components/SegmentTray'
 import MovementDetail from './components/MovementDetail'
+import ExportFlowModal from './components/ExportFlowModal'
 import useMovements from './hooks/useMovements'
 
 const MAX_PER_SEGMENT = 4
@@ -13,6 +14,7 @@ export default function App() {
   const [mode, setMode] = useState('category')
   const [segments, setSegments] = useState([])
   const [detailMovement, setDetailMovement] = useState(null)
+  const [showExport, setShowExport] = useState(false)
 
   // Quick-add: add to last segment, auto-create if empty or last has >= MAX_PER_SEGMENT
   const quickAdd = useCallback((movement) => {
@@ -38,23 +40,8 @@ export default function App() {
   }, [])
 
   const exportFlow = useCallback(() => {
-    const flow = {
-      name: 'TunaMat Flow',
-      exportedAt: new Date().toISOString(),
-      segments: segments.map((s) => ({
-        name: s.name,
-        movements: s.movements.map((m) => ({
-          id: m.id, name: m.name, category: m.category, subcategory: m.subcategory,
-          equipment: m.equipment, rep_ranges: m.rep_ranges, is_hold: m.is_hold,
-        })),
-      })),
-    }
-    const blob = new Blob([JSON.stringify(flow, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a'); a.href = url
-    a.download = `tunamat-flow-${Date.now()}.json`; a.click()
-    URL.revokeObjectURL(url)
-  }, [segments])
+    setShowExport(true)
+  }, [])
 
   return (
     <div className="h-screen flex flex-col bg-base overflow-hidden">
@@ -98,6 +85,11 @@ export default function App() {
       )}
 
       <SegmentTray segments={segments} onUpdate={setSegments} onExport={exportFlow} />
+
+      {/* Export flow modal */}
+      {showExport && (
+        <ExportFlowModal segments={segments} onClose={() => setShowExport(false)} />
+      )}
 
       {/* Detail overlay */}
       {detailMovement && (
