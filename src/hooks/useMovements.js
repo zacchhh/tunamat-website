@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 const API_URL = 'https://hhfexwrpsepoojekvcoz.supabase.co/functions/v1/movements'
 
@@ -6,6 +6,13 @@ export default function useMovements() {
   const [movements, setMovements] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [attempt, setAttempt] = useState(0)
+
+  const retry = useCallback(() => {
+    setError(null)
+    setLoading(true)
+    setAttempt((a) => a + 1)
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -27,10 +34,10 @@ export default function useMovements() {
     }
     fetchMovements()
     return () => { cancelled = true }
-  }, [])
+  }, [attempt])
 
   const movementMap = {}
   movements.forEach((m) => { movementMap[m.id] = m })
 
-  return { movements, movementMap, loading, error }
+  return { movements, movementMap, loading, error, retry }
 }
