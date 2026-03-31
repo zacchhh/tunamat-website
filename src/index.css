@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f9f6f1;
+  --color-cream-dark: #f0ebe3;
+  --color-bark: #2c2418;
+  --color-bark-light: #4a3d2e;
+  --color-sage: #7a8b6f;
+  --color-sage-light: #a3b396;
+  --color-sage-bg: #e8ede4;
+  --color-earth: #8b7355;
+  --color-earth-light: #b39e7d;
+  --color-earth-bg: #f0e8dc;
+  --color-slate: #5a7080;
+  --color-slate-light: #8aa0b0;
+  --color-slate-bg: #e0e8ee;
+  --color-clay: #9b7a6a;
+  --color-clay-light: #c4a898;
+  --color-clay-bg: #f2e8e2;
+  --color-moss: #6b7c5e;
+  --color-moss-light: #94a882;
+  --color-moss-bg: #e4eadf;
+  --font-serif: 'Instrument Serif', serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-bark);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-earth-light);
+  border-radius: 3px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.25s ease-out both;
+}
