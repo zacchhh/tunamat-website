@@ -46,7 +46,7 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 3px; }
 
-.canvas-grab { cursor: grab; }
+.canvas-grab { cursor: grab; touch-action: none; }
 .canvas-grab:active { cursor: grabbing; }
 
 .dot-grid {

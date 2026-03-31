@@ -59,13 +59,65 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
   const clearAll = () => { setAnchorId(null); setUpStack([]); setDownStack([]); setLinkedChildren({}); setOpenBranches({}) }
   useEffect(() => { setSelectedGroup(null); setSelectedSubcat(null); clearAll(); setPan({ x: 40, y: 0 }); setZoom(1) }, [mode])
 
-  // Pan/zoom
+  // Pan/zoom — mouse
   const handleMouseDown = useCallback((e) => { if (e.target.closest('[data-node]')) return; isPanning.current = true; wasDrag.current = false; panStart.current = { x: e.clientX, y: e.clientY }; panOrigin.current = { ...pan } }, [pan])
   const handleMouseMove = useCallback((e) => { if (!isPanning.current) return; const dx = e.clientX - panStart.current.x; const dy = e.clientY - panStart.current.y; if (Math.abs(dx) > 3 || Math.abs(dy) > 3) wasDrag.current = true; setPan({ x: panOrigin.current.x + dx, y: panOrigin.current.y + dy }) }, [])
   const handleMouseUp = useCallback(() => { isPanning.current = false; setTimeout(() => { wasDrag.current = false }, 0) }, [])
   useEffect(() => { window.addEventListener('mousemove', handleMouseMove); window.addEventListener('mouseup', handleMouseUp); return () => { window.removeEventListener('mousemove', handleMouseMove); window.removeEventListener('mouseup', handleMouseUp) } }, [handleMouseMove, handleMouseUp])
   const handleWheel = useCallback((e) => { e.preventDefault(); const r = containerRef.current?.getBoundingClientRect(); if (!r) return; const cx = e.clientX - r.left; const cy = e.clientY - r.top; const d = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP; const nz = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom + d)); const s = nz / zoom; setPan(p => ({ x: cx - s * (cx - p.x), y: cy - s * (cy - p.y) })); setZoom(nz) }, [zoom])
   useEffect(() => { const el = containerRef.current; if (!el) return; el.addEventListener('wheel', handleWheel, { passive: false }); return () => el.removeEventListener('wheel', handleWheel) }, [handleWheel])
+
+  // Pan/zoom — touch (mobile)
+  const lastTouchDist = useRef(null)
+  const handleTouchStart = useCallback((e) => {
+    if (e.touches.length === 1 && !e.target.closest('[data-node]')) {
+      isPanning.current = true; wasDrag.current = false
+      panStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+      panOrigin.current = { ...pan }
+    }
+    if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX
+      const dy = e.touches[0].clientY - e.touches[1].clientY
+      lastTouchDist.current = Math.sqrt(dx * dx + dy * dy)
+    }
+  }, [pan])
+  const handleTouchMove = useCallback((e) => {
+    if (e.touches.length === 1 && isPanning.current) {
+      e.preventDefault()
+      const dx = e.touches[0].clientX - panStart.current.x
+      const dy = e.touches[0].clientY - panStart.current.y
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) wasDrag.current = true
+      setPan({ x: panOrigin.current.x + dx, y: panOrigin.current.y + dy })
+    }
+    if (e.touches.length === 2 && lastTouchDist.current != null) {
+      e.preventDefault()
+      const dx = e.touches[0].clientX - e.touches[1].clientX
+      const dy = e.touches[0].clientY - e.touches[1].clientY
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      const scale = dist / lastTouchDist.current
+      const rect = containerRef.current?.getBoundingClientRect()
+      if (rect) {
+        const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left
+        const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top
+        const nz = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom * scale))
+        const s = nz / zoom
+        setPan(p => ({ x: cx - s * (cx - p.x), y: cy - s * (cy - p.y) }))
+        setZoom(nz)
+      }
+      lastTouchDist.current = dist
+    }
+  }, [zoom])
+  const handleTouchEnd = useCallback(() => {
+    isPanning.current = false; lastTouchDist.current = null
+    setTimeout(() => { wasDrag.current = false }, 0)
+  }, [])
+  useEffect(() => {
+    const el = containerRef.current; if (!el) return
+    el.addEventListener('touchstart', handleTouchStart, { passive: false })
+    el.addEventListener('touchmove', handleTouchMove, { passive: false })
+    el.addEventListener('touchend', handleTouchEnd)
+    return () => { el.removeEventListener('touchstart', handleTouchStart); el.removeEventListener('touchmove', handleTouchMove); el.removeEventListener('touchend', handleTouchEnd) }
+  }, [handleTouchStart, handleTouchMove, handleTouchEnd])
 
   const safeClick = (fn) => () => { if (!wasDrag.current) fn() }
   const groups = groupByKey(movements, config.groupKey)
