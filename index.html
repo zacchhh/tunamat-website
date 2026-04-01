@@ -355,44 +355,7 @@ nav {
 .phone-sub-label {
   font-size: 0.7rem; color: var(--text-muted);
 }
-.phone-detail-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 18px; border-radius: 50px;
-  font-size: 0.72rem; font-weight: 600;
-  cursor: pointer; border: 1px solid;
-  transition: all 0.3s;
-  background: transparent;
-  margin-top: 4px;
-}
-.phone-detail-btn.mat {
-  color: var(--mat-purple-light);
-  border-color: rgba(140,92,245,0.35);
-  box-shadow: 0 0 12px rgba(140,92,245,0.08);
-}
-.phone-detail-btn.mat:hover {
-  background: rgba(140,92,245,0.12);
-  border-color: rgba(140,92,245,0.55);
-  box-shadow: 0 0 20px rgba(140,92,245,0.15);
-}
-.phone-detail-btn.mat.toggled {
-  background: rgba(140,92,245,0.15);
-  border-color: rgba(140,92,245,0.55);
-  box-shadow: 0 0 20px rgba(140,92,245,0.15);
-}
-.phone-detail-btn .toggle-icon {
-  display: inline-block;
-  transition: transform 0.3s;
-  font-size: 0.8rem;
-}
-.phone-detail-btn.toggled .toggle-icon {
-  transform: rotate(90deg);
-}
-.phone-locked-label {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 0.68rem; color: var(--text-muted);
-  margin-top: 2px;
-}
-.phone-locked-label .lock { font-size: 0.6rem; opacity: 0.5; }
+/* (eye toggle styles are above) */
 
 /* ═══════ SECTION SCAFFOLDING ═══════ */
 section { position: relative; z-index: 1; padding: 110px 48px; }
@@ -445,6 +408,103 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 .f-icon.ic-green { background: rgba(52,211,153,0.08); }
 .f-card h3 { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
 .f-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ═══════ EYE TOGGLE ═══════ */
+.eye-toggle {
+  background: none; border: none; cursor: pointer;
+  color: var(--mat-purple-light);
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.3s;
+  display: flex; align-items: center;
+  opacity: 0.7;
+}
+.eye-toggle:hover { opacity: 1; background: rgba(140,92,245,0.1); }
+.eye-toggle .eye-closed { display: none; }
+.eye-toggle.toggled .eye-open { display: none; }
+.eye-toggle.toggled .eye-closed { display: block; }
+
+/* ═══════ HERO FLOATING ELEMENTS ═══════ */
+.hero-floaters {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none;
+  z-index: 0;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hf {
+  position: absolute;
+  opacity: 0;
+  animation: hfFloat 12s ease-in-out infinite;
+}
+@keyframes hfFloat {
+  0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+  10% { opacity: 1; transform: translateY(0) scale(1); }
+  80% { opacity: 1; transform: translateY(-30px) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.95); }
+}
+.hf-card {
+  background: rgba(22,22,25,0.85);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px 16px;
+  backdrop-filter: blur(8px);
+}
+
+/* BPM Chart */
+.hf-bpm { top: 15%; left: 5%; animation-delay: 0s; animation-duration: 14s; }
+.hf-bpm svg { display: block; }
+.hf-bpm-label { font-size: 0.55rem; color: var(--text-muted); margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+.hf-bpm-val { font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 700; color: #1db954; margin-top: 4px; }
+
+/* Analysis Bars */
+.hf-bars { top: 55%; right: 4%; animation-delay: -3s; animation-duration: 15s; }
+.hf-bar-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.hf-bar-name { font-size: 0.52rem; color: var(--text-muted); width: 30px; text-align: right; }
+.hf-bar-track { width: 70px; height: 4px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; }
+.hf-bar-fill { height: 100%; border-radius: 2px; animation: hfBarGrow 3s ease-out infinite; }
+@keyframes hfBarGrow { 0% { width: 0; } 30% { width: var(--w); } 100% { width: var(--w); } }
+.hf-bar-pct { font-size: 0.52rem; font-weight: 600; color: var(--text-secondary); width: 22px; }
+
+/* Donut Timer */
+.hf-donut { bottom: 18%; left: 8%; animation-delay: -6s; animation-duration: 13s; }
+.hf-donut-wrap { display: flex; align-items: center; gap: 12px; }
+.hf-donut-svg { width: 48px; height: 48px; }
+.hf-donut-svg svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.hf-donut-svg circle.track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 3; }
+.hf-donut-svg circle.fill { fill: none; stroke: #22b8a0; stroke-width: 3; stroke-linecap: round;
+  stroke-dasharray: 100; animation: hfDonutSpin 8s linear infinite; }
+@keyframes hfDonutSpin { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+.hf-donut-digits { font-family: 'Sora', sans-serif; }
+.hf-donut-time { font-size: 1.1rem; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+.hf-donut-label { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Pills */
+.hf-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 14px; border-radius: 50px;
+  font-size: 0.68rem; font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+.hf-pill-1 { top: 28%; right: 8%; animation-delay: -2s; animation-duration: 11s;
+  background: rgba(140,92,245,0.12); border: 1px solid rgba(140,92,245,0.2); color: var(--mat-purple-light); }
+.hf-pill-2 { top: 8%; right: 22%; animation-delay: -7s; animation-duration: 13s;
+  background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.15); color: #34d399; }
+.hf-pill-3 { bottom: 30%; right: 18%; animation-delay: -4s; animation-duration: 12s;
+  background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.15); color: var(--reformer-pink-light); }
+.hf-pill-4 { bottom: 12%; right: 6%; animation-delay: -9s; animation-duration: 14s;
+  background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.15); color: #fbbf24; }
+
+/* Stat bubble */
+.hf-stat { top: 42%; left: 2%; animation-delay: -5s; animation-duration: 16s; }
+.hf-stat-val { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; }
+.hf-stat-label { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Movement count bubble */
+.hf-moves { bottom: 38%; left: 3%; animation-delay: -10s; animation-duration: 15s; }
+
+@media (max-width: 1024px) {
+  .hero-floaters { display: none; }
+}
 
 /* ═══════ BLURRED FRONT FACE (coming soon phones) ═══════ */
 .phone-blur-front {
@@ -600,6 +660,79 @@ footer {
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
+  <!-- Floating ambient elements -->
+  <div class="hero-floaters">
+    <!-- BPM Line Chart -->
+    <div class="hf hf-card hf-bpm">
+      <div class="hf-bpm-label">BPM</div>
+      <svg width="120" height="44" viewBox="0 0 120 44">
+        <polyline points="0,38 12,32 24,35 36,18 48,22 60,8 72,14 84,6 96,16 108,12 120,10"
+          fill="none" stroke="#1db954" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+        <polyline points="0,38 12,32 24,35 36,18 48,22 60,8 72,14 84,6 96,16 108,12 120,10"
+          fill="none" stroke="#1db954" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.08" filter="blur(4px)"/>
+      </svg>
+      <div class="hf-bpm-val">128 bpm</div>
+    </div>
+
+    <!-- Analysis Bars -->
+    <div class="hf hf-card hf-bars">
+      <div class="hf-bar-row">
+        <span class="hf-bar-name">Core</span>
+        <div class="hf-bar-track"><div class="hf-bar-fill" style="--w:72%;background:linear-gradient(90deg,#f472b6,#ec4899);"></div></div>
+        <span class="hf-bar-pct">33%</span>
+      </div>
+      <div class="hf-bar-row">
+        <span class="hf-bar-name">Back</span>
+        <div class="hf-bar-track"><div class="hf-bar-fill" style="--w:58%;background:linear-gradient(90deg,#a78bfa,#8C5CF5);animation-delay:0.3s;"></div></div>
+        <span class="hf-bar-pct">28%</span>
+      </div>
+      <div class="hf-bar-row">
+        <span class="hf-bar-name">Legs</span>
+        <div class="hf-bar-track"><div class="hf-bar-fill" style="--w:44%;background:linear-gradient(90deg,#60a5fa,#3B82F6);animation-delay:0.6s;"></div></div>
+        <span class="hf-bar-pct">22%</span>
+      </div>
+      <div class="hf-bar-row">
+        <span class="hf-bar-name">Arms</span>
+        <div class="hf-bar-track"><div class="hf-bar-fill" style="--w:28%;background:linear-gradient(90deg,#34d399,#22b8a0);animation-delay:0.9s;"></div></div>
+        <span class="hf-bar-pct">11%</span>
+      </div>
+    </div>
+
+    <!-- Donut Timer -->
+    <div class="hf hf-card hf-donut">
+      <div class="hf-donut-wrap">
+        <div class="hf-donut-svg">
+          <svg viewBox="0 0 36 36">
+            <circle class="track" cx="18" cy="18" r="15.9"/>
+            <circle class="fill" cx="18" cy="18" r="15.9"/>
+          </svg>
+        </div>
+        <div class="hf-donut-digits">
+          <div class="hf-donut-time" id="hf-timer">0:00</div>
+          <div class="hf-donut-label">Elapsed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Pills -->
+    <div class="hf hf-pill hf-pill-1">🧘 Hold</div>
+    <div class="hf hf-pill hf-pill-2">✓ Balanced</div>
+    <div class="hf hf-pill hf-pill-3">8-10 reps</div>
+    <div class="hf hf-pill hf-pill-4">45m 00s</div>
+
+    <!-- Stat Bubble -->
+    <div class="hf hf-card hf-stat" style="text-align:center;">
+      <div class="hf-stat-val">272+</div>
+      <div class="hf-stat-label">Movements</div>
+    </div>
+
+    <!-- Segment Bubble -->
+    <div class="hf hf-card hf-moves" style="text-align:center;">
+      <div class="hf-stat-val" style="font-size:1rem;">15</div>
+      <div class="hf-stat-label">Segments</div>
+    </div>
+  </div>
+
   <div class="hero-inner">
     <h1><span class="accent">Plan. Build. Flow.</span></h1>
     <p class="sub">A suite of class planning apps for group fitness instructors. Powered by music integration, professional-grade movement libraries, and real-time analytics — built by instructors, for instructors.</p>
@@ -635,7 +768,6 @@ footer {
         </div>
         <div class="phone-btn-group">
           <div class="phone-label" style="color:var(--spin-blue-light);">TunaSpin</div>
-          <div class="phone-locked-label"><span class="lock">🔒</span> Coming soon</div>
         </div>
       </div>
 
@@ -727,11 +859,18 @@ footer {
             </div>
           </div>
         </div>
-        <div class="phone-btn-group">
+        <div class="phone-btn-group" style="flex-direction:row;align-items:center;gap:10px;">
           <a href="/tunamat" class="phone-label" style="color:var(--mat-purple-light);text-decoration:none;">TunaMat</a>
-          <div class="phone-sub-label">Mat Pilates</div>
-          <button class="phone-detail-btn mat" id="mat-toggle" onclick="toggleMatFlip(event)">
-            <span class="toggle-icon">▸</span> View Details
+          <button class="eye-toggle" id="mat-toggle" onclick="toggleMatFlip(event)" title="Toggle details">
+            <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+              <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+              <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
           </button>
         </div>
       </div>
@@ -757,7 +896,6 @@ footer {
         </div>
         <div class="phone-btn-group">
           <div class="phone-label" style="color:var(--reformer-pink-light);">TunaReformer</div>
-          <div class="phone-locked-label"><span class="lock">🔒</span> Coming soon</div>
         </div>
       </div>
 
@@ -767,7 +905,6 @@ footer {
 
 <!-- ═══════ CORE FEATURES ═══════ -->
 <section id="features" style="background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface) 50%, var(--bg-deep));">
-  <div class="sec-label">The Platform</div>
   <div class="sec-title">Core Tuna Features</div>
   <p class="sec-desc">Every app in the Tuna Athletics suite shares a common set of powerful features — designed with real instructors, refined by the community.</p>
 
@@ -843,11 +980,20 @@ function toggleMatFlip(e) {
   const btn = document.getElementById('mat-toggle');
   flip.classList.toggle('flipped');
   btn.classList.toggle('toggled');
-  const isFlipped = flip.classList.contains('flipped');
-  btn.innerHTML = isFlipped
-    ? '<span class="toggle-icon" style="transform:rotate(90deg)">▸</span> Show App'
-    : '<span class="toggle-icon">▸</span> View Details';
 }
+
+// Running elapsed timer in hero
+(function() {
+  const el = document.getElementById('hf-timer');
+  if (!el) return;
+  let sec = 0;
+  setInterval(() => {
+    sec = (sec + 1) % 3600;
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    el.textContent = m + ':' + String(s).padStart(2, '0');
+  }, 1000);
+})();
 
 // Hamburger menu
 function toggleMenu() {
