@@ -170,6 +170,26 @@ nav {
   box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.03);
 }
 
+/* Hot / highly-upvoted phase */
+.phase-node.hot .phase-card {
+  border-color: rgba(251,191,36,0.3);
+  box-shadow: 0 0 24px rgba(251,191,36,0.06);
+}
+
+.phase-node.hot .phase-card:hover {
+  border-color: rgba(251,191,36,0.45);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 28px rgba(251,191,36,0.1);
+}
+
+.phase-node.hot .phase-card::after {
+  content: '\1F525';
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  font-size: 1.1rem;
+  filter: drop-shadow(0 0 6px rgba(251,191,36,0.4));
+}
+
 .phase-label {
   font-size: 0.58rem;
   text-transform: uppercase;
@@ -616,7 +636,7 @@ footer {
       </div>
     </div>
 
-    <div class="phase-node" data-phase="3">
+    <div class="phase-node hot" data-phase="3">
       <div class="phase-card" style="--phase-color: #fbbf24">
         <div class="phase-label">Phase 3</div>
         <div class="phase-title">Creator Marketplace</div>
