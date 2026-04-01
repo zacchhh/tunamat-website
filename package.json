@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "vite app",
+    "build": "vite build app",
+    "lint": "eslint app",
+    "preview": "vite preview --root app"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.101.0",
