@@ -228,23 +228,19 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
   margin: 0 auto 64px; line-height: 1.75;
 }
 
-/* ═══════ PHONE GALLERY ═══════ */
-.phone-gallery {
-  display: flex; justify-content: center; align-items: flex-start;
-  gap: 28px; max-width: 1200px; margin: 0 auto; padding: 0 20px;
+/* ═══════ PHONE CAROUSEL ═══════ */
+.carousel-container { position: relative; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.carousel-viewport { position: relative; height: 490px; overflow: hidden; }
+.carousel-slide {
+  position: absolute; top: 0; left: 50%; width: 220px; text-align: center;
+  transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1); cursor: pointer;
 }
-.phone-wrap { flex-shrink: 0; text-align: center; }
-.phone-wrap:nth-child(even) { margin-top: 36px; }
 .phone-frame {
-  width: 210px; border-radius: 32px;
+  width: 220px; border-radius: 32px;
   border: 3px solid rgba(255,255,255,0.08);
   overflow: hidden; background: var(--bg-card);
   box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
-  position: relative; transition: transform 0.4s, box-shadow 0.4s;
-}
-.phone-frame:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 32px 80px rgba(124,92,252,0.15), 0 0 0 1px rgba(124,92,252,0.2);
+  position: relative;
 }
 .phone-frame::before {
   content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -252,10 +248,37 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
   border-radius: 0 0 16px 16px; z-index: 2;
 }
 .phone-frame img { width: 100%; display: block; }
+.phone-frame.blurred img { filter: blur(6px) saturate(0.7); }
+.phone-overlay {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(8,8,26,0.45); border-radius: 29px; z-index: 3;
+}
+.overlay-text {
+  font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700;
+  color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+  text-align: center; line-height: 1.4; padding: 0 20px;
+}
 .phone-label {
   font-size: 0.78rem; font-weight: 600; color: var(--text-secondary);
   margin-top: 14px; font-family: 'Sora', sans-serif;
 }
+.carousel-arrow {
+  position: absolute; top: 50%; transform: translateY(-70%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary);
+  font-size: 1.4rem; cursor: pointer; display: grid; place-items: center;
+  transition: all 0.3s; z-index: 20;
+}
+.carousel-arrow:hover { background: rgba(124,92,252,0.15); border-color: rgba(124,92,252,0.3); }
+.carousel-prev { left: 8px; }
+.carousel-next { right: 8px; }
+.carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.carousel-dot {
+  width: 8px; height: 8px; border-radius: 50%; padding: 0;
+  background: rgba(255,255,255,0.15); border: none; cursor: pointer; transition: all 0.3s;
+}
+.carousel-dot.active { background: var(--purple-primary); box-shadow: 0 0 12px var(--purple-glow); }
 
 /* ═══════ SHOWCASE ═══════ */
 .showcase { background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface) 50%, var(--bg-deep)); }
@@ -468,8 +491,9 @@ footer {
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 1024px) {
-  .phone-gallery { gap: 18px; }
-  .phone-frame { width: 170px; }
+  .carousel-viewport { height: 440px; }
+  .carousel-slide { width: 190px; }
+  .phone-frame { width: 190px; }
   .showcase-grid { grid-template-columns: 1fr; }
   .pricing-row { grid-template-columns: 1fr 1fr; }
 }
@@ -481,12 +505,12 @@ footer {
   section, .hero { padding-left: 20px; padding-right: 20px; }
   .hero h1 { font-size: 2.5rem; }
   .sec-title { font-size: 2rem; }
-  .phone-gallery {
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
-    justify-content: flex-start; padding-bottom: 20px; gap: 14px;
-  }
+  .carousel-viewport { height: 400px; }
+  .carousel-slide { width: 170px; }
   .phone-frame { width: 170px; }
-  .phone-wrap:nth-child(even) { margin-top: 0; }
+  .carousel-arrow { width: 36px; height: 36px; font-size: 1.1rem; }
+  .carousel-prev { left: 2px; }
+  .carousel-next { right: 2px; }
   .pricing-row { grid-template-columns: 1fr !important; max-width: 360px !important; margin: 0 auto; }
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
@@ -544,37 +568,57 @@ footer {
   <div class="sec-title">Built for the Studio</div>
   <p class="sec-desc">Plan, build, and teach — all from your pocket. Here's a look inside TunaMat on iOS.</p>
 
-  <div class="phone-gallery">
-    <div class="phone-wrap">
-      <div class="phone-frame">
-        <img src="/screenshots/Flows%20Main%20Page.png" alt="Flows Main Page" loading="lazy">
+  <div class="carousel-container">
+    <div class="carousel-viewport" id="carouselViewport">
+      <div class="carousel-slide">
+        <div class="phone-frame">
+          <img src="/screenshots/Flows%20Main%20Page.png" alt="Flows Main Page" loading="lazy">
+        </div>
+        <div class="phone-label">Your Flows</div>
       </div>
-      <div class="phone-label">Your Flows</div>
-    </div>
-    <div class="phone-wrap">
-      <div class="phone-frame">
-        <img src="/screenshots/Flow%20Builder%20Page.png" alt="Flow Builder" loading="lazy">
+      <div class="carousel-slide">
+        <div class="phone-frame">
+          <img src="/screenshots/Flow%20Builder%20Page.png" alt="Flow Builder" loading="lazy">
+        </div>
+        <div class="phone-label">Flow Builder</div>
       </div>
-      <div class="phone-label">Flow Builder</div>
-    </div>
-    <div class="phone-wrap">
-      <div class="phone-frame">
-        <img src="/screenshots/Flow%20Play%20Mode%20Page.png" alt="Play Mode" loading="lazy">
+      <div class="carousel-slide">
+        <div class="phone-frame">
+          <img src="/screenshots/Flow%20Play%20Mode%20Page.png" alt="Play Mode" loading="lazy">
+        </div>
+        <div class="phone-label">Play Mode</div>
       </div>
-      <div class="phone-label">Play Mode</div>
-    </div>
-    <div class="phone-wrap">
-      <div class="phone-frame">
-        <img src="/screenshots/Flow%20Analysis%20Page.png" alt="Flow Analysis" loading="lazy">
+      <div class="carousel-slide">
+        <div class="phone-frame blurred">
+          <img src="/screenshots/Flow%20Analysis%20Page.png" alt="Flow Analysis" loading="lazy">
+          <div class="phone-overlay"><span class="overlay-text">Yummy Analysis</span></div>
+        </div>
+        <div class="phone-label">Analysis</div>
       </div>
-      <div class="phone-label">Analysis</div>
-    </div>
-    <div class="phone-wrap">
-      <div class="phone-frame">
-        <img src="/screenshots/Movements%20Page.png" alt="Movements Library" loading="lazy">
+      <div class="carousel-slide">
+        <div class="phone-frame">
+          <img src="/screenshots/Movements%20Page.png" alt="Movements Library" loading="lazy">
+        </div>
+        <div class="phone-label">272+ Movements</div>
       </div>
-      <div class="phone-label">272+ Movements</div>
+      <div class="carousel-slide">
+        <div class="phone-frame blurred">
+          <img src="/screenshots/Movement%20Details%20Page.png" alt="Movement Details" loading="lazy">
+          <div class="phone-overlay"><span class="overlay-text">Curious?</span></div>
+        </div>
+        <div class="phone-label">Movement Details</div>
+      </div>
+      <div class="carousel-slide">
+        <div class="phone-frame blurred">
+          <img src="/screenshots/Labels%20Page.png" alt="Labels" loading="lazy">
+          <div class="phone-overlay"><span class="overlay-text">Download to Unlock!</span></div>
+        </div>
+        <div class="phone-label">Custom Labels</div>
+      </div>
     </div>
+    <button class="carousel-arrow carousel-prev" onclick="carouselNav(-1)">&#8249;</button>
+    <button class="carousel-arrow carousel-next" onclick="carouselNav(1)">&#8250;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
   </div>
 </section>
 
@@ -919,12 +963,51 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.phone-wrap, .s-card, .p-card, .faq-item').forEach(el => {
+document.querySelectorAll('.carousel-container, .s-card, .p-card, .faq-item').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   observer.observe(el);
 });
+
+// ═══════ CAROUSEL ═══════
+const cSlides = document.querySelectorAll('.carousel-slide');
+const cDotsBox = document.getElementById('carouselDots');
+let cIdx = 0, cTimer;
+
+cSlides.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => { cIdx = i; updateC(); resetC(); };
+  cDotsBox.appendChild(d);
+});
+
+function getSpacing() { return window.innerWidth < 768 ? 190 : window.innerWidth < 1024 ? 220 : 260; }
+
+function updateC() {
+  const sp = getSpacing();
+  cSlides.forEach((s, i) => {
+    const diff = i - cIdx, abs = Math.abs(diff);
+    s.style.transform = 'translateX(calc(-50% + ' + (diff * sp) + 'px)) scale(' + (abs === 0 ? 1 : 0.78) + ')';
+    s.style.opacity = abs > 2 ? 0 : abs === 0 ? 1 : abs === 1 ? 0.6 : 0.25;
+    s.style.zIndex = 10 - abs;
+    s.style.pointerEvents = abs <= 1 ? 'auto' : 'none';
+  });
+  cDotsBox.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === cIdx));
+}
+
+function carouselNav(dir) {
+  cIdx = (cIdx + dir + cSlides.length) % cSlides.length;
+  updateC(); resetC();
+}
+
+cSlides.forEach((s, i) => s.addEventListener('click', () => {
+  if (i !== cIdx) { cIdx = i; updateC(); resetC(); }
+}));
+
+function resetC() { clearInterval(cTimer); cTimer = setInterval(() => carouselNav(1), 4000); }
+window.addEventListener('resize', updateC);
+updateC(); resetC();
 </script>
 
 </body>
