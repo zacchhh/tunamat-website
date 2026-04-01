@@ -162,7 +162,7 @@ nav {
 /* ═══════ HERO ═══════ */
 .hero {
   position: relative; z-index: 1;
-  padding: 160px 48px 100px;
+  padding: 130px 48px 70px;
   text-align: center;
 }
 .hero h1 {
@@ -171,10 +171,11 @@ nav {
   line-height: 1.1; margin-bottom: 20px;
 }
 .hero .sub {
-  font-size: 1.1rem; color: var(--text-secondary);
+  font-size: 1.15rem; color: var(--text-secondary);
   line-height: 1.75; margin-bottom: 36px;
   max-width: 560px; margin-left: auto; margin-right: auto;
 }
+.hero .sub strong { color: var(--text-primary); font-weight: 700; }
 .hero-ctas {
   display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
 }
@@ -227,39 +228,34 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
   margin: 0 auto 64px; line-height: 1.75;
 }
 
-/* ═══════ FEATURES GRID ═══════ */
-.features-grid {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;
+/* ═══════ PHONE GALLERY ═══════ */
+.phone-gallery {
+  display: flex; justify-content: center; align-items: flex-start;
+  gap: 28px; max-width: 1200px; margin: 0 auto; padding: 0 20px;
 }
-.f-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 34px 28px;
-  position: relative; overflow: hidden;
-  transition: all 0.4s;
+.phone-wrap { flex-shrink: 0; text-align: center; }
+.phone-wrap:nth-child(even) { margin-top: 36px; }
+.phone-frame {
+  width: 210px; border-radius: 32px;
+  border: 3px solid rgba(255,255,255,0.08);
+  overflow: hidden; background: var(--bg-card);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+  position: relative; transition: transform 0.4s, box-shadow 0.4s;
 }
-.f-card::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
-  background: var(--gradient-main);
-  opacity: 0; transition: opacity 0.4s;
+.phone-frame:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 80px rgba(124,92,252,0.15), 0 0 0 1px rgba(124,92,252,0.2);
 }
-.f-card:hover { border-color: var(--border-hover); transform: translateY(-5px); box-shadow: 0 14px 44px rgba(124,92,252,0.1); }
-.f-card:hover::before { opacity: 1; }
-.f-icon {
-  width: 48px; height: 48px; border-radius: 14px;
-  display: grid; place-items: center;
-  font-size: 1.3rem; margin-bottom: 22px;
+.phone-frame::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 20px; background: #0a0a1a;
+  border-radius: 0 0 16px 16px; z-index: 2;
 }
-.f-icon.ic-purple { background: rgba(124,92,252,0.12); }
-.f-icon.ic-cyan { background: rgba(34,211,238,0.1); }
-.f-icon.ic-pink { background: rgba(244,114,182,0.1); }
-.f-icon.ic-amber { background: rgba(251,191,36,0.1); }
-.f-icon.ic-green { background: rgba(52,211,153,0.1); }
-.f-card h3 { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
-.f-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+.phone-frame img { width: 100%; display: block; }
+.phone-label {
+  font-size: 0.78rem; font-weight: 600; color: var(--text-secondary);
+  margin-top: 14px; font-family: 'Sora', sans-serif;
+}
 
 /* ═══════ SHOWCASE ═══════ */
 .showcase { background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface) 50%, var(--bg-deep)); }
@@ -346,6 +342,15 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 .m-sp-title { font-size: 0.72rem; font-weight: 600; }
 .m-sp-artist { font-size: 0.6rem; color: var(--text-muted); }
 .m-sp-bpm { font-size: 0.62rem; font-weight: 700; color: #1db954; background: rgba(29,185,84,0.1); padding: 3px 8px; border-radius: 50px; }
+
+/* BPM Chart */
+.m-bpm-chart {
+  margin-top: 12px; padding: 10px 10px 4px;
+  background: rgba(255,255,255,0.02); border-radius: 10px;
+  border: 1px solid rgba(29,185,84,0.1);
+}
+.m-bpm-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+.m-bpm-svg { width: 100%; height: auto; }
 
 /* Flow Library mini */
 .m-flow-card {
@@ -463,7 +468,8 @@ footer {
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 1024px) {
-  .features-grid { grid-template-columns: 1fr 1fr; }
+  .phone-gallery { gap: 18px; }
+  .phone-frame { width: 170px; }
   .showcase-grid { grid-template-columns: 1fr; }
   .pricing-row { grid-template-columns: 1fr 1fr; }
 }
@@ -475,7 +481,12 @@ footer {
   section, .hero { padding-left: 20px; padding-right: 20px; }
   .hero h1 { font-size: 2.5rem; }
   .sec-title { font-size: 2rem; }
-  .features-grid { grid-template-columns: 1fr; }
+  .phone-gallery {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    justify-content: flex-start; padding-bottom: 20px; gap: 14px;
+  }
+  .phone-frame { width: 170px; }
+  .phone-wrap:nth-child(even) { margin-top: 0; }
   .pricing-row { grid-template-columns: 1fr !important; max-width: 360px !important; margin: 0 auto; }
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
@@ -516,57 +527,53 @@ footer {
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
-  <div style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:50px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);font-size:0.78rem;font-weight:500;color:#34d399;margin-bottom:28px;">
-    <span style="width:6px;height:6px;border-radius:50%;background:#34d399;"></span>
-    Now in Beta on iOS
-  </div>
   <h1><span class="grad">TunaMat</span></h1>
-  <p class="sub">The all-in-one Mat Pilates class planning app. Build flows from a 272+ movement library, cue live play mode for better in-class pacing, and analyse every flow — all in one place.</p>
+  <p class="sub">The <strong>Mat Pilates</strong> class <strong>planning</strong> app. Build flows, teach with confidence, and analyse every class.</p>
   <div class="hero-ctas">
     <a href="#" class="btn-primary">
       Download on iOS
       <span class="arrow-circle">→</span>
     </a>
-    <a href="/app" class="btn-ghost">Try the Web App</a>
+    <a href="/tunamat/webapp" class="btn-ghost">Explore Flow Builder</a>
   </div>
 </section>
 
-<!-- ═══════ FEATURES ═══════ -->
+<!-- ═══════ APP SCREENSHOTS ═══════ -->
 <section id="features">
-  <div class="sec-label">Features</div>
-  <div class="sec-title">Everything you need to plan<br>the perfect class</div>
-  <p class="sec-desc">From a 272+ movement library to live class execution — TunaMat gives pilates instructors the tools to create balanced, beautifully paced classes.</p>
+  <div class="sec-label">The App</div>
+  <div class="sec-title">Built for the Studio</div>
+  <p class="sec-desc">Plan, build, and teach — all from your pocket. Here's a look inside TunaMat on iOS.</p>
 
-  <div class="features-grid">
-    <div class="f-card">
-      <div class="f-icon ic-purple">📚</div>
-      <h3>272+ Movement Library</h3>
-      <p>A curated library of mat pilates movements with rich metadata — muscle groups, movement patterns, equipment, and pacing presets. Continuously refined with input from professionals.</p>
+  <div class="phone-gallery">
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <img src="/screenshots/Flows%20Main%20Page.png" alt="Flows Main Page" loading="lazy">
+      </div>
+      <div class="phone-label">Your Flows</div>
     </div>
-    <div class="f-card">
-      <div class="f-icon ic-cyan">🧩</div>
-      <h3>Drag &amp; Drop Flow Builder</h3>
-      <p>Create flows with segments like Warm Up, Core Work, and Cool Down. Add movements with individual pacing and instructor notes.</p>
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <img src="/screenshots/Flow%20Builder%20Page.png" alt="Flow Builder" loading="lazy">
+      </div>
+      <div class="phone-label">Flow Builder</div>
     </div>
-    <div class="f-card">
-      <div class="f-icon ic-pink">⏱</div>
-      <h3>Timed Play Mode</h3>
-      <p>Execute your flow live in class with countdown timers per segment. Designed to be glanceable while you teach.</p>
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <img src="/screenshots/Flow%20Play%20Mode%20Page.png" alt="Play Mode" loading="lazy">
+      </div>
+      <div class="phone-label">Play Mode</div>
     </div>
-    <div class="f-card">
-      <div class="f-icon ic-amber">🔥</div>
-      <h3>Muscle Group Analysis</h3>
-      <p>See a heatmap breakdown of which muscles your flow targets. Catch imbalances before class, not after.</p>
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <img src="/screenshots/Flow%20Analysis%20Page.png" alt="Flow Analysis" loading="lazy">
+      </div>
+      <div class="phone-label">Analysis</div>
     </div>
-    <div class="f-card">
-      <div class="f-icon ic-green">🎵</div>
-      <h3>Spotify Integration</h3>
-      <p>Import any public Spotify playlist and map songs to segments. Reference BPM and duration for perfect pacing.</p>
-    </div>
-    <div class="f-card">
-      <div class="f-icon ic-purple">☁️</div>
-      <h3>Cloud Sync &amp; Offline</h3>
-      <p>Your flows sync across devices via the cloud. Works offline too — changes sync when you reconnect.</p>
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <img src="/screenshots/Movements%20Page.png" alt="Movements Library" loading="lazy">
+      </div>
+      <div class="phone-label">272+ Movements</div>
     </div>
   </div>
 </section>
@@ -574,14 +581,14 @@ footer {
 <!-- ═══════ SHOWCASE ═══════ -->
 <section class="showcase" id="showcase">
   <div class="sec-label">In Action</div>
-  <div class="sec-title">See what TunaMat can do</div>
+  <div class="sec-title">See What TunaMat Can Do</div>
   <p class="sec-desc">Powerful tools that look and feel beautiful — built for real classes, not just demos.</p>
 
   <div class="showcase-grid">
     <!-- Play Mode -->
     <div class="s-card">
       <h3>Timed Play Mode</h3>
-      <p>Glanceable timers guide you through each segment. Just hit play and teach.</p>
+      <p>Your pacing has never been more on-point. Use this feature live in class so you know when to progress to the next move.</p>
       <div class="s-preview">
         <div class="m-play-header">
           <div class="m-play-title">Example Flow</div>
@@ -670,7 +677,7 @@ footer {
     <!-- Spotify -->
     <div class="s-card">
       <h3>Spotify Segment Sync</h3>
-      <p>Map songs to segments with BPM data. No Spotify login required.</p>
+      <p>We don't just help you plan alongside your playlist, we analyse your songs and show you how your tempo changes.</p>
       <div class="s-preview">
         <div class="m-spotify-item">
           <div class="m-sp-art" style="background:linear-gradient(135deg,#7c5cfc,#ec4899);"></div>
@@ -687,13 +694,46 @@ footer {
           <div class="m-sp-info"><div class="m-sp-title">Breathe Easy</div><div class="m-sp-artist">Segment: Cool Down</div></div>
           <div class="m-sp-bpm">76 bpm</div>
         </div>
+        <div class="m-bpm-chart">
+          <div class="m-bpm-label">Tempo Analysis</div>
+          <svg viewBox="0 0 260 80" class="m-bpm-svg">
+            <defs>
+              <linearGradient id="bpmGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1db954"/>
+                <stop offset="50%" stop-color="#fbbf24"/>
+                <stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+              <linearGradient id="bpmFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(29,185,84,0.15)"/>
+                <stop offset="100%" stop-color="rgba(29,185,84,0)"/>
+              </linearGradient>
+            </defs>
+            <line x1="40" y1="12" x2="245" y2="12" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+            <line x1="40" y1="36" x2="245" y2="36" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+            <line x1="40" y1="60" x2="245" y2="60" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+            <text x="36" y="15" fill="rgba(255,255,255,0.25)" font-size="6" text-anchor="end" font-family="sans-serif">130</text>
+            <text x="36" y="39" fill="rgba(255,255,255,0.25)" font-size="6" text-anchor="end" font-family="sans-serif">100</text>
+            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="6" text-anchor="end" font-family="sans-serif">70</text>
+            <path d="M75,33 L142,10 L210,56 L210,68 L142,68 L75,68 Z" fill="url(#bpmFill)" opacity="0.6"/>
+            <polyline points="75,33 142,10 210,56" fill="none" stroke="url(#bpmGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="75" cy="33" r="3.5" fill="#1db954"/>
+            <circle cx="142" cy="10" r="3.5" fill="#fbbf24"/>
+            <circle cx="210" cy="56" r="3.5" fill="#22d3ee"/>
+            <text x="75" y="28" fill="#1db954" font-size="7" font-weight="600" text-anchor="middle" font-family="sans-serif">98</text>
+            <text x="142" y="7" fill="#fbbf24" font-size="7" font-weight="600" text-anchor="middle" font-family="sans-serif">128</text>
+            <text x="210" y="51" fill="#22d3ee" font-size="7" font-weight="600" text-anchor="middle" font-family="sans-serif">76</text>
+            <text x="75" y="76" fill="rgba(255,255,255,0.3)" font-size="5" text-anchor="middle" font-family="sans-serif">Warm Up</text>
+            <text x="142" y="76" fill="rgba(255,255,255,0.3)" font-size="5" text-anchor="middle" font-family="sans-serif">Core Work</text>
+            <text x="210" y="76" fill="rgba(255,255,255,0.3)" font-size="5" text-anchor="middle" font-family="sans-serif">Cool Down</text>
+          </svg>
+        </div>
       </div>
     </div>
 
     <!-- Flow Library -->
     <div class="s-card">
-      <h3>Your Flow Library</h3>
-      <p>Organise, duplicate, and manage all your class plans in one place.</p>
+      <h3>Flow &amp; Movement Library</h3>
+      <p>Be it the building blocks, or a complete recipe, you have complete control. Create, edit, delete and customise how your Movements and Flows appear in the app.</p>
       <div class="s-preview">
         <div class="m-flow-card">
           <div class="m-flow-top">
@@ -753,7 +793,6 @@ footer {
         <li><span class="check">✓</span> Flow builder &amp; play mode</li>
         <li><span class="check">✓</span> Muscle group analysis</li>
       </ul>
-      <button class="p-btn outline">Get Started</button>
     </div>
 
     <div class="p-card">
@@ -766,7 +805,6 @@ footer {
         <li><span class="check">✓</span> Full marketplace access</li>
         <li><span class="check">✓</span> Flow duplication</li>
       </ul>
-      <button class="p-btn outline">Subscribe</button>
     </div>
 
     <div class="p-card featured">
@@ -779,7 +817,6 @@ footer {
         <li><span class="check">✓</span> Full marketplace access</li>
         <li><span class="check">✓</span> Flow duplication</li>
       </ul>
-      <button class="p-btn filled">Subscribe &amp; Save</button>
     </div>
 
     <div class="p-card" style="border-color:rgba(34,211,238,0.25);">
@@ -792,9 +829,9 @@ footer {
         <li><span class="check">✓</span> All future updates</li>
         <li><span class="check">✓</span> Founding member badge</li>
       </ul>
-      <button class="p-btn outline" style="border-color:rgba(34,211,238,0.25);color:var(--cyan);">Get Lifetime Access</button>
     </div>
   </div>
+  <p style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:28px;">All purchases are made in-app on the App Store.</p>
 </section>
 
 <!-- ═══════ QUOTE ═══════ -->
@@ -815,7 +852,7 @@ footer {
       <div class="footer-col">
         <h4>Products</h4>
         <a href="/tunamat">TunaMat</a>
-        <a href="/app">Web App</a>
+        <a href="/tunamat/webapp">Flow Builder</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -882,7 +919,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.f-card, .s-card, .p-card, .faq-item').forEach(el => {
+document.querySelectorAll('.phone-wrap, .s-card, .p-card, .faq-item').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
