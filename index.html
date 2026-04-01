@@ -215,91 +215,118 @@ nav {
 .phone {
   width: 290px; height: 600px;
   border-radius: 40px;
-  background: var(--bg-card);
-  border: 2px solid var(--border);
+  background: #0A0F1A;
+  border: 2px solid rgba(255,255,255,0.08);
   position: relative; overflow: hidden;
   box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 80px rgba(124,92,252,0.08);
 }
 .phone-notch {
   width: 110px; height: 26px;
-  background: var(--bg-deep);
+  background: #050810;
   border-radius: 0 0 16px 16px;
   margin: 0 auto;
 }
 .phone-screen {
-  padding: 14px 16px;
-  display: flex; flex-direction: column; gap: 10px;
-  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-deep) 100%);
+  padding: 10px 14px;
+  display: flex; flex-direction: column; gap: 6px;
+  background: #0A0F1A;
   height: calc(100% - 26px);
+  overflow: hidden;
 }
 .ps-header {
   display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 2px;
 }
 .ps-header h4 {
   font-family: 'Sora', sans-serif;
-  font-size: 1rem; font-weight: 600;
+  font-size: 1.05rem; font-weight: 700;
+  color: #fff;
 }
-.ps-dots { display: flex; gap: 3px; }
-.ps-dots span { width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); }
+.ps-back {
+  font-size: 0.65rem; color: var(--purple-primary); font-weight: 500;
+}
+.ps-edit-btn {
+  font-size: 0.58rem; font-weight: 600; color: #fff;
+  background: var(--purple-primary); border-radius: 6px;
+  padding: 3px 10px;
+}
+.ps-action-row {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 2px;
+}
+.ps-fave {
+  font-size: 0.55rem; color: var(--text-muted); text-align: center;
+}
+.ps-fave-icon { font-size: 0.7rem; }
+.ps-play-btn {
+  font-size: 0.58rem; font-weight: 600; color: #fff;
+  background: #8C5CF5; border-radius: 50px;
+  padding: 4px 12px; display: flex; align-items: center; gap: 3px;
+}
+.ps-analyse-btn {
+  font-size: 0.58rem; font-weight: 600; color: #fff;
+  background: #22b8a0; border-radius: 50px;
+  padding: 4px 12px; display: flex; align-items: center; gap: 3px;
+}
+.ps-duration {
+  font-size: 0.6rem; color: var(--text-muted); text-align: center; margin-bottom: 2px;
+}
 .ps-segment {
-  background: var(--bg-card); border-radius: 12px;
-  padding: 10px 12px;
-  border: 1px solid rgba(124,92,252,0.08);
+  background: rgba(255,255,255,0.03); border-radius: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(124,92,252,0.1);
+}
+.ps-seg-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px;
 }
 .ps-seg-label {
-  font-size: 0.6rem; text-transform: uppercase;
-  letter-spacing: 1.2px; font-weight: 700;
-  margin-bottom: 6px;
+  font-size: 0.62rem; font-weight: 600;
 }
 .ps-seg-label.warm { color: #fbbf24; }
 .ps-seg-label.core { color: var(--pink); }
 .ps-seg-label.cool { color: var(--cyan); }
+.ps-seg-time {
+  font-size: 0.55rem; color: var(--text-muted);
+}
 .ps-move {
   display: flex; justify-content: space-between; align-items: center;
   padding: 5px 0;
   border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 .ps-move:last-child { border: none; }
-.ps-move-name { font-size: 0.72rem; font-weight: 500; }
-.ps-move-meta { font-size: 0.6rem; color: var(--text-muted); }
-.ps-heatmap {
-  background: var(--bg-card); border-radius: 12px;
-  padding: 12px; border: 1px solid rgba(124,92,252,0.08);
-  display: flex; align-items: center; gap: 14px;
+.ps-move-left { display: flex; flex-direction: column; gap: 2px; }
+.ps-move-name { font-size: 0.72rem; font-weight: 500; color: #fff; }
+.ps-move-badge {
+  font-size: 0.5rem; font-weight: 600;
+  padding: 1px 6px; border-radius: 4px; display: inline-block; width: fit-content;
 }
-.ps-heat-label {
-  font-size: 0.6rem; text-transform: uppercase;
-  letter-spacing: 1px; font-weight: 700; color: var(--cyan);
-  writing-mode: vertical-rl; transform: rotate(180deg);
+.ps-move-badge.hold { background: rgba(34,184,160,0.15); color: #22b8a0; }
+.ps-move-badge.reps { background: rgba(34,184,160,0.15); color: #22b8a0; }
+.ps-move-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: rgba(34,184,160,0.12);
+  display: grid; place-items: center;
+  font-size: 0.7rem; color: #22b8a0;
 }
-.ps-body {
-  width: 48px; height: 90px;
-  border-radius: 16px 16px 6px 6px;
-  background: linear-gradient(180deg, rgba(124,92,252,0.15), rgba(236,72,153,0.3) 40%, rgba(124,92,252,0.1) 70%, rgba(34,211,238,0.15));
-  border: 1px solid rgba(124,92,252,0.15);
-  position: relative;
+.ps-tab-bar {
+  margin-top: auto;
+  display: flex; justify-content: space-around; align-items: center;
+  padding: 6px 0 2px;
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
-.ps-body::after {
-  content: '';
-  position: absolute; top: 28%; left: 50%; transform: translateX(-50%);
-  width: 26px; height: 20px; border-radius: 4px;
-  background: rgba(236,72,153,0.5);
-  animation: heatPulse 3s infinite;
+.ps-tab {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 0.45rem; color: var(--text-muted);
 }
-@keyframes heatPulse { 0%,100%{opacity:.3} 50%{opacity:.85} }
-.ps-bars {
-  display: flex; flex-direction: column; gap: 5px; flex: 1;
+.ps-tab.active { color: var(--purple-primary); }
+.ps-tab-icon { font-size: 0.65rem; }
+.ps-create-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--purple-primary);
+  display: grid; place-items: center;
+  font-size: 1rem; color: #fff; margin-top: -8px;
 }
-.ps-bar-row {
-  display: flex; align-items: center; gap: 6px;
-}
-.ps-bar-name { font-size: 0.58rem; color: var(--text-muted); width: 32px; text-align: right; }
-.ps-bar-track {
-  flex: 1; height: 5px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 3px; overflow: hidden;
-}
-.ps-bar-fill { height: 100%; border-radius: 3px; }
 
 /* floating cards */
 .float-card {
@@ -426,66 +453,144 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 }
 
 /* mini mockup pieces inside showcase */
-.m-timer { text-align: center; padding: 12px 0; }
-.m-timer-time {
+.m-play-header {
+  text-align: center; margin-bottom: 8px;
+}
+.m-play-title {
   font-family: 'Sora', sans-serif;
-  font-size: 2.6rem; font-weight: 700; color: var(--purple-light);
-  letter-spacing: 3px;
+  font-size: 0.85rem; font-weight: 600; color: #fff;
 }
-.m-timer-label {
-  font-size: 0.68rem; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px;
+.m-play-sub {
+  font-size: 0.6rem; color: var(--text-muted);
 }
-.m-timer-bar {
-  height: 5px; background: rgba(124,92,252,0.12);
-  border-radius: 3px; margin-top: 16px; overflow: hidden;
+.m-play-duration-label {
+  font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--purple-light); font-weight: 600; text-align: center; margin-bottom: 2px;
 }
-.m-timer-fill {
-  height: 100%; width: 62%;
-  background: var(--gradient-main); border-radius: 3px;
+.m-play-duration {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.6rem; font-weight: 700; color: #fff;
+  text-align: center; letter-spacing: 2px; margin-bottom: 10px;
+}
+.m-donut-wrap {
+  display: flex; justify-content: center; align-items: center; margin-bottom: 10px;
+}
+.m-donut {
+  width: 90px; height: 90px; position: relative;
+}
+.m-donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.m-donut-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  text-align: center;
+}
+.m-donut-sec {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.4rem; font-weight: 700; color: #fff;
+}
+.m-donut-frac {
+  font-size: 0.5rem; color: var(--text-muted);
+}
+.m-play-segment {
+  font-size: 0.65rem; color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.m-play-segment-time {
+  font-size: 0.55rem; color: var(--text-muted);
 }
 .m-current {
   text-align: center; padding: 10px 14px;
-  background: var(--bg-card); border-radius: 10px;
-  border: 1px solid rgba(124,92,252,0.08); margin-top: 10px;
+  background: rgba(34,184,160,0.06); border-radius: 12px;
+  border: 1px solid rgba(34,184,160,0.15); margin: 8px 0;
 }
-.m-current .tag {
-  font-size: 0.58rem; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--cyan); font-weight: 700;
+.m-current .icon {
+  font-size: 1.5rem; margin-bottom: 4px;
 }
 .m-current .name {
-  font-size: 1rem; font-weight: 600; margin-top: 2px;
+  font-size: 1rem; font-weight: 600; margin-top: 2px; color: #fff;
+}
+.m-current .tag {
+  font-size: 0.6rem; font-weight: 600; color: #22b8a0;
+}
+.m-play-controls {
+  display: flex; justify-content: center; align-items: center; gap: 18px;
+  margin-top: 8px;
+}
+.m-play-ctrl {
+  font-size: 0.65rem; color: var(--text-muted);
+}
+.m-play-pause {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--purple-primary);
+  display: grid; place-items: center;
+  font-size: 0.9rem; color: #fff;
 }
 
-.m-heatmap-row {
-  display: flex; gap: 18px; align-items: center; justify-content: center;
+.m-analysis-balanced {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.2rem; font-weight: 700; text-align: center; color: #fff;
+  margin-bottom: 2px;
+}
+.m-analysis-sub {
+  font-size: 0.65rem; color: var(--text-muted); text-align: center; margin-bottom: 10px;
+}
+.m-silhouettes {
+  display: flex; gap: 14px; justify-content: center; align-items: flex-end;
+  margin-bottom: 10px;
+}
+.m-silhouette {
+  width: 40px; height: 80px;
+  border-radius: 14px 14px 4px 4px;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.m-silhouette.front {
+  background: linear-gradient(180deg, rgba(124,92,252,0.08), rgba(236,72,153,0.25) 35%, rgba(251,191,36,0.15) 60%, rgba(34,211,238,0.1));
+}
+.m-silhouette.back {
+  background: linear-gradient(180deg, rgba(34,211,238,0.08), rgba(244,114,182,0.2) 35%, rgba(124,92,252,0.15) 60%, rgba(52,211,153,0.1));
+}
+.m-muscle-dots {
+  display: flex; flex-wrap: wrap; gap: 4px 10px; justify-content: center;
+  font-size: 0.55rem; color: var(--text-secondary); margin-bottom: 12px;
+}
+.m-muscle-dot {
+  display: flex; align-items: center; gap: 3px;
+}
+.m-muscle-dot .dot {
+  width: 5px; height: 5px; border-radius: 50%;
+}
+.m-analysis-stats {
+  display: flex; justify-content: space-around; text-align: center;
+  margin-bottom: 12px;
   padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
-.m-body-fig {
-  width: 60px; height: 110px;
-  border-radius: 20px 20px 6px 6px;
-  background: linear-gradient(180deg, rgba(124,92,252,0.15), rgba(236,72,153,0.35) 40%, rgba(124,92,252,0.1) 65%, rgba(34,211,238,0.18));
-  border: 1px solid rgba(124,92,252,0.15);
-  position: relative; flex-shrink: 0;
+.m-analysis-stat-val {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.1rem; font-weight: 700; color: #fff;
 }
-.m-body-fig::after {
-  content: '';
-  position: absolute; top: 25%; left: 50%; transform: translateX(-50%);
-  width: 32px; height: 22px; border-radius: 4px;
-  background: rgba(236,72,153,0.55);
+.m-analysis-stat-label {
+  font-size: 0.5rem; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
 }
-.m-stat-list { display: flex; flex-direction: column; gap: 7px; }
+.m-region-title {
+  font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-muted); font-weight: 600; margin-bottom: 6px;
+}
+.m-stat-list { display: flex; flex-direction: column; gap: 5px; }
 .m-stat {
   display: flex; align-items: center; gap: 8px;
 }
-.m-stat-name { font-size: 0.65rem; color: var(--text-muted); width: 46px; text-align: right; }
+.m-stat-name { font-size: 0.62rem; color: var(--text-secondary); width: 52px; text-align: left; }
 .m-stat-track {
-  width: 90px; height: 6px;
+  flex: 1; height: 5px;
   background: rgba(255,255,255,0.05);
   border-radius: 3px; overflow: hidden;
 }
 .m-stat-bar { height: 100%; border-radius: 3px; }
-.m-stat-pct { font-size: 0.65rem; font-weight: 600; color: var(--text-secondary); width: 28px; }
+.m-stat-pct { font-size: 0.62rem; font-weight: 600; color: var(--text-secondary); width: 28px; text-align: right; }
 
 .m-spotify-item {
   display: flex; align-items: center; gap: 12px;
@@ -505,20 +610,42 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
   background: rgba(29,185,84,0.1); padding: 3px 8px; border-radius: 50px;
 }
 
-.m-flow-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 12px;
-  background: var(--bg-card); border-radius: 10px;
-  border: 1px solid rgba(124,92,252,0.06);
-  margin-bottom: 6px;
+.m-flow-card {
+  background: rgba(255,255,255,0.03); border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(124,92,252,0.1);
+  margin-bottom: 8px;
 }
-.m-flow-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.m-flow-info { flex: 1; }
-.m-flow-name { font-size: 0.75rem; font-weight: 600; }
-.m-flow-detail { font-size: 0.6rem; color: var(--text-muted); }
+.m-flow-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 8px;
+}
+.m-flow-name { font-size: 0.82rem; font-weight: 600; color: #fff; }
+.m-flow-desc { font-size: 0.58rem; color: var(--text-muted); margin-top: 1px; }
 .m-flow-badge {
-  font-size: 0.58rem; padding: 3px 9px;
+  font-size: 0.52rem; padding: 3px 9px;
   border-radius: 50px; font-weight: 600;
+  display: flex; align-items: center; gap: 3px;
+}
+.m-flow-badge .badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+}
+.m-flow-stats {
+  display: flex; gap: 16px; margin-bottom: 8px;
+}
+.m-flow-stat {
+  display: flex; flex-direction: column; align-items: flex-start;
+}
+.m-flow-stat-val { font-size: 0.72rem; font-weight: 700; color: #fff; }
+.m-flow-stat-label { font-size: 0.5rem; color: var(--text-muted); }
+.m-flow-tags {
+  display: flex; gap: 5px;
+}
+.m-flow-tag {
+  font-size: 0.5rem; padding: 2px 8px;
+  border-radius: 4px; font-weight: 500;
+  background: rgba(124,92,252,0.1); color: var(--purple-light);
+  border: 1px solid rgba(124,92,252,0.15);
 }
 
 /* ═══════ HOW IT WORKS ═══════ */
@@ -958,7 +1085,7 @@ footer {
       </div>
       <h1><span class="grad">Plan. Build. Flow.</span></h1>
       <p class="sub" style="font-size:1.4rem;font-weight:600;color:var(--text-primary);margin-bottom:16px;font-family:'Sora',sans-serif;">Meet TunaMat</p>
-      <p class="sub">The all-in-one Mat Pilates class planning app for instructors. Build Flows from an ever-growing Movement Library, cue Live Play mode for better in-class pacing, and analyse every flow you create — all in one place.</p>
+      <p class="sub">The all-in-one Mat Pilates class planning app for instructors. Build Flows from a 272+ Movement Library, cue Live Play mode for better in-class pacing, and analyse every flow you create — all in one place.</p>
       <div class="hero-ctas">
         <a href="#" class="btn-primary">
           Get Started Free
@@ -972,7 +1099,7 @@ footer {
       <!-- Floating accent cards -->
       <div class="float-card fc1">
         <div class="fc-label">Movements</div>
-        <div class="fc-val" style="color:var(--purple-light);">255+</div>
+        <div class="fc-val" style="color:var(--purple-light);">272+</div>
       </div>
       <div class="float-card fc2">
         <div class="fc-label">Muscle Groups</div>
@@ -988,45 +1115,66 @@ footer {
         <div class="phone-notch"></div>
         <div class="phone-screen">
           <div class="ps-header">
-            <h4>Morning Flow</h4>
-            <div class="ps-dots"><span></span><span></span><span></span></div>
+            <span class="ps-back">‹ Back</span>
+            <span class="ps-edit-btn">Edit</span>
           </div>
+          <h4 style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:0;">Example Flow</h4>
+          <div class="ps-action-row">
+            <div class="ps-fave"><div class="ps-fave-icon">♡</div><div>Fave</div></div>
+            <div class="ps-play-btn">▶ Play</div>
+            <div class="ps-analyse-btn">📊 Analyse</div>
+          </div>
+          <div class="ps-duration">45m 00s</div>
 
           <div class="ps-segment">
-            <div class="ps-seg-label warm">Warm Up · 8 min</div>
-            <div class="ps-move"><span class="ps-move-name">Pelvic Curl</span><span class="ps-move-meta">8 reps</span></div>
-            <div class="ps-move"><span class="ps-move-name">Cat-Cow</span><span class="ps-move-meta">6 reps</span></div>
-            <div class="ps-move"><span class="ps-move-name">Spine Twist</span><span class="ps-move-meta">8 reps</span></div>
-          </div>
-
-          <div class="ps-segment">
-            <div class="ps-seg-label core">Core Work · 15 min</div>
-            <div class="ps-move"><span class="ps-move-name">The Hundred</span><span class="ps-move-meta">100 beats</span></div>
-            <div class="ps-move"><span class="ps-move-name">Roll Up</span><span class="ps-move-meta">8 reps</span></div>
-            <div class="ps-move"><span class="ps-move-name">Single Leg Stretch</span><span class="ps-move-meta">10 reps</span></div>
-          </div>
-
-          <div class="ps-heatmap">
-            <div class="ps-heat-label">Analysis</div>
-            <div class="ps-body"></div>
-            <div class="ps-bars">
-              <div class="ps-bar-row">
-                <span class="ps-bar-name">Core</span>
-                <div class="ps-bar-track"><div class="ps-bar-fill" style="width:85%;background:var(--pink);"></div></div>
-              </div>
-              <div class="ps-bar-row">
-                <span class="ps-bar-name">Glutes</span>
-                <div class="ps-bar-track"><div class="ps-bar-fill" style="width:45%;background:var(--purple-light);"></div></div>
-              </div>
-              <div class="ps-bar-row">
-                <span class="ps-bar-name">Back</span>
-                <div class="ps-bar-track"><div class="ps-bar-fill" style="width:55%;background:var(--cyan);"></div></div>
-              </div>
-              <div class="ps-bar-row">
-                <span class="ps-bar-name">Legs</span>
-                <div class="ps-bar-track"><div class="ps-bar-fill" style="width:30%;background:#fbbf24;"></div></div>
-              </div>
+            <div class="ps-seg-header">
+              <div class="ps-seg-label warm">1. Centering &amp; Breath</div>
+              <span class="ps-seg-time">3:00</span>
             </div>
+            <div class="ps-move">
+              <div class="ps-move-left">
+                <span class="ps-move-name">Chest Opener</span>
+                <span class="ps-move-badge hold">Hold</span>
+              </div>
+              <div class="ps-move-icon">🧘</div>
+            </div>
+            <div class="ps-move">
+              <div class="ps-move-left">
+                <span class="ps-move-name">Cat-Cow</span>
+                <span class="ps-move-badge reps">8-10 reps</span>
+              </div>
+              <div class="ps-move-icon">🧘</div>
+            </div>
+            <div class="ps-move">
+              <div class="ps-move-left">
+                <span class="ps-move-name">Butterfly Stretch</span>
+                <span class="ps-move-badge hold">Hold</span>
+              </div>
+              <div class="ps-move-icon">🧘</div>
+            </div>
+          </div>
+
+          <div class="ps-segment">
+            <div class="ps-seg-header">
+              <div class="ps-seg-label core">2. Spinal Warm-Up</div>
+              <span class="ps-seg-time">3:00</span>
+            </div>
+            <div class="ps-move">
+              <div class="ps-move-left">
+                <span class="ps-move-name">Kneeling Chest Exp.</span>
+                <span class="ps-move-badge reps">8 reps</span>
+              </div>
+              <div class="ps-move-icon">🧘</div>
+            </div>
+          </div>
+
+          <!-- Tab bar -->
+          <div class="ps-tab-bar">
+            <div class="ps-tab active"><span class="ps-tab-icon">📋</span>Flows</div>
+            <div class="ps-tab"><span class="ps-tab-icon">🏃</span>Moves</div>
+            <div class="ps-create-btn">+</div>
+            <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
+            <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
           </div>
         </div>
       </div>
@@ -1043,8 +1191,8 @@ footer {
   <div class="features-grid">
     <div class="f-card">
       <div class="f-icon ic-purple">📚</div>
-      <h3>255+ Movement Library</h3>
-      <p>An ever-growing library of mat pilates movements with rich metadata — muscle groups, movement patterns, equipment, and pacing presets. Continuously refined with input from professionals.</p>
+      <h3>272+ Movement Library</h3>
+      <p>A curated library of mat pilates movements with rich metadata — muscle groups, movement patterns, equipment, and pacing presets. Continuously refined with input from professionals.</p>
     </div>
     <div class="f-card">
       <div class="f-icon ic-cyan">🧩</div>
@@ -1086,14 +1234,37 @@ footer {
       <h3>Timed Play Mode</h3>
       <p>Glanceable timers guide you through each segment. Just hit play and teach.</p>
       <div class="s-preview">
-        <div class="m-timer">
-          <div class="m-timer-time">02:34</div>
-          <div class="m-timer-label">Core Work — Segment 2 of 4</div>
-          <div class="m-timer-bar"><div class="m-timer-fill"></div></div>
+        <div class="m-play-header">
+          <div class="m-play-title">Example Flow</div>
+          <div class="m-play-sub">1 / 15</div>
+        </div>
+        <div class="m-play-duration-label">Total Duration</div>
+        <div class="m-play-duration">0:00.99</div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="flex:1;">
+            <div class="m-play-segment">1. Centering &amp; Breath</div>
+            <div class="m-play-segment-time">0:00 / 3:00</div>
+          </div>
+          <div class="m-donut">
+            <svg viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(124,92,252,0.12)" stroke-width="2.5"/>
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#22b8a0" stroke-width="2.5" stroke-dasharray="100" stroke-dashoffset="1" stroke-linecap="round"/>
+            </svg>
+            <div class="m-donut-center">
+              <div class="m-donut-sec">59</div>
+              <div class="m-donut-frac">1/1</div>
+            </div>
+          </div>
         </div>
         <div class="m-current">
-          <div class="tag">Now Playing</div>
-          <div class="name">The Hundred</div>
+          <div class="icon">🧘</div>
+          <div class="name">Chest Opener</div>
+          <div class="tag">Hold</div>
+        </div>
+        <div class="m-play-controls">
+          <span class="m-play-ctrl">⏮ Prev Segment</span>
+          <div class="m-play-pause">⏸</div>
+          <span class="m-play-ctrl">Next Segment ⏭</span>
         </div>
       </div>
     </div>
@@ -1103,34 +1274,45 @@ footer {
       <h3>Muscle Group Analysis</h3>
       <p>Real-time feedback flags imbalances so you can adjust before class.</p>
       <div class="s-preview">
-        <div class="m-heatmap-row">
-          <div class="m-body-fig"></div>
-          <div class="m-stat-list">
-            <div class="m-stat">
-              <span class="m-stat-name">Core</span>
-              <div class="m-stat-track"><div class="m-stat-bar" style="width:82%;background:var(--pink);"></div></div>
-              <span class="m-stat-pct">82%</span>
-            </div>
-            <div class="m-stat">
-              <span class="m-stat-name">Glutes</span>
-              <div class="m-stat-track"><div class="m-stat-bar" style="width:48%;background:var(--purple-light);"></div></div>
-              <span class="m-stat-pct">48%</span>
-            </div>
-            <div class="m-stat">
-              <span class="m-stat-name">Back</span>
-              <div class="m-stat-track"><div class="m-stat-bar" style="width:56%;background:var(--cyan);"></div></div>
-              <span class="m-stat-pct">56%</span>
-            </div>
-            <div class="m-stat">
-              <span class="m-stat-name">Legs</span>
-              <div class="m-stat-track"><div class="m-stat-bar" style="width:33%;background:#fbbf24;"></div></div>
-              <span class="m-stat-pct">33%</span>
-            </div>
-            <div class="m-stat">
-              <span class="m-stat-name">Arms</span>
-              <div class="m-stat-track"><div class="m-stat-bar" style="width:21%;background:#34d399;"></div></div>
-              <span class="m-stat-pct">21%</span>
-            </div>
+        <div class="m-analysis-balanced">Balanced</div>
+        <div class="m-analysis-sub">Overall class focus</div>
+        <div class="m-silhouettes">
+          <div class="m-silhouette front"></div>
+          <div class="m-silhouette back"></div>
+        </div>
+        <div class="m-muscle-dots">
+          <span class="m-muscle-dot"><span class="dot" style="background:#f472b6;"></span> Back 33%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#34d399;"></span> Abs 28%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#22d3ee;"></span> Stretch 22%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#a78bfa;"></span> Full Body 11%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#fbbf24;"></span> Glutes 6%</span>
+        </div>
+        <div class="m-analysis-stats">
+          <div><div class="m-analysis-stat-val">18</div><div class="m-analysis-stat-label">Movements</div></div>
+          <div><div class="m-analysis-stat-val">15</div><div class="m-analysis-stat-label">Segments</div></div>
+          <div><div class="m-analysis-stat-val">45m</div><div class="m-analysis-stat-label">Duration</div></div>
+        </div>
+        <div class="m-region-title">Body Region Balance</div>
+        <div class="m-stat-list">
+          <div class="m-stat">
+            <span class="m-stat-name">Core</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:28%;background:linear-gradient(90deg,#f472b6,#ec4899);"></div></div>
+            <span class="m-stat-pct">28%</span>
+          </div>
+          <div class="m-stat">
+            <span class="m-stat-name">Upper Body</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:33%;background:linear-gradient(90deg,#f97316,#f472b6);"></div></div>
+            <span class="m-stat-pct">33%</span>
+          </div>
+          <div class="m-stat">
+            <span class="m-stat-name">Lower Body</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:6%;background:linear-gradient(90deg,#f472b6,#a78bfa);"></div></div>
+            <span class="m-stat-pct">6%</span>
+          </div>
+          <div class="m-stat">
+            <span class="m-stat-name">Mobility</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:22%;background:linear-gradient(90deg,#22d3ee,#34d399);"></div></div>
+            <span class="m-stat-pct">22%</span>
           </div>
         </div>
       </div>
@@ -1164,20 +1346,41 @@ footer {
       <h3>Your Flow Library</h3>
       <p>Organise, duplicate, and manage all your class plans in one place.</p>
       <div class="s-preview">
-        <div class="m-flow-item">
-          <div class="m-flow-dot" style="background:var(--purple-primary);"></div>
-          <div class="m-flow-info"><div class="m-flow-name">Morning Core Blast</div><div class="m-flow-detail">45 min · 4 segments · 18 movements</div></div>
-          <div class="m-flow-badge" style="background:rgba(124,92,252,0.12);color:var(--purple-light);">Peak</div>
+        <div class="m-flow-card">
+          <div class="m-flow-top">
+            <div>
+              <div class="m-flow-name">Example Flow</div>
+              <div class="m-flow-desc">A complete 45-minute mat pilates fl...</div>
+            </div>
+            <div class="m-flow-badge" style="background:rgba(251,191,36,0.1);color:#fbbf24;"><span class="badge-dot" style="background:#fbbf24;"></span> Moderate</div>
+          </div>
+          <div class="m-flow-stats">
+            <div class="m-flow-stat"><div class="m-flow-stat-val">45m 00s</div><div class="m-flow-stat-label">Duration</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">15</div><div class="m-flow-stat-label">Segments</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">18</div><div class="m-flow-stat-label">Movements</div></div>
+          </div>
+          <div class="m-flow-tags">
+            <span class="m-flow-tag">Full Body</span>
+            <span class="m-flow-tag">Mat</span>
+          </div>
         </div>
-        <div class="m-flow-item">
-          <div class="m-flow-dot" style="background:var(--cyan);"></div>
-          <div class="m-flow-info"><div class="m-flow-name">Recovery Flow</div><div class="m-flow-detail">30 min · 3 segments · 12 movements</div></div>
-          <div class="m-flow-badge" style="background:rgba(34,211,238,0.1);color:var(--cyan);">Recovery</div>
-        </div>
-        <div class="m-flow-item">
-          <div class="m-flow-dot" style="background:var(--pink);"></div>
-          <div class="m-flow-info"><div class="m-flow-name">Glute Sculptor</div><div class="m-flow-detail">50 min · 5 segments · 22 movements</div></div>
-          <div class="m-flow-badge" style="background:rgba(244,114,182,0.1);color:var(--pink);">Moderate</div>
+        <div class="m-flow-card">
+          <div class="m-flow-top">
+            <div>
+              <div class="m-flow-name">Morning Core Blast</div>
+              <div class="m-flow-desc">High-intensity core focused session</div>
+            </div>
+            <div class="m-flow-badge" style="background:rgba(239,68,68,0.1);color:#ef4444;"><span class="badge-dot" style="background:#ef4444;"></span> Peak</div>
+          </div>
+          <div class="m-flow-stats">
+            <div class="m-flow-stat"><div class="m-flow-stat-val">50m 00s</div><div class="m-flow-stat-label">Duration</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">5</div><div class="m-flow-stat-label">Segments</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">22</div><div class="m-flow-stat-label">Movements</div></div>
+          </div>
+          <div class="m-flow-tags">
+            <span class="m-flow-tag">Abs</span>
+            <span class="m-flow-tag" style="background:rgba(34,211,238,0.1);color:var(--cyan);border-color:rgba(34,211,238,0.15);">Circuit</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1260,7 +1463,7 @@ footer {
 
       <div style="margin-top:36px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
         <div style="text-align:center;">
-          <div style="font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:var(--purple-light);">255+</div>
+          <div style="font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:var(--purple-light);">272+</div>
           <div style="font-size:0.68rem;color:var(--text-muted);">Movements</div>
         </div>
         <div style="width:1px;background:var(--border);"></div>
@@ -1299,7 +1502,7 @@ footer {
       <p class="p-desc">Try TunaMat with one flow — no credit card needed.</p>
       <ul class="p-features">
         <li><span class="check">✓</span> 1 flow (limited)</li>
-        <li><span class="check">✓</span> 255+ movement library</li>
+        <li><span class="check">✓</span> 272+ movement library</li>
         <li><span class="check">✓</span> Flow builder &amp; play mode</li>
         <li><span class="check">✓</span> Muscle group analysis</li>
       </ul>
@@ -1366,7 +1569,7 @@ footer {
   <div class="faq-list">
     <div class="faq-item">
       <button class="faq-q">Is TunaMat free to use? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Yes! The free tier gives you 1 flow with full access to the 255+ movement library, flow builder, play mode, and muscle group analysis. No credit card required.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">Yes! The free tier gives you 1 flow with full access to the 272+ movement library, flow builder, play mode, and muscle group analysis. No credit card required.</div></div>
     </div>
     <div class="faq-item">
       <button class="faq-q">What devices does TunaMat support? <span class="icon">+</span></button>
@@ -1415,7 +1618,7 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    © 2025 Tuna Athletics. All rights reserved.
+    © 2026 Tuna Athletics. All rights reserved.
   </div>
 </footer>
 
