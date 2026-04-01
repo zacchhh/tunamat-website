@@ -33,7 +33,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle dot grid */
 body::before {
   content: '';
   position: fixed;
@@ -119,16 +118,16 @@ nav {
   padding: 0 40px 80px;
 }
 
-/* ═══════ PHASE GRID (snake layout) ═══════ */
+/* ═══════ PHASE GRID ═══════ */
 .phase-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   row-gap: 32px;
-  column-gap: 20px;
+  column-gap: 18px;
   position: relative;
 }
 
-/* ═══════ PHASE NODE (grid cell) ═══════ */
+/* ═══════ PHASE NODE ═══════ */
 .phase-node {
   position: relative;
   opacity: 0;
@@ -146,9 +145,10 @@ nav {
   background: rgba(255,255,255,0.02);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 14px 14px;
+  padding: 16px 12px 14px;
   position: relative;
   transition: all 0.35s ease;
+  height: 100%;
 }
 
 .phase-card:hover {
@@ -183,13 +183,13 @@ nav {
 
 .phase-title {
   font-family: 'Sora', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: 14px;
 }
 
-/* ═══════ METRO TRACK (colored line + feature stops) ═══════ */
+/* ═══════ METRO TRACK ═══════ */
 .phase-track {
   display: flex;
   align-items: flex-start;
@@ -197,7 +197,6 @@ nav {
   padding: 0 2px;
 }
 
-/* The connecting line behind the dots */
 .phase-track::before {
   content: '';
   position: absolute;
@@ -215,7 +214,6 @@ nav {
 .phase-node.current .phase-track::before { opacity: 0.3; }
 .phase-node.current .phase-card:hover .phase-track::before { opacity: 0.5; }
 
-/* Individual feature stop */
 .track-stop {
   flex: 1;
   display: flex;
@@ -246,7 +244,7 @@ nav {
 }
 
 .stop-label {
-  font-size: 0.52rem;
+  font-size: 0.5rem;
   color: var(--text-muted);
   margin-top: 7px;
   text-align: center;
@@ -258,48 +256,23 @@ nav {
 .phase-card:hover .stop-label { color: var(--text-secondary); }
 .phase-node.current .stop-label { color: var(--text-secondary); }
 
-/* ═══════ FLOW CONNECTORS (arrows between phases) ═══════ */
+/* ═══════ FLOW CONNECTORS ═══════ */
 
-/* Right arrows: Row 1 (L→R) and Row 3 (L→R) */
+/* Right arrows between adjacent phases (not at row ends) */
 [data-phase="1"]::after,
 [data-phase="2"]::after,
+[data-phase="3"]::after,
+[data-phase="5"]::after,
+[data-phase="6"]::after,
 [data-phase="7"]::after {
   content: '';
   position: absolute;
-  right: -14px;
+  right: -13px;
   top: 50%;
   width: 7px; height: 7px;
   border-right: 1.5px solid rgba(255,255,255,0.12);
   border-bottom: 1.5px solid rgba(255,255,255,0.12);
   transform: translateY(-50%) rotate(-45deg);
-  z-index: 2;
-}
-
-/* Left arrows: Row 2 (R→L) */
-[data-phase="4"]::before,
-[data-phase="5"]::before {
-  content: '';
-  position: absolute;
-  left: -14px;
-  top: 50%;
-  width: 7px; height: 7px;
-  border-right: 1.5px solid rgba(255,255,255,0.12);
-  border-bottom: 1.5px solid rgba(255,255,255,0.12);
-  transform: translateY(-50%) rotate(135deg);
-  z-index: 2;
-}
-
-/* Down arrows: Row transitions */
-[data-phase="3"]::after,
-[data-phase="6"]::after {
-  content: '';
-  position: absolute;
-  bottom: -22px;
-  left: 50%;
-  width: 7px; height: 7px;
-  border-right: 1.5px solid rgba(255,255,255,0.12);
-  border-bottom: 1.5px solid rgba(255,255,255,0.12);
-  transform: translateX(-50%) rotate(45deg);
   z-index: 2;
 }
 
@@ -328,7 +301,6 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Track line draw animation */
 .phase-track::before {
   transform-origin: left;
   transform: scaleX(0);
@@ -339,17 +311,7 @@ footer {
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Row 2 (R→L): draw from right */
-[data-phase="4"] .phase-track::before,
-[data-phase="5"] .phase-track::before,
-[data-phase="6"] .phase-track::before {
-  transform-origin: right;
-}
-
-/* Dots pop in with stagger */
-.stop-dot {
-  transform: scale(0);
-}
+.stop-dot { transform: scale(0); }
 
 .phase-node.reveal .stop-dot {
   transform: scale(1);
@@ -360,13 +322,8 @@ footer {
 .phase-node.reveal .track-stop:nth-child(2) .stop-dot { transition-delay: 0.25s; }
 .phase-node.reveal .track-stop:nth-child(3) .stop-dot { transition-delay: 0.35s; }
 .phase-node.reveal .track-stop:nth-child(4) .stop-dot { transition-delay: 0.45s; }
-.phase-node.reveal .track-stop:nth-child(5) .stop-dot { transition-delay: 0.55s; }
-.phase-node.reveal .track-stop:nth-child(6) .stop-dot { transition-delay: 0.65s; }
 
-/* Labels fade in */
-.stop-label {
-  opacity: 0;
-}
+.stop-label { opacity: 0; }
 
 .phase-node.reveal .stop-label {
   opacity: 1;
@@ -377,49 +334,43 @@ footer {
 .phase-node.reveal .track-stop:nth-child(2) .stop-label { transition-delay: 0.4s; }
 .phase-node.reveal .track-stop:nth-child(3) .stop-label { transition-delay: 0.5s; }
 .phase-node.reveal .track-stop:nth-child(4) .stop-label { transition-delay: 0.6s; }
-.phase-node.reveal .track-stop:nth-child(5) .stop-label { transition-delay: 0.7s; }
-.phase-node.reveal .track-stop:nth-child(6) .stop-label { transition-delay: 0.8s; }
 
 /* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 1000px) {
+  .phase-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Hide arrows at end of 2-col rows */
+  [data-phase="2"]::after,
+  [data-phase="4"]::after,
+  [data-phase="6"]::after,
+  [data-phase="8"]::after {
+    display: none !important;
+  }
+}
+
 @media (max-width: 900px) {
   nav { padding: 12px 20px; }
   .nav-pills { display: none; }
   .hero { padding: 110px 20px 20px; }
   .hero h1 { font-size: 2rem; }
   .roadmap { padding: 0 20px 60px; margin-top: 30px; }
-
-  .phase-grid {
-    grid-template-columns: 1fr;
-    row-gap: 14px;
-  }
-
-  .phase-node {
-    grid-column: auto !important;
-    grid-row: auto !important;
-  }
-
-  /* Hide flow connectors on mobile */
-  .phase-node::before,
-  .phase-node::after {
-    display: none !important;
-  }
-
-  /* All tracks draw from left on mobile */
-  [data-phase="4"] .phase-track::before,
-  [data-phase="5"] .phase-track::before,
-  [data-phase="6"] .phase-track::before {
-    transform-origin: left;
-  }
-
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 600px) {
+  .phase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phase-node::after { display: none !important; }
+
   .hero h1 { font-size: 1.7rem; }
   .roadmap { padding: 0 16px 40px; }
   .phase-card { padding: 14px 10px 12px; }
-  .stop-label { font-size: 0.48rem; }
+  .stop-label { font-size: 0.5rem; }
 }
 </style>
 </head>
@@ -451,23 +402,20 @@ footer {
 <section class="roadmap">
   <div class="phase-grid">
 
-    <!-- ═══ ROW 1: L → R ═══ -->
-    <div class="phase-node current" style="grid-row:1;grid-column:1" data-phase="1">
+    <!-- ═══ ROW 1 ═══ -->
+    <div class="phase-node current" data-phase="1">
       <div class="phase-card" style="--phase-color: #fff">
         <div class="phase-label">Phase 1 — Current</div>
         <div class="phase-title">MVP — App Store Launch</div>
-        <div class="phase-track" style="--stops: 6">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">272+ Moves</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Flow Builder</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Play Mode</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Analysis</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Spotify</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Cloud Sync</div></div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">iOS App</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Web App</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Core Features</div></div>
         </div>
       </div>
     </div>
 
-    <div class="phase-node" style="grid-row:1;grid-column:2" data-phase="2">
+    <div class="phase-node" data-phase="2">
       <div class="phase-card" style="--phase-color: #a78bfa">
         <div class="phase-label">Phase 2</div>
         <div class="phase-title">Polish &amp; Content Depth</div>
@@ -480,22 +428,9 @@ footer {
       </div>
     </div>
 
-    <div class="phase-node" style="grid-row:1;grid-column:3" data-phase="3">
-      <div class="phase-card" style="--phase-color: #5eead4">
-        <div class="phase-label">Phase 3</div>
-        <div class="phase-title">Engagement &amp; Retention</div>
-        <div class="phase-track" style="--stops: 3">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Push Notifs</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Avatars</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Web App Login</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ ROW 2: R → L ═══ -->
-    <div class="phase-node" style="grid-row:2;grid-column:3" data-phase="4">
+    <div class="phase-node" data-phase="3">
       <div class="phase-card" style="--phase-color: #fbbf24">
-        <div class="phase-label">Phase 4</div>
+        <div class="phase-label">Phase 3</div>
         <div class="phase-title">Creator Marketplace</div>
         <div class="phase-track" style="--stops: 4">
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Marketplace</div></div>
@@ -506,7 +441,20 @@ footer {
       </div>
     </div>
 
-    <div class="phase-node" style="grid-row:2;grid-column:2" data-phase="5">
+    <div class="phase-node" data-phase="4">
+      <div class="phase-card" style="--phase-color: #5eead4">
+        <div class="phase-label">Phase 4</div>
+        <div class="phase-title">Customisability</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Avatars</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Colour Profiles</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Push Notifs</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ROW 2 ═══ -->
+    <div class="phase-node" data-phase="5">
       <div class="phase-card" style="--phase-color: #60a5fa">
         <div class="phase-label">Phase 5</div>
         <div class="phase-title">AI Flow Builder</div>
@@ -518,7 +466,7 @@ footer {
       </div>
     </div>
 
-    <div class="phase-node" style="grid-row:2;grid-column:1" data-phase="6">
+    <div class="phase-node" data-phase="6">
       <div class="phase-card" style="--phase-color: #f472b6">
         <div class="phase-label">Phase 6</div>
         <div class="phase-title">Social Features</div>
@@ -530,8 +478,7 @@ footer {
       </div>
     </div>
 
-    <!-- ═══ ROW 3: L → R ═══ -->
-    <div class="phase-node" style="grid-row:3;grid-column:1" data-phase="7">
+    <div class="phase-node" data-phase="7">
       <div class="phase-card" style="--phase-color: #4ade80">
         <div class="phase-label">Phase 7</div>
         <div class="phase-title">iPad &amp; Apple Watch</div>
@@ -543,7 +490,7 @@ footer {
       </div>
     </div>
 
-    <div class="phase-node" style="grid-row:3;grid-column:2" data-phase="8">
+    <div class="phase-node" data-phase="8">
       <div class="phase-card" style="--phase-color: #fb923c">
         <div class="phase-label">Future</div>
         <div class="phase-title">TunaSpin &amp; TunaReformer</div>
@@ -587,17 +534,15 @@ footer {
 </footer>
 
 <script>
-// Nav scroll
 window.addEventListener('scroll', () => {
   document.querySelector('nav').style.background =
     window.scrollY > 60 ? 'rgba(9,9,15,0.92)' : 'rgba(9,9,15,0.8)';
 });
 
-// Stagger card reveals
 function revealCards() {
   const cards = document.querySelectorAll('.phase-node');
   cards.forEach((card, i) => {
-    setTimeout(() => card.classList.add('reveal'), 250 + i * 120);
+    setTimeout(() => card.classList.add('reveal'), 250 + i * 100);
   });
 }
 
