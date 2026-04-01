@@ -3,6 +3,7 @@
   "rewrites": [
     { "source": "/tunamat", "destination": "/tunamat.html" },
     { "source": "/roadmap", "destination": "/roadmap.html" },
+    { "source": "/faq", "destination": "/faq.html" },
     { "source": "/app/(.*)", "destination": "/app/index.html" }
   ]
 }
