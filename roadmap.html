@@ -111,7 +111,7 @@ nav {
   opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards;
 }
 
-/* ═══════ ROADMAP SNAKE ═══════ */
+/* ═══════ ROADMAP ═══════ */
 .roadmap {
   position: relative; z-index: 1;
   max-width: 1100px;
@@ -119,63 +119,20 @@ nav {
   padding: 0 40px 80px;
 }
 
-.snake-container {
-  position: relative;
-}
-
-/* SVG snake path */
-.snake-svg {
-  position: absolute;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: visible;
-}
-
-.snake-line {
-  fill: none;
-  stroke: rgba(255,255,255,0.07);
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
-.snake-line-glow {
-  fill: none;
-  stroke: rgba(255,255,255,0.025);
-  stroke-width: 10;
-  stroke-linecap: round;
-}
-
-.snake-flow {
-  fill: none;
-  stroke: rgba(255,255,255,0.12);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 6 18;
-  opacity: 0;
-  animation: flowDash 12s linear infinite;
-}
-
-@keyframes flowDash {
-  to { stroke-dashoffset: -120; }
-}
-
-/* ═══════ PHASE GRID ═══════ */
+/* ═══════ PHASE GRID (snake layout) ═══════ */
 .phase-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: 44px;
+  row-gap: 32px;
   column-gap: 20px;
   position: relative;
-  z-index: 1;
 }
 
-/* Phase nodes */
+/* ═══════ PHASE NODE (grid cell) ═══════ */
 .phase-node {
   position: relative;
-  text-align: center;
   opacity: 0;
-  transform: translateY(15px);
+  transform: translateY(14px);
 }
 
 .phase-node.reveal {
@@ -184,66 +141,21 @@ nav {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* Phase dot marker */
-.phase-dot {
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.15);
-  background: var(--bg-deep);
-  margin: 0 auto 10px;
-  display: grid; place-items: center;
-  font-size: 0.58rem; font-weight: 700;
-  color: rgba(255,255,255,0.3);
-  position: relative;
-  z-index: 2;
-  transition: all 0.3s;
-}
-
-.phase-node:hover .phase-dot {
-  border-color: rgba(255,255,255,0.35);
-  box-shadow: 0 0 12px rgba(255,255,255,0.1);
-}
-
-.phase-node.current .phase-dot {
-  background: #fff;
-  border-color: #fff;
-  color: #09090f;
-  box-shadow: 0 0 20px rgba(255,255,255,0.35), 0 0 50px rgba(255,255,255,0.1);
-  animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.35), 0 0 50px rgba(255,255,255,0.1); }
-  50% { box-shadow: 0 0 28px rgba(255,255,255,0.5), 0 0 70px rgba(255,255,255,0.18); }
-}
-
-/* Current phase subtle glow */
-.phase-node.current::after {
-  content: '';
-  position: absolute;
-  top: -30px; left: 50%;
-  transform: translateX(-50%);
-  width: 180px; height: 180px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Card body */
+/* ═══════ PHASE CARD ═══════ */
 .phase-card {
   background: rgba(255,255,255,0.02);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 16px 14px 14px;
+  position: relative;
   transition: all 0.35s ease;
 }
 
-.phase-node:hover .phase-card {
+.phase-card:hover {
   background: rgba(255,255,255,0.04);
   border-color: var(--border-hover);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 }
 
 .phase-node.current .phase-card {
@@ -251,92 +163,144 @@ nav {
   border-color: rgba(255,255,255,0.1);
 }
 
-.phase-node.current:hover .phase-card {
+.phase-node.current .phase-card:hover {
   background: rgba(255,255,255,0.06);
   border-color: rgba(255,255,255,0.18);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.03);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.03);
 }
 
-/* Phase label */
+/* ═══════ PHASE LABEL & TITLE ═══════ */
 .phase-label {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   text-transform: uppercase;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.6px;
   font-weight: 600;
   color: var(--text-muted);
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .phase-node.current .phase-label { color: #34d399; }
 
-/* Phase title */
 .phase-title {
   font-family: 'Sora', sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  margin-bottom: 6px;
   line-height: 1.3;
+  margin-bottom: 14px;
 }
 
-/* Phase description */
-.phase-desc {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 10px;
-  transition: color 0.3s;
-}
-
-.phase-node:hover .phase-desc { color: var(--text-secondary); }
-
-/* Feature pills */
-.phase-pills {
+/* ═══════ METRO TRACK (colored line + feature stops) ═══════ */
+.phase-track {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  padding: 0 2px;
 }
 
-.pill {
-  font-size: 0.58rem;
-  padding: 3px 9px;
-  border-radius: 50px;
-  font-weight: 500;
-  background: rgba(255,255,255,0.03);
-  color: var(--text-muted);
-  border: 1px solid rgba(255,255,255,0.04);
-  transition: all 0.25s;
-  white-space: nowrap;
-}
-
-.phase-node:hover .pill {
-  background: rgba(255,255,255,0.06);
-  color: var(--text-secondary);
-  border-color: rgba(255,255,255,0.08);
-}
-
-.phase-node.current .pill {
-  background: rgba(255,255,255,0.06);
-  color: var(--text-secondary);
-  border-color: rgba(255,255,255,0.08);
-}
-
-.phase-node.current:hover .pill {
-  background: rgba(255,255,255,0.09);
-  color: var(--text-primary);
-  border-color: rgba(255,255,255,0.12);
-}
-
-/* ═══════ DIRECTION HINTS ═══════ */
-.row-hint {
+/* The connecting line behind the dots */
+.phase-track::before {
+  content: '';
   position: absolute;
-  font-size: 0.55rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.08);
-  font-weight: 600;
-  pointer-events: none;
-  z-index: 0;
+  top: 3px;
+  left: calc(50% / var(--stops));
+  right: calc(50% / var(--stops));
+  height: 2px;
+  background: var(--phase-color);
+  opacity: 0.2;
+  border-radius: 1px;
+  transition: opacity 0.35s;
+}
+
+.phase-card:hover .phase-track::before { opacity: 0.45; }
+.phase-node.current .phase-track::before { opacity: 0.3; }
+.phase-node.current .phase-card:hover .phase-track::before { opacity: 0.5; }
+
+/* Individual feature stop */
+.track-stop {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  min-width: 0;
+}
+
+.stop-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--phase-color);
+  flex-shrink: 0;
+  opacity: 0.45;
+  transition: all 0.35s;
+}
+
+.phase-card:hover .stop-dot {
+  opacity: 0.9;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--phase-color) 50%, transparent);
+}
+
+.phase-node.current .stop-dot {
+  opacity: 0.85;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--phase-color) 40%, transparent);
+}
+
+.stop-label {
+  font-size: 0.52rem;
+  color: var(--text-muted);
+  margin-top: 7px;
+  text-align: center;
+  line-height: 1.25;
+  transition: color 0.3s;
+  max-width: 100%;
+}
+
+.phase-card:hover .stop-label { color: var(--text-secondary); }
+.phase-node.current .stop-label { color: var(--text-secondary); }
+
+/* ═══════ FLOW CONNECTORS (arrows between phases) ═══════ */
+
+/* Right arrows: Row 1 (L→R) and Row 3 (L→R) */
+[data-phase="1"]::after,
+[data-phase="2"]::after,
+[data-phase="7"]::after {
+  content: '';
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  width: 7px; height: 7px;
+  border-right: 1.5px solid rgba(255,255,255,0.12);
+  border-bottom: 1.5px solid rgba(255,255,255,0.12);
+  transform: translateY(-50%) rotate(-45deg);
+  z-index: 2;
+}
+
+/* Left arrows: Row 2 (R→L) */
+[data-phase="4"]::before,
+[data-phase="5"]::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  width: 7px; height: 7px;
+  border-right: 1.5px solid rgba(255,255,255,0.12);
+  border-bottom: 1.5px solid rgba(255,255,255,0.12);
+  transform: translateY(-50%) rotate(135deg);
+  z-index: 2;
+}
+
+/* Down arrows: Row transitions */
+[data-phase="3"]::after,
+[data-phase="6"]::after {
+  content: '';
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  width: 7px; height: 7px;
+  border-right: 1.5px solid rgba(255,255,255,0.12);
+  border-bottom: 1.5px solid rgba(255,255,255,0.12);
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 2;
 }
 
 /* ═══════ FOOTER ═══════ */
@@ -364,6 +328,58 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Track line draw animation */
+.phase-track::before {
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.phase-node.reveal .phase-track::before {
+  transform: scaleX(1);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Row 2 (R→L): draw from right */
+[data-phase="4"] .phase-track::before,
+[data-phase="5"] .phase-track::before,
+[data-phase="6"] .phase-track::before {
+  transform-origin: right;
+}
+
+/* Dots pop in with stagger */
+.stop-dot {
+  transform: scale(0);
+}
+
+.phase-node.reveal .stop-dot {
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.phase-node.reveal .track-stop:nth-child(1) .stop-dot { transition-delay: 0.15s; }
+.phase-node.reveal .track-stop:nth-child(2) .stop-dot { transition-delay: 0.25s; }
+.phase-node.reveal .track-stop:nth-child(3) .stop-dot { transition-delay: 0.35s; }
+.phase-node.reveal .track-stop:nth-child(4) .stop-dot { transition-delay: 0.45s; }
+.phase-node.reveal .track-stop:nth-child(5) .stop-dot { transition-delay: 0.55s; }
+.phase-node.reveal .track-stop:nth-child(6) .stop-dot { transition-delay: 0.65s; }
+
+/* Labels fade in */
+.stop-label {
+  opacity: 0;
+}
+
+.phase-node.reveal .stop-label {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.phase-node.reveal .track-stop:nth-child(1) .stop-label { transition-delay: 0.3s; }
+.phase-node.reveal .track-stop:nth-child(2) .stop-label { transition-delay: 0.4s; }
+.phase-node.reveal .track-stop:nth-child(3) .stop-label { transition-delay: 0.5s; }
+.phase-node.reveal .track-stop:nth-child(4) .stop-label { transition-delay: 0.6s; }
+.phase-node.reveal .track-stop:nth-child(5) .stop-label { transition-delay: 0.7s; }
+.phase-node.reveal .track-stop:nth-child(6) .stop-label { transition-delay: 0.8s; }
+
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 900px) {
   nav { padding: 12px 20px; }
@@ -371,41 +387,29 @@ footer {
   .hero { padding: 110px 20px 20px; }
   .hero h1 { font-size: 2rem; }
   .roadmap { padding: 0 20px 60px; margin-top: 30px; }
-  .row-hint { display: none; }
 
   .phase-grid {
     grid-template-columns: 1fr;
-    row-gap: 16px;
-    padding-left: 28px;
-    position: relative;
-  }
-
-  /* Mobile vertical line */
-  .phase-grid::before {
-    content: '';
-    position: absolute;
-    left: 11px; top: 12px; bottom: 12px;
-    width: 2px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+    row-gap: 14px;
   }
 
   .phase-node {
     grid-column: auto !important;
     grid-row: auto !important;
-    text-align: left;
   }
 
-  .phase-dot {
-    position: absolute;
-    left: -28px; top: 0;
-    margin: 0;
+  /* Hide flow connectors on mobile */
+  .phase-node::before,
+  .phase-node::after {
+    display: none !important;
   }
 
-  .phase-pills { justify-content: flex-start; }
-
-  .snake-svg { display: none; }
-
-  .phase-node.current::after { display: none; }
+  /* All tracks draw from left on mobile */
+  [data-phase="4"] .phase-track::before,
+  [data-phase="5"] .phase-track::before,
+  [data-phase="6"] .phase-track::before {
+    transform-origin: left;
+  }
 
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
@@ -414,6 +418,8 @@ footer {
 @media (max-width: 560px) {
   .hero h1 { font-size: 1.7rem; }
   .roadmap { padding: 0 16px 40px; }
+  .phase-card { padding: 14px 10px 12px; }
+  .stop-label { font-size: 0.48rem; }
 }
 </style>
 </head>
@@ -443,137 +449,112 @@ footer {
 
 <!-- ROADMAP -->
 <section class="roadmap">
-  <div class="snake-container">
-    <!-- SVG snake path (computed by JS) -->
-    <svg class="snake-svg" xmlns="http://www.w3.org/2000/svg">
-      <path class="snake-line-glow snake-path-el" />
-      <path class="snake-line snake-path-el" />
-      <path class="snake-flow snake-path-el" />
-    </svg>
+  <div class="phase-grid">
 
-    <div class="phase-grid">
-
-      <!-- ═══ ROW 1: L → R ═══ -->
-      <div class="phase-node current" style="grid-row:1; grid-column:1">
-        <div class="phase-dot">1</div>
-        <div class="phase-card">
-          <div class="phase-label">Phase 1 — Current</div>
-          <div class="phase-title">MVP — App Store Launch</div>
-          <div class="phase-desc">Full-featured mat pilates planning with everything an instructor needs.</div>
-          <div class="phase-pills">
-            <span class="pill">272+ Movements</span>
-            <span class="pill">Flow Builder</span>
-            <span class="pill">Play Mode</span>
-            <span class="pill">Analysis</span>
-            <span class="pill">Spotify</span>
-            <span class="pill">Cloud Sync</span>
-          </div>
+    <!-- ═══ ROW 1: L → R ═══ -->
+    <div class="phase-node current" style="grid-row:1;grid-column:1" data-phase="1">
+      <div class="phase-card" style="--phase-color: #fff">
+        <div class="phase-label">Phase 1 — Current</div>
+        <div class="phase-title">MVP — App Store Launch</div>
+        <div class="phase-track" style="--stops: 6">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">272+ Moves</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Flow Builder</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Play Mode</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Analysis</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Spotify</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Cloud Sync</div></div>
         </div>
       </div>
-
-      <div class="phase-node" style="grid-row:1; grid-column:2">
-        <div class="phase-dot">2</div>
-        <div class="phase-card">
-          <div class="phase-label">Phase 2</div>
-          <div class="phase-title">Polish &amp; Content Depth</div>
-          <div class="phase-desc">Deeper library and sharing for organic growth.</div>
-          <div class="phase-pills">
-            <span class="pill">Flow Sharing</span>
-            <span class="pill">Expanded Library</span>
-            <span class="pill">UX Polish</span>
-            <span class="pill">Performance</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-node" style="grid-row:1; grid-column:3">
-        <div class="phase-dot">3</div>
-        <div class="phase-card">
-          <div class="phase-label">Phase 3</div>
-          <div class="phase-title">Engagement &amp; Retention</div>
-          <div class="phase-desc">Smart notifications and personalisation to keep instructors coming back.</div>
-          <div class="phase-pills">
-            <span class="pill">Push Notifications</span>
-            <span class="pill">Avatars</span>
-            <span class="pill">Web App Login</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ ROW 2: R → L ═══ -->
-      <div class="phase-node" style="grid-row:2; grid-column:3">
-        <div class="phase-dot">4</div>
-        <div class="phase-card">
-          <div class="phase-label">Phase 4</div>
-          <div class="phase-title">Creator Marketplace</div>
-          <div class="phase-desc">Instructors publish and sell flows via Stripe Connect.</div>
-          <div class="phase-pills">
-            <span class="pill">Marketplace</span>
-            <span class="pill">Stripe Connect</span>
-            <span class="pill">Creator Profiles</span>
-            <span class="pill">Reviews</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-node" style="grid-row:2; grid-column:2">
-        <div class="phase-dot">5</div>
-        <div class="phase-card">
-          <div class="phase-label">Phase 5</div>
-          <div class="phase-title">AI Flow Builder</div>
-          <div class="phase-desc">Generate balanced flows from duration, focus area, and difficulty.</div>
-          <div class="phase-pills">
-            <span class="pill">AI Generation</span>
-            <span class="pill">Smart Suggestions</span>
-            <span class="pill">Balance AI</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-node" style="grid-row:2; grid-column:1">
-        <div class="phase-dot">6</div>
-        <div class="phase-card">
-          <div class="phase-label">Phase 6</div>
-          <div class="phase-title">Social Features</div>
-          <div class="phase-desc">Follow instructors, browse feeds, and share flows in the community.</div>
-          <div class="phase-pills">
-            <span class="pill">Follows</span>
-            <span class="pill">Activity Feed</span>
-            <span class="pill">Shared Flows</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ ROW 3: L → R ═══ -->
-      <div class="phase-node" style="grid-row:3; grid-column:1">
-        <div class="phase-dot">7</div>
-        <div class="phase-card">
-          <div class="phase-label">Phase 7</div>
-          <div class="phase-title">iPad &amp; Apple Watch</div>
-          <div class="phase-desc">Multi-column iPad layout plus Apple Watch companion for in-class timers.</div>
-          <div class="phase-pills">
-            <span class="pill">iPad Support</span>
-            <span class="pill">Apple Watch</span>
-            <span class="pill">Multi-Column</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-node" style="grid-row:3; grid-column:2">
-        <div class="phase-dot">8</div>
-        <div class="phase-card">
-          <div class="phase-label">Future</div>
-          <div class="phase-title">TunaSpin &amp; TunaReformer</div>
-          <div class="phase-desc">Same powerful engine, tailored for cycling and reformer pilates.</div>
-          <div class="phase-pills">
-            <span class="pill">TunaSpin</span>
-            <span class="pill">TunaReformer</span>
-            <span class="pill">Shared Accounts</span>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="phase-node" style="grid-row:1;grid-column:2" data-phase="2">
+      <div class="phase-card" style="--phase-color: #a78bfa">
+        <div class="phase-label">Phase 2</div>
+        <div class="phase-title">Polish &amp; Content Depth</div>
+        <div class="phase-track" style="--stops: 4">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Flow Sharing</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Expanded Library</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">UX Polish</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Performance</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-node" style="grid-row:1;grid-column:3" data-phase="3">
+      <div class="phase-card" style="--phase-color: #5eead4">
+        <div class="phase-label">Phase 3</div>
+        <div class="phase-title">Engagement &amp; Retention</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Push Notifs</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Avatars</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Web App Login</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ROW 2: R → L ═══ -->
+    <div class="phase-node" style="grid-row:2;grid-column:3" data-phase="4">
+      <div class="phase-card" style="--phase-color: #fbbf24">
+        <div class="phase-label">Phase 4</div>
+        <div class="phase-title">Creator Marketplace</div>
+        <div class="phase-track" style="--stops: 4">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Marketplace</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Stripe Connect</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Creator Profiles</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Reviews</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-node" style="grid-row:2;grid-column:2" data-phase="5">
+      <div class="phase-card" style="--phase-color: #60a5fa">
+        <div class="phase-label">Phase 5</div>
+        <div class="phase-title">AI Flow Builder</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">AI Generation</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Smart Suggest</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Balance AI</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-node" style="grid-row:2;grid-column:1" data-phase="6">
+      <div class="phase-card" style="--phase-color: #f472b6">
+        <div class="phase-label">Phase 6</div>
+        <div class="phase-title">Social Features</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Follows</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Activity Feed</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Shared Flows</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ROW 3: L → R ═══ -->
+    <div class="phase-node" style="grid-row:3;grid-column:1" data-phase="7">
+      <div class="phase-card" style="--phase-color: #4ade80">
+        <div class="phase-label">Phase 7</div>
+        <div class="phase-title">iPad &amp; Apple Watch</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">iPad Support</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Apple Watch</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Multi-Column</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-node" style="grid-row:3;grid-column:2" data-phase="8">
+      <div class="phase-card" style="--phase-color: #fb923c">
+        <div class="phase-label">Future</div>
+        <div class="phase-title">TunaSpin &amp; TunaReformer</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">TunaSpin</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">TunaReformer</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Shared Accounts</div></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -606,126 +587,21 @@ footer {
 </footer>
 
 <script>
-// Nav scroll effect
+// Nav scroll
 window.addEventListener('scroll', () => {
   document.querySelector('nav').style.background =
     window.scrollY > 60 ? 'rgba(9,9,15,0.92)' : 'rgba(9,9,15,0.8)';
 });
 
-let initialDrawDone = false;
-
-function buildSnakePath() {
-  const container = document.querySelector('.snake-container');
-  const svg = document.querySelector('.snake-svg');
-  const dots = document.querySelectorAll('.phase-dot');
-
-  if (!container || !svg || dots.length < 8) return;
-
-  // Check if we're in mobile layout (single column)
-  const firstDot = dots[0].getBoundingClientRect();
-  const secondDot = dots[1].getBoundingClientRect();
-  if (Math.abs(firstDot.left - secondDot.left) < 50) return; // mobile: skip SVG
-
-  const containerRect = container.getBoundingClientRect();
-
-  // Get dot centers relative to container
-  const points = Array.from(dots).map(dot => {
-    const r = dot.getBoundingClientRect();
-    return {
-      x: r.left - containerRect.left + r.width / 2,
-      y: r.top - containerRect.top + r.height / 2
-    };
-  });
-
-  // Build SVG path: snake pattern
-  // Row 1: P1 → P2 → P3 (L→R)
-  // Bend: P3 → P4 (right side U-turn)
-  // Row 2: P4 → P5 → P6 (R→L)
-  // Bend: P6 → P7 (left side U-turn)
-  // Row 3: P7 → P8 (L→R)
-  const bend = Math.min(80, containerRect.width * 0.08);
-
-  let d = `M ${points[0].x},${points[0].y}`;
-  d += ` L ${points[1].x},${points[1].y}`;
-  d += ` L ${points[2].x},${points[2].y}`;
-
-  // Right U-turn: P3 → P4
-  d += ` C ${points[2].x + bend},${points[2].y} ${points[3].x + bend},${points[3].y} ${points[3].x},${points[3].y}`;
-
-  d += ` L ${points[4].x},${points[4].y}`;
-  d += ` L ${points[5].x},${points[5].y}`;
-
-  // Left U-turn: P6 → P7
-  d += ` C ${points[5].x - bend},${points[5].y} ${points[6].x - bend},${points[6].y} ${points[6].x},${points[6].y}`;
-
-  d += ` L ${points[7].x},${points[7].y}`;
-
-  // Apply path
-  document.querySelectorAll('.snake-path-el').forEach(el => el.setAttribute('d', d));
-
-  // Size SVG to container
-  svg.setAttribute('viewBox', `0 0 ${containerRect.width} ${containerRect.height}`);
-  svg.style.width = containerRect.width + 'px';
-  svg.style.height = containerRect.height + 'px';
-
-  if (!initialDrawDone) {
-    // Animate path draw
-    const mainLine = svg.querySelector('.snake-line');
-    const glowLine = svg.querySelector('.snake-line-glow');
-    const flowLine = svg.querySelector('.snake-flow');
-
-    [mainLine, glowLine].forEach(el => {
-      const len = el.getTotalLength();
-      el.style.strokeDasharray = len;
-      el.style.strokeDashoffset = len;
-      requestAnimationFrame(() => {
-        el.style.transition = 'stroke-dashoffset 1.8s ease-out';
-        el.style.strokeDashoffset = '0';
-      });
-    });
-
-    // Flow animation: fade in after draw completes
-    setTimeout(() => {
-      flowLine.style.transition = 'opacity 0.6s';
-      flowLine.style.opacity = '1';
-    }, 2000);
-
-    initialDrawDone = true;
-  } else {
-    // Resize: update without animation
-    const mainLine = svg.querySelector('.snake-line');
-    const glowLine = svg.querySelector('.snake-line-glow');
-    [mainLine, glowLine].forEach(el => {
-      el.style.strokeDasharray = 'none';
-      el.style.strokeDashoffset = '0';
-      el.style.transition = 'none';
-    });
-  }
-}
-
 // Stagger card reveals
 function revealCards() {
   const cards = document.querySelectorAll('.phase-node');
   cards.forEach((card, i) => {
-    setTimeout(() => {
-      card.classList.add('reveal');
-    }, 250 + i * 100);
+    setTimeout(() => card.classList.add('reveal'), 250 + i * 120);
   });
 }
 
-// Init
-window.addEventListener('load', () => {
-  revealCards();
-  // Slight delay for layout stability
-  setTimeout(buildSnakePath, 120);
-});
-
-// Rebuild on resize
-let resizeTimer;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(buildSnakePath, 200);
-});
+window.addEventListener('load', revealCards);
 </script>
 
 </body>
