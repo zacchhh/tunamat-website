@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TunaMat — Mat Pilates Class Planning App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep: #08081a;
+  --bg-surface: #0e0e28;
+  --bg-card: #141436;
+  --bg-card-hover: #1a1a48;
+  --purple-primary: #7c5cfc;
+  --purple-light: #a78bfa;
+  --purple-glow: rgba(124,92,252,0.25);
+  --cyan: #22d3ee;
+  --teal: #22b8a0;
+  --pink: #f472b6;
+  --magenta: #c026d3;
+  --text-primary: #eeedf5;
+  --text-secondary: #9593ad;
+  --text-muted: #5f5d78;
+  --border: rgba(124,92,252,0.12);
+  --border-hover: rgba(124,92,252,0.3);
+  --gradient-main: linear-gradient(135deg, #7c5cfc 0%, #a855f7 50%, #ec4899 100%);
+  --radius: 18px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.glow-orb {
+  position: fixed; border-radius: 50%;
+  pointer-events: none; z-index: 0; filter: blur(80px);
+}
+.glow-orb.one { width: 600px; height: 600px; top: -200px; left: -100px; background: rgba(124,92,252,0.08); }
+.glow-orb.two { width: 500px; height: 500px; top: 40%; right: -150px; background: rgba(168,85,247,0.06); }
+
+/* ═══════ NAV ═══════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 10px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(8,8,26,0.75);
+  backdrop-filter: blur(24px) saturate(1.4);
+  border-bottom: 1px solid rgba(124,92,252,0.06);
+}
+.nav-brand {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700; font-size: 1.1rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-brand .icon {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--gradient-main);
+  display: grid; place-items: center;
+  font-size: 0.6rem; font-weight: 800; color: #fff;
+}
+.nav-pills {
+  display: flex; gap: 2px;
+  background: rgba(20,20,54,0.8);
+  border: 1px solid var(--border);
+  border-radius: 50px; padding: 3px 4px;
+}
+.nav-pills a {
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 0.78rem; font-weight: 500;
+  padding: 6px 16px; border-radius: 50px;
+  transition: all 0.25s;
+}
+.nav-pills a:hover, .nav-pills a.active {
+  color: #fff; background: rgba(124,92,252,0.18);
+}
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.btn-nav-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 20px; border-radius: 50px;
+  background: var(--purple-primary); color: #fff;
+  font-size: 0.78rem; font-weight: 600;
+  text-decoration: none; border: none;
+  box-shadow: 0 4px 20px var(--purple-glow);
+  transition: all 0.3s;
+}
+.btn-nav-cta:hover {
+  background: var(--purple-light);
+  transform: translateY(-1px);
+}
+
+/* ═══════ HERO ═══════ */
+.hero {
+  position: relative; z-index: 1;
+  padding: 160px 48px 100px;
+  text-align: center;
+}
+.hero h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 3.5rem; font-weight: 700;
+  line-height: 1.1; margin-bottom: 20px;
+}
+.hero .sub {
+  font-size: 1.1rem; color: var(--text-secondary);
+  line-height: 1.75; margin-bottom: 36px;
+  max-width: 560px; margin-left: auto; margin-right: auto;
+}
+.hero-ctas {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 34px; border-radius: 50px;
+  background: var(--gradient-main); color: #fff;
+  font-size: 1rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  box-shadow: 0 6px 32px var(--purple-glow);
+  transition: all 0.35s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 44px rgba(124,92,252,0.4);
+}
+.btn-primary .arrow-circle {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: grid; place-items: center;
+  transition: transform 0.3s;
+}
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 30px; border-radius: 50px;
+  background: transparent; color: var(--text-secondary);
+  font-size: 1rem; font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.btn-ghost:hover { color: #fff; border-color: var(--purple-primary); }
+.grad { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* ═══════ SECTIONS ═══════ */
+section { position: relative; z-index: 1; padding: 110px 48px; }
+.sec-label {
+  font-size: 0.78rem; text-transform: uppercase;
+  letter-spacing: 2.5px; color: var(--purple-light);
+  font-weight: 600; text-align: center; margin-bottom: 14px;
+}
+.sec-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.7rem; font-weight: 700;
+  text-align: center; margin-bottom: 16px; line-height: 1.18;
+}
+.sec-desc {
+  font-size: 1.05rem; color: var(--text-secondary);
+  text-align: center; max-width: 560px;
+  margin: 0 auto 64px; line-height: 1.75;
+}
+
+/* ═══════ FEATURES GRID ═══════ */
+.features-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;
+}
+.f-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 34px 28px;
+  position: relative; overflow: hidden;
+  transition: all 0.4s;
+}
+.f-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--gradient-main);
+  opacity: 0; transition: opacity 0.4s;
+}
+.f-card:hover { border-color: var(--border-hover); transform: translateY(-5px); box-shadow: 0 14px 44px rgba(124,92,252,0.1); }
+.f-card:hover::before { opacity: 1; }
+.f-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: grid; place-items: center;
+  font-size: 1.3rem; margin-bottom: 22px;
+}
+.f-icon.ic-purple { background: rgba(124,92,252,0.12); }
+.f-icon.ic-cyan { background: rgba(34,211,238,0.1); }
+.f-icon.ic-pink { background: rgba(244,114,182,0.1); }
+.f-icon.ic-amber { background: rgba(251,191,36,0.1); }
+.f-icon.ic-green { background: rgba(52,211,153,0.1); }
+.f-card h3 { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+.f-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ═══════ SHOWCASE ═══════ */
+.showcase { background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface) 50%, var(--bg-deep)); }
+.showcase-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+.s-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px 0; overflow: hidden;
+  transition: all 0.4s;
+}
+.s-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 16px 50px rgba(0,0,0,0.3); }
+.s-card h3 { font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; }
+.s-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 28px; }
+.s-preview {
+  width: 100%; min-height: 200px;
+  border-radius: 14px 14px 0 0;
+  background: var(--bg-surface);
+  border: 1px solid rgba(124,92,252,0.06);
+  border-bottom: none;
+  padding: 18px; overflow: hidden;
+}
+
+/* Play Mode mini */
+.m-play-header { text-align: center; margin-bottom: 8px; }
+.m-play-title { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600; color: #fff; }
+.m-play-sub { font-size: 0.6rem; color: var(--text-muted); }
+.m-play-duration-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--purple-light); font-weight: 600; text-align: center; margin-bottom: 2px; }
+.m-play-duration { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; text-align: center; letter-spacing: 2px; margin-bottom: 10px; }
+.m-donut-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
+.m-donut { width: 90px; height: 90px; position: relative; }
+.m-donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.m-donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+.m-donut-sec { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; }
+.m-donut-frac { font-size: 0.5rem; color: var(--text-muted); }
+.m-play-segment { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 2px; }
+.m-play-segment-time { font-size: 0.55rem; color: var(--text-muted); }
+.m-current {
+  text-align: center; padding: 10px 14px;
+  background: rgba(34,184,160,0.06); border-radius: 12px;
+  border: 1px solid rgba(34,184,160,0.15); margin: 8px 0;
+}
+.m-current .icon { font-size: 1.5rem; margin-bottom: 4px; }
+.m-current .name { font-size: 1rem; font-weight: 600; margin-top: 2px; color: #fff; }
+.m-current .tag { font-size: 0.6rem; font-weight: 600; color: var(--teal); }
+.m-play-controls { display: flex; justify-content: center; align-items: center; gap: 18px; margin-top: 8px; }
+.m-play-ctrl { font-size: 0.65rem; color: var(--text-muted); }
+.m-play-pause { width: 36px; height: 36px; border-radius: 50%; background: var(--purple-primary); display: grid; place-items: center; font-size: 0.9rem; color: #fff; }
+
+/* Analysis mini */
+.m-analysis-balanced { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 700; text-align: center; color: #fff; margin-bottom: 2px; }
+.m-analysis-sub { font-size: 0.65rem; color: var(--text-muted); text-align: center; margin-bottom: 10px; }
+.m-silhouettes { display: flex; gap: 14px; justify-content: center; align-items: flex-end; margin-bottom: 10px; }
+.m-silhouette { width: 40px; height: 80px; border-radius: 14px 14px 4px 4px; position: relative; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; }
+.m-silhouette.front { background: linear-gradient(180deg, rgba(124,92,252,0.08), rgba(236,72,153,0.25) 35%, rgba(251,191,36,0.15) 60%, rgba(34,211,238,0.1)); }
+.m-silhouette.back { background: linear-gradient(180deg, rgba(34,211,238,0.08), rgba(244,114,182,0.2) 35%, rgba(124,92,252,0.15) 60%, rgba(52,211,153,0.1)); }
+.m-muscle-dots { display: flex; flex-wrap: wrap; gap: 4px 10px; justify-content: center; font-size: 0.55rem; color: var(--text-secondary); margin-bottom: 12px; }
+.m-muscle-dot { display: flex; align-items: center; gap: 3px; }
+.m-muscle-dot .dot { width: 5px; height: 5px; border-radius: 50%; }
+.m-analysis-stats { display: flex; justify-content: space-around; text-align: center; margin-bottom: 12px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
+.m-analysis-stat-val { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
+.m-analysis-stat-label { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.m-region-title { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
+.m-stat-list { display: flex; flex-direction: column; gap: 5px; }
+.m-stat { display: flex; align-items: center; gap: 8px; }
+.m-stat-name { font-size: 0.62rem; color: var(--text-secondary); width: 52px; text-align: left; }
+.m-stat-track { flex: 1; height: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+.m-stat-bar { height: 100%; border-radius: 3px; }
+.m-stat-pct { font-size: 0.62rem; font-weight: 600; color: var(--text-secondary); width: 28px; text-align: right; }
+
+/* Spotify mini */
+.m-spotify-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 12px;
+  background: var(--bg-card); border-radius: 10px;
+  border: 1px solid rgba(124,92,252,0.06);
+  margin-bottom: 6px;
+}
+.m-sp-art { width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0; }
+.m-sp-info { flex: 1; }
+.m-sp-title { font-size: 0.72rem; font-weight: 600; }
+.m-sp-artist { font-size: 0.6rem; color: var(--text-muted); }
+.m-sp-bpm { font-size: 0.62rem; font-weight: 700; color: #1db954; background: rgba(29,185,84,0.1); padding: 3px 8px; border-radius: 50px; }
+
+/* Flow Library mini */
+.m-flow-card {
+  background: rgba(255,255,255,0.03); border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(124,92,252,0.1);
+  margin-bottom: 8px;
+}
+.m-flow-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.m-flow-name { font-size: 0.82rem; font-weight: 600; color: #fff; }
+.m-flow-desc { font-size: 0.58rem; color: var(--text-muted); margin-top: 1px; }
+.m-flow-badge { font-size: 0.52rem; padding: 3px 9px; border-radius: 50px; font-weight: 600; display: flex; align-items: center; gap: 3px; }
+.m-flow-badge .badge-dot { width: 5px; height: 5px; border-radius: 50%; }
+.m-flow-stats { display: flex; gap: 16px; margin-bottom: 8px; }
+.m-flow-stat { display: flex; flex-direction: column; align-items: flex-start; }
+.m-flow-stat-val { font-size: 0.72rem; font-weight: 700; color: #fff; }
+.m-flow-stat-label { font-size: 0.5rem; color: var(--text-muted); }
+.m-flow-tags { display: flex; gap: 5px; }
+.m-flow-tag { font-size: 0.5rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; background: rgba(124,92,252,0.1); color: var(--purple-light); border: 1px solid rgba(124,92,252,0.15); }
+
+/* ═══════ PRICING ═══════ */
+.pricing-row {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 18px;
+}
+.p-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 28px;
+  position: relative; transition: all 0.4s;
+}
+.p-card.featured {
+  border-color: var(--purple-primary);
+  box-shadow: 0 0 60px rgba(124,92,252,0.1);
+}
+.p-card.featured::before {
+  content: 'Most Popular';
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  padding: 5px 18px; border-radius: 50px;
+  background: var(--gradient-main); color: #fff;
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.p-card:hover { transform: translateY(-4px); box-shadow: 0 14px 50px rgba(0,0,0,0.3); }
+.p-tier { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--purple-light); font-weight: 600; margin-bottom: 8px; }
+.p-price { font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 4px; }
+.p-price .period { font-size: 0.85rem; font-weight: 400; color: var(--text-muted); }
+.p-desc { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6; }
+.p-features { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 10px; }
+.p-features li { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; }
+.p-features li .check { width: 20px; height: 20px; border-radius: 50%; background: rgba(124,92,252,0.12); display: grid; place-items: center; font-size: 0.65rem; color: var(--purple-light); flex-shrink: 0; }
+.p-btn {
+  display: block; text-align: center;
+  padding: 14px; border-radius: 50px;
+  font-size: 0.95rem; font-weight: 600;
+  text-decoration: none; transition: all 0.3s;
+  cursor: pointer; border: none; width: 100%;
+}
+.p-btn.outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border); }
+.p-btn.outline:hover { border-color: var(--purple-primary); background: rgba(124,92,252,0.06); }
+.p-btn.filled { background: var(--gradient-main); color: #fff; box-shadow: 0 4px 24px var(--purple-glow); }
+.p-btn.filled:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(124,92,252,0.35); }
+
+/* ═══════ FAQ ═══════ */
+.faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.3s; }
+.faq-item:hover { border-color: var(--border-hover); }
+.faq-q {
+  width: 100%; padding: 20px 24px;
+  background: none; border: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem; font-weight: 600; color: var(--text-primary);
+  text-align: left;
+}
+.faq-q .icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(124,92,252,0.1); display: grid; place-items: center; font-size: 1.1rem; color: var(--purple-light); transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-q .icon { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+.faq-item.open .faq-a { max-height: 200px; }
+.faq-a-inner { padding: 0 24px 20px; font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ═══════ QUOTE ═══════ */
+.quote-section {
+  text-align: center; padding: 80px 48px;
+  background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface), var(--bg-deep));
+}
+.quote-mark { font-size: 4rem; line-height: 1; color: rgba(124,92,252,0.2); font-family: Georgia, serif; margin-bottom: 8px; }
+.quote-text { font-size: 1.35rem; font-weight: 400; color: var(--text-primary); max-width: 640px; margin: 0 auto 16px; line-height: 1.7; font-style: italic; }
+.quote-attr { font-size: 0.88rem; color: var(--text-muted); font-weight: 500; }
+
+/* ═══════ FOOTER ═══════ */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 60px 48px 40px;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 40px;
+}
+.footer-brand { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+.footer-tagline { font-size: 0.88rem; color: var(--text-muted); max-width: 280px; }
+.footer-links { display: flex; gap: 48px; }
+.footer-col h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 600; margin-bottom: 14px; }
+.footer-col a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; margin-bottom: 10px; transition: color 0.2s; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(124,92,252,0.06); text-align: center; font-size: 0.8rem; color: var(--text-muted); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .showcase-grid { grid-template-columns: 1fr; }
+  .pricing-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-pills { display: none; }
+  section, .hero { padding-left: 20px; padding-right: 20px; }
+  .hero h1 { font-size: 2.5rem; }
+  .sec-title { font-size: 2rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .pricing-row { grid-template-columns: 1fr !important; max-width: 360px !important; margin: 0 auto; }
+  .footer-inner { flex-direction: column; }
+  .footer-links { flex-direction: column; gap: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="glow-orb one"></div>
+<div class="glow-orb two"></div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+  <a href="/" class="nav-brand">
+    <span class="icon">TA</span>
+    Tuna Athletics
+  </a>
+  <div class="nav-pills">
+    <a href="/tunamat" class="active">TunaMat</a>
+    <a href="/roadmap">Roadmap</a>
+    <a href="/app">Web App</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="btn-nav-cta">Download App</a>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div style="display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:50px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);font-size:0.78rem;font-weight:500;color:#34d399;margin-bottom:28px;">
+    <span style="width:6px;height:6px;border-radius:50%;background:#34d399;"></span>
+    Now in Beta on iOS
+  </div>
+  <h1><span class="grad">TunaMat</span></h1>
+  <p class="sub">The all-in-one Mat Pilates class planning app. Build flows from a 272+ movement library, cue live play mode for better in-class pacing, and analyse every flow — all in one place.</p>
+  <div class="hero-ctas">
+    <a href="#" class="btn-primary">
+      Download on iOS
+      <span class="arrow-circle">→</span>
+    </a>
+    <a href="/app" class="btn-ghost">Try the Web App</a>
+  </div>
+</section>
+
+<!-- ═══════ FEATURES ═══════ -->
+<section id="features">
+  <div class="sec-label">Features</div>
+  <div class="sec-title">Everything you need to plan<br>the perfect class</div>
+  <p class="sec-desc">From a 272+ movement library to live class execution — TunaMat gives pilates instructors the tools to create balanced, beautifully paced classes.</p>
+
+  <div class="features-grid">
+    <div class="f-card">
+      <div class="f-icon ic-purple">📚</div>
+      <h3>272+ Movement Library</h3>
+      <p>A curated library of mat pilates movements with rich metadata — muscle groups, movement patterns, equipment, and pacing presets. Continuously refined with input from professionals.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon ic-cyan">🧩</div>
+      <h3>Drag &amp; Drop Flow Builder</h3>
+      <p>Create flows with segments like Warm Up, Core Work, and Cool Down. Add movements with individual pacing and instructor notes.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon ic-pink">⏱</div>
+      <h3>Timed Play Mode</h3>
+      <p>Execute your flow live in class with countdown timers per segment. Designed to be glanceable while you teach.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon ic-amber">🔥</div>
+      <h3>Muscle Group Analysis</h3>
+      <p>See a heatmap breakdown of which muscles your flow targets. Catch imbalances before class, not after.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon ic-green">🎵</div>
+      <h3>Spotify Integration</h3>
+      <p>Import any public Spotify playlist and map songs to segments. Reference BPM and duration for perfect pacing.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon ic-purple">☁️</div>
+      <h3>Cloud Sync &amp; Offline</h3>
+      <p>Your flows sync across devices via the cloud. Works offline too — changes sync when you reconnect.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SHOWCASE ═══════ -->
+<section class="showcase" id="showcase">
+  <div class="sec-label">In Action</div>
+  <div class="sec-title">See what TunaMat can do</div>
+  <p class="sec-desc">Powerful tools that look and feel beautiful — built for real classes, not just demos.</p>
+
+  <div class="showcase-grid">
+    <!-- Play Mode -->
+    <div class="s-card">
+      <h3>Timed Play Mode</h3>
+      <p>Glanceable timers guide you through each segment. Just hit play and teach.</p>
+      <div class="s-preview">
+        <div class="m-play-header">
+          <div class="m-play-title">Example Flow</div>
+          <div class="m-play-sub">1 / 15</div>
+        </div>
+        <div class="m-play-duration-label">Total Duration</div>
+        <div class="m-play-duration">0:00.99</div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="flex:1;">
+            <div class="m-play-segment">1. Centering &amp; Breath</div>
+            <div class="m-play-segment-time">0:00 / 3:00</div>
+          </div>
+          <div class="m-donut">
+            <svg viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(124,92,252,0.12)" stroke-width="2.5"/>
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#22b8a0" stroke-width="2.5" stroke-dasharray="100" stroke-dashoffset="1" stroke-linecap="round"/>
+            </svg>
+            <div class="m-donut-center">
+              <div class="m-donut-sec">59</div>
+              <div class="m-donut-frac">1/1</div>
+            </div>
+          </div>
+        </div>
+        <div class="m-current">
+          <div class="icon">🧘</div>
+          <div class="name">Chest Opener</div>
+          <div class="tag">Hold</div>
+        </div>
+        <div class="m-play-controls">
+          <span class="m-play-ctrl">⏮ Prev Segment</span>
+          <div class="m-play-pause">⏸</div>
+          <span class="m-play-ctrl">Next Segment ⏭</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analysis -->
+    <div class="s-card">
+      <h3>Muscle Group Analysis</h3>
+      <p>Real-time feedback flags imbalances so you can adjust before class.</p>
+      <div class="s-preview">
+        <div class="m-analysis-balanced">Balanced</div>
+        <div class="m-analysis-sub">Overall class focus</div>
+        <div class="m-silhouettes">
+          <div class="m-silhouette front"></div>
+          <div class="m-silhouette back"></div>
+        </div>
+        <div class="m-muscle-dots">
+          <span class="m-muscle-dot"><span class="dot" style="background:#f472b6;"></span> Back 33%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#34d399;"></span> Abs 28%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#22d3ee;"></span> Stretch 22%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#a78bfa;"></span> Full Body 11%</span>
+          <span class="m-muscle-dot"><span class="dot" style="background:#fbbf24;"></span> Glutes 6%</span>
+        </div>
+        <div class="m-analysis-stats">
+          <div><div class="m-analysis-stat-val">18</div><div class="m-analysis-stat-label">Movements</div></div>
+          <div><div class="m-analysis-stat-val">15</div><div class="m-analysis-stat-label">Segments</div></div>
+          <div><div class="m-analysis-stat-val">45m</div><div class="m-analysis-stat-label">Duration</div></div>
+        </div>
+        <div class="m-region-title">Body Region Balance</div>
+        <div class="m-stat-list">
+          <div class="m-stat">
+            <span class="m-stat-name">Core</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:28%;background:linear-gradient(90deg,#f472b6,#ec4899);"></div></div>
+            <span class="m-stat-pct">28%</span>
+          </div>
+          <div class="m-stat">
+            <span class="m-stat-name">Upper Body</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:33%;background:linear-gradient(90deg,#f97316,#f472b6);"></div></div>
+            <span class="m-stat-pct">33%</span>
+          </div>
+          <div class="m-stat">
+            <span class="m-stat-name">Lower Body</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:6%;background:linear-gradient(90deg,#f472b6,#a78bfa);"></div></div>
+            <span class="m-stat-pct">6%</span>
+          </div>
+          <div class="m-stat">
+            <span class="m-stat-name">Mobility</span>
+            <div class="m-stat-track"><div class="m-stat-bar" style="width:22%;background:linear-gradient(90deg,#22d3ee,#34d399);"></div></div>
+            <span class="m-stat-pct">22%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spotify -->
+    <div class="s-card">
+      <h3>Spotify Segment Sync</h3>
+      <p>Map songs to segments with BPM data. No Spotify login required.</p>
+      <div class="s-preview">
+        <div class="m-spotify-item">
+          <div class="m-sp-art" style="background:linear-gradient(135deg,#7c5cfc,#ec4899);"></div>
+          <div class="m-sp-info"><div class="m-sp-title">Warm Light</div><div class="m-sp-artist">Segment: Warm Up</div></div>
+          <div class="m-sp-bpm">98 bpm</div>
+        </div>
+        <div class="m-spotify-item">
+          <div class="m-sp-art" style="background:linear-gradient(135deg,#ec4899,#f97316);"></div>
+          <div class="m-sp-info"><div class="m-sp-title">Push Through</div><div class="m-sp-artist">Segment: Core Work</div></div>
+          <div class="m-sp-bpm">128 bpm</div>
+        </div>
+        <div class="m-spotify-item">
+          <div class="m-sp-art" style="background:linear-gradient(135deg,#22d3ee,#7c5cfc);"></div>
+          <div class="m-sp-info"><div class="m-sp-title">Breathe Easy</div><div class="m-sp-artist">Segment: Cool Down</div></div>
+          <div class="m-sp-bpm">76 bpm</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow Library -->
+    <div class="s-card">
+      <h3>Your Flow Library</h3>
+      <p>Organise, duplicate, and manage all your class plans in one place.</p>
+      <div class="s-preview">
+        <div class="m-flow-card">
+          <div class="m-flow-top">
+            <div>
+              <div class="m-flow-name">Example Flow</div>
+              <div class="m-flow-desc">A complete 45-minute mat pilates fl...</div>
+            </div>
+            <div class="m-flow-badge" style="background:rgba(251,191,36,0.1);color:#fbbf24;"><span class="badge-dot" style="background:#fbbf24;"></span> Moderate</div>
+          </div>
+          <div class="m-flow-stats">
+            <div class="m-flow-stat"><div class="m-flow-stat-val">45m 00s</div><div class="m-flow-stat-label">Duration</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">15</div><div class="m-flow-stat-label">Segments</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">18</div><div class="m-flow-stat-label">Movements</div></div>
+          </div>
+          <div class="m-flow-tags">
+            <span class="m-flow-tag">Full Body</span>
+            <span class="m-flow-tag">Mat</span>
+          </div>
+        </div>
+        <div class="m-flow-card">
+          <div class="m-flow-top">
+            <div>
+              <div class="m-flow-name">Morning Core Blast</div>
+              <div class="m-flow-desc">High-intensity core focused session</div>
+            </div>
+            <div class="m-flow-badge" style="background:rgba(239,68,68,0.1);color:#ef4444;"><span class="badge-dot" style="background:#ef4444;"></span> Peak</div>
+          </div>
+          <div class="m-flow-stats">
+            <div class="m-flow-stat"><div class="m-flow-stat-val">50m 00s</div><div class="m-flow-stat-label">Duration</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">5</div><div class="m-flow-stat-label">Segments</div></div>
+            <div class="m-flow-stat"><div class="m-flow-stat-val">22</div><div class="m-flow-stat-label">Movements</div></div>
+          </div>
+          <div class="m-flow-tags">
+            <span class="m-flow-tag">Abs</span>
+            <span class="m-flow-tag" style="background:rgba(34,211,238,0.1);color:var(--cyan);border-color:rgba(34,211,238,0.15);">Circuit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING ═══════ -->
+<section id="pricing" style="background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface), var(--bg-deep));">
+  <div class="sec-label">Pricing</div>
+  <div class="sec-title">Simple pricing, powerful tools</div>
+  <p class="sec-desc">Start free. Upgrade when you're ready for unlimited flows.</p>
+
+  <div class="pricing-row">
+    <div class="p-card">
+      <div class="p-tier">Free</div>
+      <div class="p-price">$0</div>
+      <p class="p-desc">Try TunaMat with one flow — no credit card needed.</p>
+      <ul class="p-features">
+        <li><span class="check">✓</span> 1 flow (limited)</li>
+        <li><span class="check">✓</span> 272+ movement library</li>
+        <li><span class="check">✓</span> Flow builder &amp; play mode</li>
+        <li><span class="check">✓</span> Muscle group analysis</li>
+      </ul>
+      <button class="p-btn outline">Get Started</button>
+    </div>
+
+    <div class="p-card">
+      <div class="p-tier">Premium Monthly</div>
+      <div class="p-price">$7.99 <span class="period">/ mo</span></div>
+      <p class="p-desc">Full access, billed monthly. Cancel anytime.</p>
+      <ul class="p-features">
+        <li><span class="check">✓</span> Everything in Free</li>
+        <li><span class="check">✓</span> Unlimited flows</li>
+        <li><span class="check">✓</span> Full marketplace access</li>
+        <li><span class="check">✓</span> Flow duplication</li>
+      </ul>
+      <button class="p-btn outline">Subscribe</button>
+    </div>
+
+    <div class="p-card featured">
+      <div class="p-tier">Premium Annual</div>
+      <div class="p-price">$5.99 <span class="period">/ mo</span></div>
+      <p class="p-desc">Best value — billed annually at $71.88/yr. Save 25%.</p>
+      <ul class="p-features">
+        <li><span class="check">✓</span> Everything in Free</li>
+        <li><span class="check">✓</span> Unlimited flows</li>
+        <li><span class="check">✓</span> Full marketplace access</li>
+        <li><span class="check">✓</span> Flow duplication</li>
+      </ul>
+      <button class="p-btn filled">Subscribe &amp; Save</button>
+    </div>
+
+    <div class="p-card" style="border-color:rgba(34,211,238,0.25);">
+      <div class="p-tier" style="color:var(--cyan);">Lifetime Deal</div>
+      <div class="p-price">$199 <span class="period">once</span></div>
+      <p class="p-desc">Pay once, own it forever. For early believers.</p>
+      <ul class="p-features">
+        <li><span class="check">✓</span> Everything in Premium</li>
+        <li><span class="check">✓</span> Lifetime access</li>
+        <li><span class="check">✓</span> All future updates</li>
+        <li><span class="check">✓</span> Founding member badge</li>
+      </ul>
+      <button class="p-btn outline" style="border-color:rgba(34,211,238,0.25);color:var(--cyan);">Get Lifetime Access</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ QUOTE ═══════ -->
+<div class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">Built by pilates instructors, for pilates instructors. We obsess over the details so you can focus on your class.</p>
+  <p class="quote-attr">— The TunaMat Team</p>
+</div>
+
+<!-- ═══════ FAQ ═══════ -->
+<section id="faq">
+  <div class="sec-label">FAQ</div>
+  <div class="sec-title">Questions? We've got answers.</div>
+  <p class="sec-desc"></p>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">Is TunaMat free to use? <span class="icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Yes! The free tier gives you 1 flow with full access to the 272+ movement library, flow builder, play mode, and muscle group analysis. No credit card required.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What devices does TunaMat support? <span class="icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">TunaMat is a native iOS app available on iPhone running iOS 17 or later. iPad and web support are on the roadmap.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Do I need a Spotify account? <span class="icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">No. TunaMat works with any public Spotify playlist URL — no Spotify login required. You can paste a link and we'll pull in song titles, artists, and BPM data for your segments.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Can I create my own movements? <span class="icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Absolutely. Create custom movements with the same rich metadata as built-in ones — muscle groups, movement patterns, equipment, pacing presets. They sync across your devices automatically.</div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is my data safe offline? <span class="icon">+</span></button>
+      <div class="faq-a"><div class="faq-a-inner">Yes. TunaMat caches all your data locally so the app works without internet. When you reconnect, changes sync to the cloud automatically.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Tuna Athletics</div>
+      <p class="footer-tagline">Class planning apps for group fitness instructors. Plan. Build. Flow.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="/tunamat">TunaMat</a>
+        <a href="/app">Web App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/roadmap">Roadmap</a>
+        <a href="mailto:hello@tunaathletics.com">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Tuna Athletics. All rights reserved.
+  </div>
+</footer>
+
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    e.preventDefault();
+    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.background = window.scrollY > 60 ? 'rgba(8,8,26,0.92)' : 'rgba(8,8,26,0.75)';
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.f-card, .s-card, .p-card, .faq-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tuna Athletics — TunaMat</title>
+<title>Tuna Athletics — Plan. Build. Flow.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -18,8 +18,10 @@
   --purple-light: #a78bfa;
   --purple-glow: rgba(124,92,252,0.25);
   --cyan: #22d3ee;
+  --teal: #22b8a0;
   --pink: #f472b6;
   --magenta: #c026d3;
+  --orange: #FF6B4A;
   --text-primary: #eeedf5;
   --text-secondary: #9593ad;
   --text-muted: #5f5d78;
@@ -42,27 +44,12 @@ body {
 
 /* ═══════ AMBIENT GLOWS ═══════ */
 .glow-orb {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(80px);
+  position: fixed; border-radius: 50%;
+  pointer-events: none; z-index: 0; filter: blur(80px);
 }
-.glow-orb.one {
-  width: 600px; height: 600px;
-  top: -200px; left: -100px;
-  background: rgba(124,92,252,0.08);
-}
-.glow-orb.two {
-  width: 500px; height: 500px;
-  top: 40%; right: -150px;
-  background: rgba(168,85,247,0.06);
-}
-.glow-orb.three {
-  width: 450px; height: 450px;
-  bottom: -100px; left: 30%;
-  background: rgba(236,72,153,0.05);
-}
+.glow-orb.one { width: 600px; height: 600px; top: -200px; left: -100px; background: rgba(124,92,252,0.08); }
+.glow-orb.two { width: 500px; height: 500px; top: 40%; right: -150px; background: rgba(168,85,247,0.06); }
+.glow-orb.three { width: 450px; height: 450px; bottom: -100px; left: 30%; background: rgba(236,72,153,0.05); }
 
 /* ═══════ NAV ═══════ */
 nav {
@@ -81,8 +68,7 @@ nav {
   display: flex; align-items: center; gap: 10px;
 }
 .nav-brand .icon {
-  width: 28px; height: 28px;
-  border-radius: 8px;
+  width: 28px; height: 28px; border-radius: 8px;
   background: var(--gradient-main);
   display: grid; place-items: center;
   font-size: 0.6rem; font-weight: 800; color: #fff;
@@ -102,15 +88,7 @@ nav {
 .nav-pills a:hover, .nav-pills a.active {
   color: #fff; background: rgba(124,92,252,0.18);
 }
-.nav-right {
-  display: flex; align-items: center; gap: 20px;
-}
-.nav-right .link {
-  color: var(--text-secondary); text-decoration: none;
-  font-size: 0.88rem; font-weight: 500;
-  transition: color 0.2s;
-}
-.nav-right .link:hover { color: #fff; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
 .btn-nav-cta {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 20px; border-radius: 50px;
@@ -131,14 +109,12 @@ nav {
   position: relative; z-index: 1;
   min-height: 100vh;
   display: flex; align-items: center;
-  padding: 140px 48px 100px;
+  padding: 140px 48px 80px;
 }
 .hero-inner {
   max-width: 1300px; margin: 0 auto; width: 100%;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; align-items: center;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
 }
-.hero-content { max-width: 540px; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 6px 18px 6px 8px; border-radius: 50px;
@@ -159,18 +135,18 @@ nav {
 }
 .hero h1 {
   font-family: 'Sora', sans-serif;
-  font-size: 3.7rem; font-weight: 700;
-  line-height: 1.1; margin-bottom: 24px;
+  font-size: 4.2rem; font-weight: 800;
+  line-height: 1.08; margin-bottom: 24px;
   opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
 }
 .grad { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .hero .sub {
-  font-size: 1.1rem; color: var(--text-secondary);
-  line-height: 1.75; margin-bottom: 40px; max-width: 460px;
+  font-size: 1.15rem; color: var(--text-secondary);
+  line-height: 1.75; margin-bottom: 40px; max-width: 600px;
   opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards;
 }
 .hero-ctas {
-  display: flex; gap: 14px; flex-wrap: wrap;
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
   opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards;
 }
 .btn-primary {
@@ -207,152 +183,154 @@ nav {
   background: rgba(124,92,252,0.06);
 }
 
-/* ── phone mockup ── */
-.hero-visual {
-  display: flex; justify-content: center; position: relative;
-  opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
+/* ═══════ 3-PHONE SHOWCASE ═══════ */
+.phones-showcase {
+  display: flex; justify-content: center; align-items: center;
+  margin-top: 70px; perspective: 1400px;
+  gap: 0;
+  opacity: 0; animation: fadeUp 0.9s 0.6s ease forwards;
 }
+.phone-wrap {
+  position: relative; transition: transform 0.5s;
+}
+.phone-wrap.left {
+  transform: rotateY(18deg) translateX(30px) scale(0.82);
+  z-index: 1;
+}
+.phone-wrap.center {
+  z-index: 3;
+  animation: floatCenter 5s ease-in-out infinite;
+}
+.phone-wrap.right {
+  transform: rotateY(-18deg) translateX(-30px) scale(0.82);
+  z-index: 1;
+}
+.phone-wrap.left .phone { box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 40px rgba(255,107,74,0.06); }
+.phone-wrap.center .phone { box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 80px rgba(124,92,252,0.1); }
+.phone-wrap.right .phone { box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 40px rgba(34,184,160,0.06); }
+
+@keyframes floatCenter {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.phone-wrap.left { animation: floatLeft 5s ease-in-out infinite; }
+@keyframes floatLeft {
+  0%,100% { transform: rotateY(18deg) translateX(30px) scale(0.82) translateY(0); }
+  50% { transform: rotateY(18deg) translateX(30px) scale(0.82) translateY(-10px); }
+}
+.phone-wrap.right { animation: floatRight 5s ease-in-out infinite; }
+@keyframes floatRight {
+  0%,100% { transform: rotateY(-18deg) translateX(-30px) scale(0.82) translateY(0); }
+  50% { transform: rotateY(-18deg) translateX(-30px) scale(0.82) translateY(-10px); }
+}
+
 .phone {
-  width: 290px; height: 600px;
-  border-radius: 40px;
+  width: 260px; height: 540px;
+  border-radius: 36px;
   background: #0A0F1A;
   border: 2px solid rgba(255,255,255,0.08);
   position: relative; overflow: hidden;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 80px rgba(124,92,252,0.08);
 }
 .phone-notch {
-  width: 110px; height: 26px;
+  width: 100px; height: 24px;
   background: #050810;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 14px 14px;
   margin: 0 auto;
 }
 .phone-screen {
-  padding: 10px 14px;
-  display: flex; flex-direction: column; gap: 6px;
+  padding: 8px 12px;
+  display: flex; flex-direction: column; gap: 5px;
   background: #0A0F1A;
-  height: calc(100% - 26px);
+  height: calc(100% - 24px);
   overflow: hidden;
 }
-.ps-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 2px;
-}
-.ps-header h4 {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.05rem; font-weight: 700;
-  color: #fff;
-}
-.ps-back {
-  font-size: 0.65rem; color: var(--purple-primary); font-weight: 500;
-}
+
+/* phone inner elements */
+.ps-back { font-size: 0.6rem; color: var(--purple-primary); font-weight: 500; }
 .ps-edit-btn {
-  font-size: 0.58rem; font-weight: 600; color: #fff;
-  background: var(--purple-primary); border-radius: 6px;
-  padding: 3px 10px;
+  font-size: 0.52rem; font-weight: 600; color: #fff;
+  border-radius: 5px; padding: 2px 8px;
 }
-.ps-action-row {
-  display: flex; align-items: center; gap: 6px;
-  margin-bottom: 2px;
+.ps-header { display: flex; justify-content: space-between; align-items: center; }
+.ps-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.92rem; font-weight: 700; color: #fff;
 }
-.ps-fave {
-  font-size: 0.55rem; color: var(--text-muted); text-align: center;
+.ps-action-row { display: flex; align-items: center; gap: 5px; }
+.ps-fave { font-size: 0.48rem; color: var(--text-muted); text-align: center; }
+.ps-fave-icon { font-size: 0.6rem; }
+.ps-play-btn, .ps-analyse-btn {
+  font-size: 0.52rem; font-weight: 600; color: #fff;
+  border-radius: 50px; padding: 3px 10px;
+  display: flex; align-items: center; gap: 3px;
 }
-.ps-fave-icon { font-size: 0.7rem; }
-.ps-play-btn {
-  font-size: 0.58rem; font-weight: 600; color: #fff;
-  background: #8C5CF5; border-radius: 50px;
-  padding: 4px 12px; display: flex; align-items: center; gap: 3px;
-}
-.ps-analyse-btn {
-  font-size: 0.58rem; font-weight: 600; color: #fff;
-  background: #22b8a0; border-radius: 50px;
-  padding: 4px 12px; display: flex; align-items: center; gap: 3px;
-}
-.ps-duration {
-  font-size: 0.6rem; color: var(--text-muted); text-align: center; margin-bottom: 2px;
-}
+.ps-duration { font-size: 0.55rem; color: var(--text-muted); text-align: center; }
 .ps-segment {
-  background: rgba(255,255,255,0.03); border-radius: 10px;
-  padding: 8px 10px;
-  border: 1px solid rgba(124,92,252,0.1);
+  background: rgba(255,255,255,0.03); border-radius: 8px;
+  padding: 7px 9px; border: 1px solid rgba(255,255,255,0.05);
 }
-.ps-seg-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 6px;
-}
-.ps-seg-label {
-  font-size: 0.62rem; font-weight: 600;
-}
-.ps-seg-label.warm { color: #fbbf24; }
-.ps-seg-label.core { color: var(--pink); }
-.ps-seg-label.cool { color: var(--cyan); }
-.ps-seg-time {
-  font-size: 0.55rem; color: var(--text-muted);
-}
+.ps-seg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.ps-seg-label { font-size: 0.55rem; font-weight: 600; }
+.ps-seg-time { font-size: 0.5rem; color: var(--text-muted); }
 .ps-move {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
+  padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 .ps-move:last-child { border: none; }
-.ps-move-left { display: flex; flex-direction: column; gap: 2px; }
-.ps-move-name { font-size: 0.72rem; font-weight: 500; color: #fff; }
+.ps-move-left { display: flex; flex-direction: column; gap: 1px; }
+.ps-move-name { font-size: 0.62rem; font-weight: 500; color: #fff; }
 .ps-move-badge {
-  font-size: 0.5rem; font-weight: 600;
-  padding: 1px 6px; border-radius: 4px; display: inline-block; width: fit-content;
+  font-size: 0.44rem; font-weight: 600;
+  padding: 1px 5px; border-radius: 3px; display: inline-block; width: fit-content;
 }
-.ps-move-badge.hold { background: rgba(34,184,160,0.15); color: #22b8a0; }
-.ps-move-badge.reps { background: rgba(34,184,160,0.15); color: #22b8a0; }
 .ps-move-icon {
-  width: 28px; height: 28px; border-radius: 6px;
-  background: rgba(34,184,160,0.12);
-  display: grid; place-items: center;
-  font-size: 0.7rem; color: #22b8a0;
+  width: 24px; height: 24px; border-radius: 5px;
+  display: grid; place-items: center; font-size: 0.6rem;
 }
 .ps-tab-bar {
   margin-top: auto;
   display: flex; justify-content: space-around; align-items: center;
-  padding: 6px 0 2px;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 5px 0 1px; border-top: 1px solid rgba(255,255,255,0.05);
 }
-.ps-tab {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  font-size: 0.45rem; color: var(--text-muted);
-}
+.ps-tab { display: flex; flex-direction: column; align-items: center; gap: 1px; font-size: 0.4rem; color: var(--text-muted); }
 .ps-tab.active { color: var(--purple-primary); }
-.ps-tab-icon { font-size: 0.65rem; }
+.ps-tab-icon { font-size: 0.55rem; }
 .ps-create-btn {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--purple-primary);
-  display: grid; place-items: center;
-  font-size: 1rem; color: #fff; margin-top: -8px;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 0.9rem; color: #fff; margin-top: -6px;
 }
 
-/* floating cards */
-.float-card {
-  position: absolute;
-  padding: 10px 16px; border-radius: 14px;
-  background: rgba(20,20,54,0.85);
+/* App badge on phones */
+.phone-app-badge {
+  position: absolute; bottom: 62px; left: 50%; transform: translateX(-50%);
+  padding: 5px 14px; border-radius: 50px;
+  font-size: 0.6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  z-index: 5; white-space: nowrap;
   backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.35);
-  z-index: 3;
-  animation: float 5s ease-in-out infinite;
 }
-.float-card .fc-label {
-  font-size: 0.58rem; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 0.5px;
+.phone-app-badge.released {
+  background: rgba(124,92,252,0.2); color: var(--purple-light);
+  border: 1px solid rgba(124,92,252,0.3);
 }
-.float-card .fc-val {
-  font-weight: 700; font-size: 0.95rem;
+.phone-app-badge.soon {
+  background: rgba(255,255,255,0.06); color: var(--text-muted);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.phone-overlay {
+  position: absolute; inset: 2px; border-radius: 34px;
+  background: rgba(10,15,26,0.55);
+  backdrop-filter: blur(2px);
+  z-index: 4;
+}
+.phone-app-name {
+  text-align: center; margin-top: 10px;
   font-family: 'Sora', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
 }
-.fc1 { top: 12%; right: -8%; animation-delay: 0s; }
-.fc2 { bottom: 22%; left: -16%; animation-delay: -1.8s; }
-.fc3 { top: 58%; right: -20%; animation-delay: -3.5s; }
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+.phone-app-sub {
+  text-align: center;
+  font-size: 0.7rem; color: var(--text-muted);
 }
 
 /* ═══════ SECTION SCAFFOLDING ═══════ */
@@ -369,7 +347,7 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 }
 .sec-desc {
   font-size: 1.05rem; color: var(--text-secondary);
-  text-align: center; max-width: 560px;
+  text-align: center; max-width: 620px;
   margin: 0 auto 64px; line-height: 1.75;
 }
 
@@ -409,6 +387,7 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 .f-icon.ic-pink { background: rgba(244,114,182,0.1); }
 .f-icon.ic-amber { background: rgba(251,191,36,0.1); }
 .f-icon.ic-green { background: rgba(52,211,153,0.1); }
+.f-icon.ic-orange { background: rgba(255,107,74,0.1); }
 .f-card h3 {
   font-family: 'Sora', sans-serif;
   font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;
@@ -417,403 +396,90 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
   font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;
 }
 
-/* ═══════ SHOWCASE (2-col cards with mini UI) ═══════ */
-.showcase { background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface) 50%, var(--bg-deep)); }
-.showcase-grid {
+/* ═══════ APPS SECTION ═══════ */
+.apps-row {
   max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-.s-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 36px 32px 0; overflow: hidden;
-  transition: all 0.4s;
-}
-.s-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 50px rgba(0,0,0,0.3);
-}
-.s-card h3 {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.25rem; font-weight: 600; margin-bottom: 10px;
-}
-.s-card p {
-  font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 28px;
-}
-.s-preview {
-  width: 100%; min-height: 200px;
-  border-radius: 14px 14px 0 0;
-  background: var(--bg-surface);
-  border: 1px solid rgba(124,92,252,0.06);
-  border-bottom: none;
-  padding: 18px; overflow: hidden;
-}
-
-/* mini mockup pieces inside showcase */
-.m-play-header {
-  text-align: center; margin-bottom: 8px;
-}
-.m-play-title {
-  font-family: 'Sora', sans-serif;
-  font-size: 0.85rem; font-weight: 600; color: #fff;
-}
-.m-play-sub {
-  font-size: 0.6rem; color: var(--text-muted);
-}
-.m-play-duration-label {
-  font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px;
-  color: var(--purple-light); font-weight: 600; text-align: center; margin-bottom: 2px;
-}
-.m-play-duration {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.6rem; font-weight: 700; color: #fff;
-  text-align: center; letter-spacing: 2px; margin-bottom: 10px;
-}
-.m-donut-wrap {
-  display: flex; justify-content: center; align-items: center; margin-bottom: 10px;
-}
-.m-donut {
-  width: 90px; height: 90px; position: relative;
-}
-.m-donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.m-donut-center {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  text-align: center;
-}
-.m-donut-sec {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.4rem; font-weight: 700; color: #fff;
-}
-.m-donut-frac {
-  font-size: 0.5rem; color: var(--text-muted);
-}
-.m-play-segment {
-  font-size: 0.65rem; color: var(--text-muted);
-  margin-bottom: 2px;
-}
-.m-play-segment-time {
-  font-size: 0.55rem; color: var(--text-muted);
-}
-.m-current {
-  text-align: center; padding: 10px 14px;
-  background: rgba(34,184,160,0.06); border-radius: 12px;
-  border: 1px solid rgba(34,184,160,0.15); margin: 8px 0;
-}
-.m-current .icon {
-  font-size: 1.5rem; margin-bottom: 4px;
-}
-.m-current .name {
-  font-size: 1rem; font-weight: 600; margin-top: 2px; color: #fff;
-}
-.m-current .tag {
-  font-size: 0.6rem; font-weight: 600; color: #22b8a0;
-}
-.m-play-controls {
-  display: flex; justify-content: center; align-items: center; gap: 18px;
-  margin-top: 8px;
-}
-.m-play-ctrl {
-  font-size: 0.65rem; color: var(--text-muted);
-}
-.m-play-pause {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: var(--purple-primary);
-  display: grid; place-items: center;
-  font-size: 0.9rem; color: #fff;
-}
-
-.m-analysis-balanced {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.2rem; font-weight: 700; text-align: center; color: #fff;
-  margin-bottom: 2px;
-}
-.m-analysis-sub {
-  font-size: 0.65rem; color: var(--text-muted); text-align: center; margin-bottom: 10px;
-}
-.m-silhouettes {
-  display: flex; gap: 14px; justify-content: center; align-items: flex-end;
-  margin-bottom: 10px;
-}
-.m-silhouette {
-  width: 40px; height: 80px;
-  border-radius: 14px 14px 4px 4px;
-  position: relative;
-  border: 1px solid rgba(255,255,255,0.06);
-  overflow: hidden;
-}
-.m-silhouette.front {
-  background: linear-gradient(180deg, rgba(124,92,252,0.08), rgba(236,72,153,0.25) 35%, rgba(251,191,36,0.15) 60%, rgba(34,211,238,0.1));
-}
-.m-silhouette.back {
-  background: linear-gradient(180deg, rgba(34,211,238,0.08), rgba(244,114,182,0.2) 35%, rgba(124,92,252,0.15) 60%, rgba(52,211,153,0.1));
-}
-.m-muscle-dots {
-  display: flex; flex-wrap: wrap; gap: 4px 10px; justify-content: center;
-  font-size: 0.55rem; color: var(--text-secondary); margin-bottom: 12px;
-}
-.m-muscle-dot {
-  display: flex; align-items: center; gap: 3px;
-}
-.m-muscle-dot .dot {
-  width: 5px; height: 5px; border-radius: 50%;
-}
-.m-analysis-stats {
-  display: flex; justify-content: space-around; text-align: center;
-  margin-bottom: 12px;
-  padding: 8px 0;
-  border-top: 1px solid rgba(255,255,255,0.04);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.m-analysis-stat-val {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.1rem; font-weight: 700; color: #fff;
-}
-.m-analysis-stat-label {
-  font-size: 0.5rem; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 0.5px;
-}
-.m-region-title {
-  font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px;
-  color: var(--text-muted); font-weight: 600; margin-bottom: 6px;
-}
-.m-stat-list { display: flex; flex-direction: column; gap: 5px; }
-.m-stat {
-  display: flex; align-items: center; gap: 8px;
-}
-.m-stat-name { font-size: 0.62rem; color: var(--text-secondary); width: 52px; text-align: left; }
-.m-stat-track {
-  flex: 1; height: 5px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 3px; overflow: hidden;
-}
-.m-stat-bar { height: 100%; border-radius: 3px; }
-.m-stat-pct { font-size: 0.62rem; font-weight: 600; color: var(--text-secondary); width: 28px; text-align: right; }
-
-.m-spotify-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 9px 12px;
-  background: var(--bg-card); border-radius: 10px;
-  border: 1px solid rgba(124,92,252,0.06);
-  margin-bottom: 6px;
-}
-.m-sp-art {
-  width: 36px; height: 36px; border-radius: 6px; flex-shrink: 0;
-}
-.m-sp-info { flex: 1; }
-.m-sp-title { font-size: 0.72rem; font-weight: 600; }
-.m-sp-artist { font-size: 0.6rem; color: var(--text-muted); }
-.m-sp-bpm {
-  font-size: 0.62rem; font-weight: 700; color: #1db954;
-  background: rgba(29,185,84,0.1); padding: 3px 8px; border-radius: 50px;
-}
-
-.m-flow-card {
-  background: rgba(255,255,255,0.03); border-radius: 12px;
-  padding: 12px 14px;
-  border: 1px solid rgba(124,92,252,0.1);
-  margin-bottom: 8px;
-}
-.m-flow-top {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 8px;
-}
-.m-flow-name { font-size: 0.82rem; font-weight: 600; color: #fff; }
-.m-flow-desc { font-size: 0.58rem; color: var(--text-muted); margin-top: 1px; }
-.m-flow-badge {
-  font-size: 0.52rem; padding: 3px 9px;
-  border-radius: 50px; font-weight: 600;
-  display: flex; align-items: center; gap: 3px;
-}
-.m-flow-badge .badge-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-}
-.m-flow-stats {
-  display: flex; gap: 16px; margin-bottom: 8px;
-}
-.m-flow-stat {
-  display: flex; flex-direction: column; align-items: flex-start;
-}
-.m-flow-stat-val { font-size: 0.72rem; font-weight: 700; color: #fff; }
-.m-flow-stat-label { font-size: 0.5rem; color: var(--text-muted); }
-.m-flow-tags {
-  display: flex; gap: 5px;
-}
-.m-flow-tag {
-  font-size: 0.5rem; padding: 2px 8px;
-  border-radius: 4px; font-weight: 500;
-  background: rgba(124,92,252,0.1); color: var(--purple-light);
-  border: 1px solid rgba(124,92,252,0.15);
-}
-
-/* ═══════ HOW IT WORKS ═══════ */
-.steps-row {
-  max-width: 1100px; margin: 0 auto;
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 32px; counter-reset: step;
-}
-.step {
-  text-align: center; position: relative;
-  counter-increment: step;
-}
-.step::before {
-  content: counter(step);
-  display: flex; align-items: center; justify-content: center;
-  width: 52px; height: 52px; border-radius: 50%;
-  background: rgba(124,92,252,0.1);
-  border: 2px solid rgba(124,92,252,0.25);
-  font-family: 'Sora', sans-serif;
-  font-size: 1.2rem; font-weight: 700;
-  color: var(--purple-light);
-  margin: 0 auto 22px;
-}
-.step h3 {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.15rem; font-weight: 600; margin-bottom: 10px;
-}
-.step p {
-  font-size: 0.9rem; color: var(--text-secondary);
-  line-height: 1.7; max-width: 300px; margin: 0 auto;
-}
-
-/* ═══════ PRICING ═══════ */
-.pricing-row {
-  max-width: 820px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr;
   gap: 28px;
 }
-.p-card {
+.app-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 40px 34px;
-  position: relative; transition: all 0.4s;
+  padding: 40px 32px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  transition: all 0.4s;
 }
-.p-card.featured {
-  border-color: var(--purple-primary);
-  box-shadow: 0 0 60px rgba(124,92,252,0.1);
+.app-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 44px rgba(124,92,252,0.1);
 }
-.p-card.featured::before {
-  content: 'Most Popular';
-  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  padding: 5px 18px; border-radius: 50px;
-  background: var(--gradient-main); color: #fff;
-  font-size: 0.72rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.5px;
+.app-card.featured {
+  border-color: rgba(124,92,252,0.3);
+  box-shadow: 0 0 60px rgba(124,92,252,0.08);
 }
-.p-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 50px rgba(0,0,0,0.3);
+.app-card.featured::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gradient-main);
 }
-.p-tier {
-  font-size: 0.78rem; text-transform: uppercase;
-  letter-spacing: 1.5px; color: var(--purple-light);
-  font-weight: 600; margin-bottom: 8px;
-}
-.p-price {
-  font-family: 'Sora', sans-serif;
-  font-size: 2.4rem; font-weight: 700; margin-bottom: 4px;
-}
-.p-price .period {
-  font-size: 0.85rem; font-weight: 400; color: var(--text-muted);
-}
-.p-desc {
-  font-size: 0.88rem; color: var(--text-secondary);
-  margin-bottom: 28px; line-height: 1.6;
-}
-.p-features {
-  list-style: none; margin-bottom: 32px;
-  display: flex; flex-direction: column; gap: 12px;
-}
-.p-features li {
-  font-size: 0.88rem; color: var(--text-secondary);
-  display: flex; align-items: center; gap: 10px;
-}
-.p-features li .check {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: rgba(124,92,252,0.12);
+.app-icon {
+  width: 64px; height: 64px; border-radius: 16px;
   display: grid; place-items: center;
-  font-size: 0.65rem; color: var(--purple-light); flex-shrink: 0;
+  font-size: 1.6rem; margin: 0 auto 18px;
 }
-.p-btn {
-  display: block; text-align: center;
-  padding: 14px; border-radius: 50px;
-  font-size: 0.95rem; font-weight: 600;
+.app-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 14px; border-radius: 50px;
+  font-size: 0.68rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+.app-status.live { background: rgba(52,211,153,0.1); color: #34d399; }
+.app-status.soon { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+.app-card h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.35rem; font-weight: 700; margin-bottom: 6px;
+}
+.app-card .modality {
+  font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;
+}
+.app-card p {
+  font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;
+}
+.app-card .btn-app {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; border-radius: 50px;
+  font-size: 0.88rem; font-weight: 600;
   text-decoration: none; transition: all 0.3s;
-  cursor: pointer; border: none; width: 100%;
+  cursor: pointer; border: none;
 }
-.p-btn.outline {
-  background: transparent; color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-.p-btn.outline:hover { border-color: var(--purple-primary); background: rgba(124,92,252,0.06); }
-.p-btn.filled {
+.btn-app.filled {
   background: var(--gradient-main); color: #fff;
   box-shadow: 0 4px 24px var(--purple-glow);
 }
-.p-btn.filled:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 36px rgba(124,92,252,0.35);
+.btn-app.filled:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(124,92,252,0.35); }
+.btn-app.outline {
+  background: transparent; color: var(--text-muted);
+  border: 1px solid var(--border);
 }
 
-/* ═══════ QUOTE ═══════ */
-.quote-section {
+/* ═══════ CTA ═══════ */
+.cta-section {
   text-align: center;
-  padding: 80px 48px;
+  padding: 100px 48px;
   background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface), var(--bg-deep));
 }
-.quote-mark {
-  font-size: 4rem; line-height: 1; color: rgba(124,92,252,0.2);
-  font-family: Georgia, serif; margin-bottom: 8px;
+.cta-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 2.4rem; font-weight: 700;
+  margin-bottom: 16px; line-height: 1.2;
 }
-.quote-text {
-  font-size: 1.35rem; font-weight: 400;
-  color: var(--text-primary); max-width: 640px;
-  margin: 0 auto 16px; line-height: 1.7;
-  font-style: italic;
-}
-.quote-attr {
-  font-size: 0.88rem; color: var(--text-muted); font-weight: 500;
-}
-
-/* ═══════ FAQ ═══════ */
-.faq-list {
-  max-width: 720px; margin: 0 auto;
-  display: flex; flex-direction: column; gap: 12px;
-}
-.faq-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden; transition: border-color 0.3s;
-}
-.faq-item:hover { border-color: var(--border-hover); }
-.faq-q {
-  width: 100%; padding: 20px 24px;
-  background: none; border: none; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
-  font-family: 'Outfit', sans-serif;
-  font-size: 1rem; font-weight: 600; color: var(--text-primary);
-  text-align: left;
-}
-.faq-q .icon {
-  width: 28px; height: 28px; border-radius: 50%;
-  background: rgba(124,92,252,0.1);
-  display: grid; place-items: center;
-  font-size: 1.1rem; color: var(--purple-light);
-  transition: transform 0.3s; flex-shrink: 0;
-}
-.faq-item.open .faq-q .icon { transform: rotate(45deg); }
-.faq-a {
-  max-height: 0; overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
-}
-.faq-item.open .faq-a { max-height: 200px; }
-.faq-a-inner {
-  padding: 0 24px 20px;
-  font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7;
+.cta-desc {
+  font-size: 1.05rem; color: var(--text-secondary);
+  max-width: 520px; margin: 0 auto 36px; line-height: 1.7;
 }
 
 /* ═══════ FOOTER ═══════ */
@@ -831,9 +497,7 @@ footer {
   font-family: 'Sora', sans-serif;
   font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;
 }
-.footer-tagline {
-  font-size: 0.88rem; color: var(--text-muted); max-width: 280px;
-}
+.footer-tagline { font-size: 0.88rem; color: var(--text-muted); max-width: 280px; }
 .footer-links { display: flex; gap: 48px; }
 .footer-col h4 {
   font-size: 0.75rem; text-transform: uppercase;
@@ -854,189 +518,21 @@ footer {
   font-size: 0.8rem; color: var(--text-muted);
 }
 
-/* ═══════ NODE TREE ═══════ */
-.node-tree {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  min-height: 320px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-}
-.node-tree::-webkit-scrollbar { height: 4px; }
-.node-tree::-webkit-scrollbar-track { background: transparent; }
-.node-tree::-webkit-scrollbar-thumb { background: rgba(124,92,252,0.2); border-radius: 2px; }
-
-.node-col {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.node-col-mid {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-}
-.node-col-end {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-  position: relative;
-}
-.node-connectors {
-  width: 70px;
-  flex-shrink: 0;
-  align-self: stretch;
-}
-.node-pill {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 10px 14px;
-  background: var(--bg-surface);
-  border: 1px solid rgba(124,92,252,0.15);
-  border-radius: 10px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  min-width: 180px;
-  transition: all 0.3s;
-  cursor: default;
-}
-.node-pill:hover {
-  border-color: rgba(124,92,252,0.3);
-  background: var(--bg-card-hover);
-}
-.node-pill.active-orange {
-  border-color: rgba(200,160,60,0.5);
-  background: rgba(200,160,60,0.06);
-}
-.node-pill.active-orange .node-count { background: rgba(200,160,60,0.2); color: #c8a03c; }
-.node-count {
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 50px;
-  background: rgba(124,92,252,0.1);
-  color: var(--purple-light);
-}
-.node-count.orange { background: rgba(200,160,60,0.2); color: #c8a03c; }
-
-.node-connector-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 18px;
-  border-radius: 50px;
-  background: var(--bg-surface);
-  border: 1px solid rgba(124,92,252,0.12);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-.node-count-inline {
-  font-weight: 700;
-  color: var(--purple-light);
-}
-.node-count-inline.cyan { color: var(--cyan); }
-
-.movement-node {
-  padding: 18px 28px;
-  border-radius: 14px;
-  border: 2px solid var(--cyan);
-  background: rgba(34,211,238,0.04);
-  text-align: center;
-  position: relative;
-  min-width: 200px;
-  box-shadow: 0 0 30px rgba(34,211,238,0.06);
-}
-.movement-node-x {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-.movement-node-name {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-.movement-node-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-.mn-btn {
-  padding: 5px 14px;
-  border-radius: 8px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.mn-view {
-  background: rgba(124,92,252,0.12);
-  color: var(--purple-light);
-}
-.mn-view:hover { background: rgba(124,92,252,0.2); }
-.mn-add {
-  background: rgba(34,211,238,0.12);
-  color: var(--cyan);
-}
-.mn-add:hover { background: rgba(34,211,238,0.2); }
-
-.node-linked-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 18px;
-  border-radius: 50px;
-  background: var(--bg-surface);
-  border: 1px solid rgba(200,160,60,0.25);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  position: absolute;
-  right: -120px;
-  top: 50%;
-  transform: translateY(-50%);
-  white-space: nowrap;
-}
-
 /* ═══════ ANIMATIONS ═══════ */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* node chain scrollbar */
-.node-chain::-webkit-scrollbar { height: 4px; }
-.node-chain::-webkit-scrollbar-track { background: transparent; }
-.node-chain::-webkit-scrollbar-thumb { background: rgba(124,92,252,0.2); border-radius: 2px; }
-
-/* node hover */
-.node-item { transition: all 0.3s; }
-.node-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 1024px) {
-  .node-linked-badge { display: none; }
-  .hero-inner { grid-template-columns: 1fr; text-align: center; }
-  .hero-content { max-width: 100%; margin: 0 auto; }
-  .hero .sub { margin-left: auto; margin-right: auto; }
-  .hero-ctas { justify-content: center; }
-  .hero-visual { margin-top: 40px; }
-  .float-card { display: none; }
+  .hero h1 { font-size: 3.2rem; }
   .features-grid { grid-template-columns: 1fr 1fr; }
-  .showcase-grid { grid-template-columns: 1fr; }
+  .apps-row { grid-template-columns: 1fr; max-width: 420px; }
+  .phone-wrap.left, .phone-wrap.right { display: none; }
+  .phones-showcase { perspective: none; }
+  .phone-wrap.center { animation: floatCenterSimple 5s ease-in-out infinite; }
+  @keyframes floatCenterSimple { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
 }
 @media (max-width: 768px) {
   nav { padding: 14px 20px; }
@@ -1045,10 +541,10 @@ footer {
   .hero h1 { font-size: 2.5rem; }
   .sec-title { font-size: 2rem; }
   .features-grid { grid-template-columns: 1fr; }
-  .steps-row { grid-template-columns: 1fr; gap: 48px; }
-  .pricing-row { grid-template-columns: 1fr !important; max-width: 360px !important; }
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
+  .cta-title { font-size: 1.8rem; }
+  .phones-showcase { margin-top: 40px; }
 }
 </style>
 </head>
@@ -1060,555 +556,349 @@ footer {
 
 <!-- ═══════ NAV ═══════ -->
 <nav>
-  <a href="#" class="nav-brand">
+  <a href="/" class="nav-brand">
     <span class="icon">TA</span>
     Tuna Athletics
   </a>
   <div class="nav-pills">
-    <a href="#features" class="active">Features</a>
+    <a href="/tunamat">TunaMat</a>
+    <a href="/roadmap">Roadmap</a>
     <a href="/app">Web App</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
   </div>
   <div class="nav-right">
-    <a href="#" class="btn-nav-cta">Download App</a>
+    <a href="/tunamat" class="btn-nav-cta">Download App</a>
   </div>
 </nav>
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Now available on iOS
-      </div>
-      <h1><span class="grad">Plan. Build. Flow.</span></h1>
-      <p class="sub" style="font-size:1.4rem;font-weight:600;color:var(--text-primary);margin-bottom:16px;font-family:'Sora',sans-serif;">Meet TunaMat</p>
-      <p class="sub">The all-in-one Mat Pilates class planning app for instructors. Build Flows from a 272+ Movement Library, cue Live Play mode for better in-class pacing, and analyse every flow you create — all in one place.</p>
-      <div class="hero-ctas">
-        <a href="#" class="btn-primary">
-          Get Started Free
-          <span class="arrow-circle">→</span>
-        </a>
-        <a href="#features" class="btn-ghost">See Features</a>
-      </div>
+    <div class="hero-badge">
+      <span class="dot"></span>
+      TunaMat now available on iOS
+    </div>
+    <h1><span class="grad">Plan. Build. Flow.</span></h1>
+    <p class="sub">A suite of class planning apps for group fitness instructors. Powered by Spotify integration, professional-grade movement libraries, and real-time analytics — built by instructors, for instructors.</p>
+    <div class="hero-ctas">
+      <a href="/tunamat" class="btn-primary">
+        Explore TunaMat
+        <span class="arrow-circle">→</span>
+      </a>
+      <a href="/roadmap" class="btn-ghost">View Roadmap</a>
     </div>
 
-    <div class="hero-visual">
-      <!-- Floating accent cards -->
-      <div class="float-card fc1">
-        <div class="fc-label">Movements</div>
-        <div class="fc-val" style="color:var(--purple-light);">272+</div>
-      </div>
-      <div class="float-card fc2">
-        <div class="fc-label">Muscle Groups</div>
-        <div class="fc-val" style="color:var(--cyan);">Balanced ✓</div>
-      </div>
-      <div class="float-card fc3">
-        <div class="fc-label">Spotify BPM</div>
-        <div class="fc-val" style="color:var(--pink);">128 bpm</div>
-      </div>
-
-      <!-- Phone mockup -->
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="ps-header">
-            <span class="ps-back">‹ Back</span>
-            <span class="ps-edit-btn">Edit</span>
-          </div>
-          <h4 style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:0;">Example Flow</h4>
-          <div class="ps-action-row">
-            <div class="ps-fave"><div class="ps-fave-icon">♡</div><div>Fave</div></div>
-            <div class="ps-play-btn">▶ Play</div>
-            <div class="ps-analyse-btn">📊 Analyse</div>
-          </div>
-          <div class="ps-duration">45m 00s</div>
-
-          <div class="ps-segment">
-            <div class="ps-seg-header">
-              <div class="ps-seg-label warm">1. Centering &amp; Breath</div>
-              <span class="ps-seg-time">3:00</span>
+    <!-- 3 floating phones -->
+    <div class="phones-showcase">
+      <!-- TunaSpin (left) -->
+      <div class="phone-wrap left">
+        <div class="phone">
+          <div class="phone-overlay"></div>
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ps-header">
+              <span class="ps-back">‹ Back</span>
+              <span class="ps-edit-btn" style="background:var(--orange);">Edit</span>
             </div>
-            <div class="ps-move">
-              <div class="ps-move-left">
-                <span class="ps-move-name">Chest Opener</span>
-                <span class="ps-move-badge hold">Hold</span>
+            <div class="ps-title">HIIT Ride</div>
+            <div class="ps-action-row">
+              <div class="ps-fave"><div class="ps-fave-icon">♡</div></div>
+              <div class="ps-play-btn" style="background:var(--orange);">▶ Play</div>
+              <div class="ps-analyse-btn" style="background:#c05a3a;">📊 Analyse</div>
+            </div>
+            <div class="ps-duration">50m 00s</div>
+            <div class="ps-segment">
+              <div class="ps-seg-header">
+                <div class="ps-seg-label" style="color:var(--orange);">1. Warm-Up Ride</div>
+                <span class="ps-seg-time">5:00</span>
               </div>
-              <div class="ps-move-icon">🧘</div>
-            </div>
-            <div class="ps-move">
-              <div class="ps-move-left">
-                <span class="ps-move-name">Cat-Cow</span>
-                <span class="ps-move-badge reps">8-10 reps</span>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Seated Climb</span>
+                  <span class="ps-move-badge" style="background:rgba(255,107,74,0.15);color:var(--orange);">60 RPM</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(255,107,74,0.12);color:var(--orange);">🚴</div>
               </div>
-              <div class="ps-move-icon">🧘</div>
-            </div>
-            <div class="ps-move">
-              <div class="ps-move-left">
-                <span class="ps-move-name">Butterfly Stretch</span>
-                <span class="ps-move-badge hold">Hold</span>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Easy Pedal</span>
+                  <span class="ps-move-badge" style="background:rgba(255,107,74,0.15);color:var(--orange);">70 RPM</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(255,107,74,0.12);color:var(--orange);">🚴</div>
               </div>
-              <div class="ps-move-icon">🧘</div>
+            </div>
+            <div class="ps-segment">
+              <div class="ps-seg-header">
+                <div class="ps-seg-label" style="color:#fbbf24;">2. Hill Climb</div>
+                <span class="ps-seg-time">8:00</span>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Standing Climb</span>
+                  <span class="ps-move-badge" style="background:rgba(255,107,74,0.15);color:var(--orange);">80 RPM</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(255,107,74,0.12);color:var(--orange);">🚴</div>
+              </div>
+            </div>
+            <div class="ps-tab-bar">
+              <div class="ps-tab active" style="color:var(--orange);"><span class="ps-tab-icon">📋</span>Classes</div>
+              <div class="ps-tab"><span class="ps-tab-icon">🚴</span>Exercises</div>
+              <div class="ps-create-btn" style="background:var(--orange);">+</div>
+              <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
+              <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
             </div>
           </div>
-
-          <div class="ps-segment">
-            <div class="ps-seg-header">
-              <div class="ps-seg-label core">2. Spinal Warm-Up</div>
-              <span class="ps-seg-time">3:00</span>
-            </div>
-            <div class="ps-move">
-              <div class="ps-move-left">
-                <span class="ps-move-name">Kneeling Chest Exp.</span>
-                <span class="ps-move-badge reps">8 reps</span>
-              </div>
-              <div class="ps-move-icon">🧘</div>
-            </div>
-          </div>
-
-          <!-- Tab bar -->
-          <div class="ps-tab-bar">
-            <div class="ps-tab active"><span class="ps-tab-icon">📋</span>Flows</div>
-            <div class="ps-tab"><span class="ps-tab-icon">🏃</span>Moves</div>
-            <div class="ps-create-btn">+</div>
-            <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
-            <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
-          </div>
+          <div class="phone-app-badge soon">Coming Soon</div>
         </div>
+        <div class="phone-app-name" style="color:var(--orange);">TunaSpin</div>
+        <div class="phone-app-sub">Indoor Cycling</div>
+      </div>
+
+      <!-- TunaMat (center - featured) -->
+      <div class="phone-wrap center">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ps-header">
+              <span class="ps-back">‹ Back</span>
+              <span class="ps-edit-btn" style="background:var(--purple-primary);">Edit</span>
+            </div>
+            <div class="ps-title">Example Flow</div>
+            <div class="ps-action-row">
+              <div class="ps-fave"><div class="ps-fave-icon">♡</div><div>Fave</div></div>
+              <div class="ps-play-btn" style="background:#8C5CF5;">▶ Play</div>
+              <div class="ps-analyse-btn" style="background:var(--teal);">📊 Analyse</div>
+            </div>
+            <div class="ps-duration">45m 00s</div>
+            <div class="ps-segment">
+              <div class="ps-seg-header">
+                <div class="ps-seg-label" style="color:#fbbf24;">1. Centering &amp; Breath</div>
+                <span class="ps-seg-time">3:00</span>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Chest Opener</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">Hold</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Cat-Cow</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">8-10 reps</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Butterfly Stretch</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">Hold</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+              </div>
+            </div>
+            <div class="ps-segment">
+              <div class="ps-seg-header">
+                <div class="ps-seg-label" style="color:var(--pink);">2. Spinal Warm-Up</div>
+                <span class="ps-seg-time">3:00</span>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Kneeling Chest Exp.</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">8 reps</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+              </div>
+            </div>
+            <div class="ps-tab-bar">
+              <div class="ps-tab active"><span class="ps-tab-icon">📋</span>Flows</div>
+              <div class="ps-tab"><span class="ps-tab-icon">🏃</span>Moves</div>
+              <div class="ps-create-btn" style="background:var(--purple-primary);">+</div>
+              <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
+              <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
+            </div>
+          </div>
+          <div class="phone-app-badge released">Available Now</div>
+        </div>
+        <div class="phone-app-name" style="color:var(--purple-light);">TunaMat</div>
+        <div class="phone-app-sub">Mat Pilates</div>
+      </div>
+
+      <!-- TunaReformer (right) -->
+      <div class="phone-wrap right">
+        <div class="phone">
+          <div class="phone-overlay"></div>
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="ps-header">
+              <span class="ps-back">‹ Back</span>
+              <span class="ps-edit-btn" style="background:var(--teal);">Edit</span>
+            </div>
+            <div class="ps-title">Reformer Flow</div>
+            <div class="ps-action-row">
+              <div class="ps-fave"><div class="ps-fave-icon">♡</div></div>
+              <div class="ps-play-btn" style="background:var(--teal);">▶ Play</div>
+              <div class="ps-analyse-btn" style="background:#1a8a76;">📊 Analyse</div>
+            </div>
+            <div class="ps-duration">55m 00s</div>
+            <div class="ps-segment">
+              <div class="ps-seg-header">
+                <div class="ps-seg-label" style="color:var(--teal);">1. Footwork Series</div>
+                <span class="ps-seg-time">5:00</span>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Parallel Heels</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">10 reps</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🤸</div>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">V-Position</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">10 reps</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🤸</div>
+              </div>
+            </div>
+            <div class="ps-segment">
+              <div class="ps-seg-header">
+                <div class="ps-seg-label" style="color:#fbbf24;">2. Long Stretch</div>
+                <span class="ps-seg-time">8:00</span>
+              </div>
+              <div class="ps-move">
+                <div class="ps-move-left">
+                  <span class="ps-move-name">Long Stretch</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">Hold</span>
+                </div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🤸</div>
+              </div>
+            </div>
+            <div class="ps-tab-bar">
+              <div class="ps-tab active" style="color:var(--teal);"><span class="ps-tab-icon">📋</span>Flows</div>
+              <div class="ps-tab"><span class="ps-tab-icon">🤸</span>Exercises</div>
+              <div class="ps-create-btn" style="background:var(--teal);">+</div>
+              <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
+              <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
+            </div>
+          </div>
+          <div class="phone-app-badge soon">Coming Soon</div>
+        </div>
+        <div class="phone-app-name" style="color:var(--teal);">TunaReformer</div>
+        <div class="phone-app-sub">Reformer Pilates</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ FEATURES ═══════ -->
-<section id="features">
-  <div class="sec-label">Features</div>
-  <div class="sec-title">Everything you need to plan<br>the perfect class</div>
-  <p class="sec-desc">From an ever-growing movement library to live class execution — TunaMat gives pilates instructors the tools to create balanced, beautifully paced classes.</p>
+<!-- ═══════ PLATFORM FEATURES ═══════ -->
+<section id="features" style="background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface) 50%, var(--bg-deep));">
+  <div class="sec-label">The Platform</div>
+  <div class="sec-title">One engine powering every<br>Tuna app</div>
+  <p class="sec-desc">Every app in the Tuna Athletics suite shares a common set of powerful features — designed with real instructors, refined by the community.</p>
 
   <div class="features-grid">
     <div class="f-card">
-      <div class="f-icon ic-purple">📚</div>
-      <h3>272+ Movement Library</h3>
-      <p>A curated library of mat pilates movements with rich metadata — muscle groups, movement patterns, equipment, and pacing presets. Continuously refined with input from professionals.</p>
+      <div class="f-icon ic-green">🎵</div>
+      <h3>Spotify Integration</h3>
+      <p>Centre your class around music. Map any public playlist to your segments with BPM data for perfectly paced transitions — no Spotify login required.</p>
     </div>
     <div class="f-card">
-      <div class="f-icon ic-cyan">🧩</div>
-      <h3>Drag &amp; Drop Flow Builder</h3>
-      <p>Create flows with segments like Warm Up, Core Work, and Cool Down. Add movements with individual pacing and instructor notes.</p>
+      <div class="f-icon ic-purple">📚</div>
+      <h3>Professional Movement Library</h3>
+      <p>Hundreds of exercises vetted by industry professionals, with rich metadata — muscle groups, movement patterns, equipment, and recommended pacing.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon ic-cyan">👥</div>
+      <h3>Community-Driven</h3>
+      <p>Movement libraries are maintained and improved by the user community. Your expertise shapes the platform — create custom exercises and share knowledge.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon ic-amber">⚡</div>
+      <h3>Rapid Class Planning</h3>
+      <p>An intuitive interface that speeds up class planning from hours to minutes. Drag-and-drop segments, add movements, and set pacing in seconds.</p>
     </div>
     <div class="f-card">
       <div class="f-icon ic-pink">⏱</div>
-      <h3>Timed Play Mode</h3>
-      <p>Execute your flow live in class with countdown timers per segment. Designed to be glanceable while you teach.</p>
+      <h3>Live Play Mode</h3>
+      <p>Hit play and teach. Glanceable timers guide you through each segment with crossfade-aware pacing — the ultimate in-class companion.</p>
     </div>
     <div class="f-card">
-      <div class="f-icon ic-amber">🔥</div>
-      <h3>Muscle Group Analysis</h3>
-      <p>See a heatmap breakdown of which muscles your flow targets. Catch imbalances before class, not after.</p>
-    </div>
-    <div class="f-card">
-      <div class="f-icon ic-green">🎵</div>
-      <h3>Spotify Integration</h3>
-      <p>Import any public Spotify playlist and map songs to segments. Reference BPM and duration for perfect pacing.</p>
-    </div>
-    <div class="f-card">
-      <div class="f-icon ic-purple">☁️</div>
-      <h3>Cloud Sync &amp; Offline</h3>
-      <p>Your flows sync across devices via the cloud. Works offline too — changes sync when you reconnect.</p>
+      <div class="f-icon ic-orange">📊</div>
+      <h3>Real-Time Analytics</h3>
+      <p>Muscle group analysis and balance feedback give you real-time insight pre-execution. Catch imbalances before class, not after.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════ SHOWCASE ═══════ -->
-<section class="showcase" id="showcase">
-  <div class="sec-label">In Action</div>
-  <div class="sec-title">See what TunaMat can do</div>
-  <p class="sec-desc">Powerful tools that look and feel beautiful — built for real classes, not just demos.</p>
+<!-- ═══════ OUR APPS ═══════ -->
+<section id="apps">
+  <div class="sec-label">Our Apps</div>
+  <div class="sec-title">Built for every modality</div>
+  <p class="sec-desc">Each Tuna app is purpose-built for its discipline — with the same powerful engine, tailored to the movements, pacing, and terminology you know.</p>
 
-  <div class="showcase-grid">
-    <!-- Play Mode -->
-    <div class="s-card">
-      <h3>Timed Play Mode</h3>
-      <p>Glanceable timers guide you through each segment. Just hit play and teach.</p>
-      <div class="s-preview">
-        <div class="m-play-header">
-          <div class="m-play-title">Example Flow</div>
-          <div class="m-play-sub">1 / 15</div>
-        </div>
-        <div class="m-play-duration-label">Total Duration</div>
-        <div class="m-play-duration">0:00.99</div>
-        <div style="display:flex;gap:14px;align-items:flex-start;">
-          <div style="flex:1;">
-            <div class="m-play-segment">1. Centering &amp; Breath</div>
-            <div class="m-play-segment-time">0:00 / 3:00</div>
-          </div>
-          <div class="m-donut">
-            <svg viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(124,92,252,0.12)" stroke-width="2.5"/>
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#22b8a0" stroke-width="2.5" stroke-dasharray="100" stroke-dashoffset="1" stroke-linecap="round"/>
-            </svg>
-            <div class="m-donut-center">
-              <div class="m-donut-sec">59</div>
-              <div class="m-donut-frac">1/1</div>
-            </div>
-          </div>
-        </div>
-        <div class="m-current">
-          <div class="icon">🧘</div>
-          <div class="name">Chest Opener</div>
-          <div class="tag">Hold</div>
-        </div>
-        <div class="m-play-controls">
-          <span class="m-play-ctrl">⏮ Prev Segment</span>
-          <div class="m-play-pause">⏸</div>
-          <span class="m-play-ctrl">Next Segment ⏭</span>
-        </div>
-      </div>
+  <div class="apps-row">
+    <div class="app-card">
+      <div class="app-icon" style="background:rgba(255,107,74,0.1);">🚴</div>
+      <div class="app-status soon">Coming Soon</div>
+      <h3>TunaSpin</h3>
+      <div class="modality">Indoor Cycling &amp; Spin</div>
+      <p>Plan spin classes with RPM targets, resistance zones, and rhythm-based segments synced to your playlist.</p>
+      <span class="btn-app outline">Notify Me</span>
     </div>
 
-    <!-- Analysis -->
-    <div class="s-card">
-      <h3>Muscle Group Analysis</h3>
-      <p>Real-time feedback flags imbalances so you can adjust before class.</p>
-      <div class="s-preview">
-        <div class="m-analysis-balanced">Balanced</div>
-        <div class="m-analysis-sub">Overall class focus</div>
-        <div class="m-silhouettes">
-          <div class="m-silhouette front"></div>
-          <div class="m-silhouette back"></div>
-        </div>
-        <div class="m-muscle-dots">
-          <span class="m-muscle-dot"><span class="dot" style="background:#f472b6;"></span> Back 33%</span>
-          <span class="m-muscle-dot"><span class="dot" style="background:#34d399;"></span> Abs 28%</span>
-          <span class="m-muscle-dot"><span class="dot" style="background:#22d3ee;"></span> Stretch 22%</span>
-          <span class="m-muscle-dot"><span class="dot" style="background:#a78bfa;"></span> Full Body 11%</span>
-          <span class="m-muscle-dot"><span class="dot" style="background:#fbbf24;"></span> Glutes 6%</span>
-        </div>
-        <div class="m-analysis-stats">
-          <div><div class="m-analysis-stat-val">18</div><div class="m-analysis-stat-label">Movements</div></div>
-          <div><div class="m-analysis-stat-val">15</div><div class="m-analysis-stat-label">Segments</div></div>
-          <div><div class="m-analysis-stat-val">45m</div><div class="m-analysis-stat-label">Duration</div></div>
-        </div>
-        <div class="m-region-title">Body Region Balance</div>
-        <div class="m-stat-list">
-          <div class="m-stat">
-            <span class="m-stat-name">Core</span>
-            <div class="m-stat-track"><div class="m-stat-bar" style="width:28%;background:linear-gradient(90deg,#f472b6,#ec4899);"></div></div>
-            <span class="m-stat-pct">28%</span>
-          </div>
-          <div class="m-stat">
-            <span class="m-stat-name">Upper Body</span>
-            <div class="m-stat-track"><div class="m-stat-bar" style="width:33%;background:linear-gradient(90deg,#f97316,#f472b6);"></div></div>
-            <span class="m-stat-pct">33%</span>
-          </div>
-          <div class="m-stat">
-            <span class="m-stat-name">Lower Body</span>
-            <div class="m-stat-track"><div class="m-stat-bar" style="width:6%;background:linear-gradient(90deg,#f472b6,#a78bfa);"></div></div>
-            <span class="m-stat-pct">6%</span>
-          </div>
-          <div class="m-stat">
-            <span class="m-stat-name">Mobility</span>
-            <div class="m-stat-track"><div class="m-stat-bar" style="width:22%;background:linear-gradient(90deg,#22d3ee,#34d399);"></div></div>
-            <span class="m-stat-pct">22%</span>
-          </div>
-        </div>
+    <div class="app-card featured">
+      <div class="app-icon" style="background:rgba(124,92,252,0.12);">🧘</div>
+      <div class="app-status live">
+        <span style="width:6px;height:6px;border-radius:50%;background:#34d399;"></span>
+        Available Now
       </div>
+      <h3>TunaMat</h3>
+      <div class="modality">Mat Pilates</div>
+      <p>272+ movements, flow builder, timed play mode, muscle group analysis, and Spotify integration — all in one native iOS app.</p>
+      <a href="/tunamat" class="btn-app filled">Explore TunaMat →</a>
     </div>
 
-    <!-- Spotify -->
-    <div class="s-card">
-      <h3>Spotify Segment Sync</h3>
-      <p>Map songs to segments with BPM data. No Spotify login required.</p>
-      <div class="s-preview">
-        <div class="m-spotify-item">
-          <div class="m-sp-art" style="background:linear-gradient(135deg,#7c5cfc,#ec4899);"></div>
-          <div class="m-sp-info"><div class="m-sp-title">Warm Light</div><div class="m-sp-artist">Segment: Warm Up</div></div>
-          <div class="m-sp-bpm">98 bpm</div>
-        </div>
-        <div class="m-spotify-item">
-          <div class="m-sp-art" style="background:linear-gradient(135deg,#ec4899,#f97316);"></div>
-          <div class="m-sp-info"><div class="m-sp-title">Push Through</div><div class="m-sp-artist">Segment: Core Work</div></div>
-          <div class="m-sp-bpm">128 bpm</div>
-        </div>
-        <div class="m-spotify-item">
-          <div class="m-sp-art" style="background:linear-gradient(135deg,#22d3ee,#7c5cfc);"></div>
-          <div class="m-sp-info"><div class="m-sp-title">Breathe Easy</div><div class="m-sp-artist">Segment: Cool Down</div></div>
-          <div class="m-sp-bpm">76 bpm</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Flow Library -->
-    <div class="s-card">
-      <h3>Your Flow Library</h3>
-      <p>Organise, duplicate, and manage all your class plans in one place.</p>
-      <div class="s-preview">
-        <div class="m-flow-card">
-          <div class="m-flow-top">
-            <div>
-              <div class="m-flow-name">Example Flow</div>
-              <div class="m-flow-desc">A complete 45-minute mat pilates fl...</div>
-            </div>
-            <div class="m-flow-badge" style="background:rgba(251,191,36,0.1);color:#fbbf24;"><span class="badge-dot" style="background:#fbbf24;"></span> Moderate</div>
-          </div>
-          <div class="m-flow-stats">
-            <div class="m-flow-stat"><div class="m-flow-stat-val">45m 00s</div><div class="m-flow-stat-label">Duration</div></div>
-            <div class="m-flow-stat"><div class="m-flow-stat-val">15</div><div class="m-flow-stat-label">Segments</div></div>
-            <div class="m-flow-stat"><div class="m-flow-stat-val">18</div><div class="m-flow-stat-label">Movements</div></div>
-          </div>
-          <div class="m-flow-tags">
-            <span class="m-flow-tag">Full Body</span>
-            <span class="m-flow-tag">Mat</span>
-          </div>
-        </div>
-        <div class="m-flow-card">
-          <div class="m-flow-top">
-            <div>
-              <div class="m-flow-name">Morning Core Blast</div>
-              <div class="m-flow-desc">High-intensity core focused session</div>
-            </div>
-            <div class="m-flow-badge" style="background:rgba(239,68,68,0.1);color:#ef4444;"><span class="badge-dot" style="background:#ef4444;"></span> Peak</div>
-          </div>
-          <div class="m-flow-stats">
-            <div class="m-flow-stat"><div class="m-flow-stat-val">50m 00s</div><div class="m-flow-stat-label">Duration</div></div>
-            <div class="m-flow-stat"><div class="m-flow-stat-val">5</div><div class="m-flow-stat-label">Segments</div></div>
-            <div class="m-flow-stat"><div class="m-flow-stat-val">22</div><div class="m-flow-stat-label">Movements</div></div>
-          </div>
-          <div class="m-flow-tags">
-            <span class="m-flow-tag">Abs</span>
-            <span class="m-flow-tag" style="background:rgba(34,211,238,0.1);color:var(--cyan);border-color:rgba(34,211,238,0.15);">Circuit</span>
-          </div>
-        </div>
-      </div>
+    <div class="app-card">
+      <div class="app-icon" style="background:rgba(34,184,160,0.1);">🤸</div>
+      <div class="app-status soon">Coming Soon</div>
+      <h3>TunaReformer</h3>
+      <div class="modality">Reformer Pilates</div>
+      <p>Spring settings, carriage positions, and reformer-specific exercises — the planning tool reformer instructors deserve.</p>
+      <span class="btn-app outline">Notify Me</span>
     </div>
   </div>
 </section>
 
-<!-- ═══════ NODE BUILDING SHOWCASE ═══════ -->
-<section id="how">
-  <div class="sec-label">Flow Building</div>
-  <div class="sec-title">From blank canvas to balanced<br>class in minutes</div>
-  <p class="sec-desc">Drill into muscle groups, explore movement patterns, and chain movements into your flow — all through an intuitive node-based interface.</p>
-
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:40px 28px;position:relative;overflow:hidden;">
-
-      <!-- Node tree visualization -->
-      <div class="node-tree">
-        <!-- LEVEL 1: Muscle Groups -->
-        <div class="node-col">
-          <div class="node-pill">Abs <span class="node-count">59</span></div>
-          <div class="node-pill">Arms <span class="node-count">32</span></div>
-          <div class="node-pill">Back <span class="node-count">24</span></div>
-          <div class="node-pill active-orange">Full Body <span class="node-count orange">29</span></div>
-          <div class="node-pill">Glutes <span class="node-count">34</span></div>
-          <div class="node-pill">Legs <span class="node-count">53</span></div>
-          <div class="node-pill">Stretch &amp; Mobility <span class="node-count">41</span></div>
-        </div>
-
-        <!-- Connector lines L1→L2 -->
-        <div class="node-connectors">
-          <svg width="100%" height="100%" viewBox="0 0 80 280" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,140 C40,140 40,60 80,60" stroke="rgba(124,92,252,0.15)" stroke-width="1.5"/>
-            <path d="M0,140 C40,140 40,140 80,140" stroke="rgba(200,160,60,0.35)" stroke-width="2"/>
-            <path d="M0,140 C40,140 40,220 80,220" stroke="rgba(124,92,252,0.15)" stroke-width="1.5"/>
-          </svg>
-        </div>
-
-        <!-- LEVEL 2: Movement Patterns -->
-        <div class="node-col node-col-mid">
-          <div class="node-pill">Balance &amp; Stability <span class="node-count">2</span></div>
-          <div class="node-pill active-orange">Compound <span class="node-count orange">17</span></div>
-          <div class="node-pill">Functional <span class="node-count">10</span></div>
-        </div>
-
-        <!-- Connector lines L2→L3 -->
-        <div class="node-connectors">
-          <svg width="100%" height="100%" viewBox="0 0 80 280" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,140 C50,140 30,140 80,140" stroke="rgba(200,160,60,0.35)" stroke-width="2"/>
-          </svg>
-        </div>
-
-        <!-- LEVEL 3: Movement Node -->
-        <div class="node-col node-col-end">
-          <!-- From indicator -->
-          <div class="node-connector-badge">
-            <span style="color:var(--purple-light);">↑</span> From <span class="node-count-inline">1</span>
-          </div>
-
-          <!-- Main movement card -->
-          <div class="movement-node">
-            <div class="movement-node-x">×</div>
-            <div class="movement-node-name">Reverse Tabletop</div>
-            <div class="movement-node-actions">
-              <span class="mn-btn mn-view">View Details</span>
-              <span class="mn-btn mn-add">+ Flow</span>
-            </div>
-          </div>
-
-          <!-- To indicator -->
-          <div class="node-connector-badge">
-            <span style="color:var(--purple-light);">↓</span> To <span class="node-count-inline">1</span>
-          </div>
-
-          <!-- Linked indicator (to the right) -->
-          <div class="node-linked-badge">
-            <span style="color:var(--cyan);">⚯</span> Linked <span class="node-count-inline cyan">2</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:36px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
-        <div style="text-align:center;">
-          <div style="font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:var(--purple-light);">272+</div>
-          <div style="font-size:0.68rem;color:var(--text-muted);">Movements</div>
-        </div>
-        <div style="width:1px;background:var(--border);"></div>
-        <div style="text-align:center;">
-          <div style="font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:var(--pink);">7</div>
-          <div style="font-size:0.68rem;color:var(--text-muted);">Muscle Groups</div>
-        </div>
-        <div style="width:1px;background:var(--border);"></div>
-        <div style="text-align:center;">
-          <div style="font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:700;color:var(--cyan);">∞</div>
-          <div style="font-size:0.68rem;color:var(--text-muted);">Flow Possibilities</div>
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:36px;">
-      <a href="/app" class="btn-primary" style="display:inline-flex;">
-        Try the Web App
-        <span class="arrow-circle">→</span>
-      </a>
-    </div>
+<!-- ═══════ CTA ═══════ -->
+<div class="cta-section">
+  <div class="cta-title">Ready to transform your<br>class planning?</div>
+  <p class="cta-desc">Start with TunaMat — free. Plan your first flow in minutes, not hours.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="/tunamat" class="btn-primary">
+      Get Started Free
+      <span class="arrow-circle">→</span>
+    </a>
+    <a href="/app" class="btn-ghost">Try the Web App</a>
   </div>
-</section>
-
-<!-- ═══════ PRICING ═══════ -->
-<section id="pricing" style="background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface), var(--bg-deep));">
-  <div class="sec-label">Pricing</div>
-  <div class="sec-title">Simple pricing, powerful tools</div>
-  <p class="sec-desc">Start free. Upgrade when you're ready for unlimited flows.</p>
-
-  <div class="pricing-row" style="max-width:1100px;grid-template-columns:repeat(4,1fr);gap:18px;">
-    <!-- Free -->
-    <div class="p-card">
-      <div class="p-tier">Free</div>
-      <div class="p-price" style="font-size:2rem;">$0</div>
-      <p class="p-desc">Try TunaMat with one flow — no credit card needed.</p>
-      <ul class="p-features">
-        <li><span class="check">✓</span> 1 flow (limited)</li>
-        <li><span class="check">✓</span> 272+ movement library</li>
-        <li><span class="check">✓</span> Flow builder &amp; play mode</li>
-        <li><span class="check">✓</span> Muscle group analysis</li>
-      </ul>
-      <button class="p-btn outline">Get Started</button>
-    </div>
-
-    <!-- Monthly -->
-    <div class="p-card">
-      <div class="p-tier">Premium Monthly</div>
-      <div class="p-price" style="font-size:2rem;">$7.99 <span class="period">/ mo</span></div>
-      <p class="p-desc">Full access, billed monthly. Cancel anytime.</p>
-      <ul class="p-features">
-        <li><span class="check">✓</span> Everything in Free</li>
-        <li><span class="check">✓</span> Unlimited flows</li>
-        <li><span class="check">✓</span> Full marketplace access</li>
-        <li><span class="check">✓</span> Flow duplication</li>
-      </ul>
-      <button class="p-btn outline">Subscribe</button>
-    </div>
-
-    <!-- Annual -->
-    <div class="p-card featured">
-      <div class="p-tier">Premium Annual</div>
-      <div class="p-price" style="font-size:2rem;">$5.99 <span class="period">/ mo</span></div>
-      <p class="p-desc">Best value — billed annually at $71.88/yr. Save 25%.</p>
-      <ul class="p-features">
-        <li><span class="check">✓</span> Everything in Free</li>
-        <li><span class="check">✓</span> Unlimited flows</li>
-        <li><span class="check">✓</span> Full marketplace access</li>
-        <li><span class="check">✓</span> Flow duplication</li>
-      </ul>
-      <button class="p-btn filled">Subscribe &amp; Save</button>
-    </div>
-
-    <!-- Lifetime -->
-    <div class="p-card" style="border-color:rgba(34,211,238,0.25);">
-      <div class="p-tier" style="color:var(--cyan);">Lifetime Deal</div>
-      <div class="p-price" style="font-size:2rem;">$199 <span class="period">once</span></div>
-      <p class="p-desc">Pay once, own it forever. For early believers.</p>
-      <ul class="p-features">
-        <li><span class="check">✓</span> Everything in Premium</li>
-        <li><span class="check">✓</span> Lifetime access</li>
-        <li><span class="check">✓</span> All future updates</li>
-        <li><span class="check">✓</span> Founding member badge</li>
-      </ul>
-      <button class="p-btn outline" style="border-color:rgba(34,211,238,0.25);color:var(--cyan);">Get Lifetime Access</button>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ QUOTE ═══════ -->
-<div class="quote-section">
-  <div class="quote-mark">"</div>
-  <p class="quote-text">Built by pilates instructors, for pilates instructors. We obsess over the details so you can focus on your class.</p>
-  <p class="quote-attr">— The TunaMat Team</p>
 </div>
-
-<!-- ═══════ FAQ ═══════ -->
-<section id="faq">
-  <div class="sec-label">FAQ</div>
-  <div class="sec-title">Questions? We've got answers.</div>
-  <p class="sec-desc"></p>
-
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q">Is TunaMat free to use? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Yes! The free tier gives you 1 flow with full access to the 272+ movement library, flow builder, play mode, and muscle group analysis. No credit card required.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">What devices does TunaMat support? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">TunaMat is a native iOS app available on iPhone running iOS 17 or later. iPad and web support are on the roadmap.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Do I need a Spotify account? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">No. TunaMat works with any public Spotify playlist URL — no Spotify login required. You can paste a link and we'll pull in song titles, artists, and BPM data for your segments.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Can I create my own movements? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Absolutely. Create custom movements with the same rich metadata as built-in ones — muscle groups, movement patterns, equipment, pacing presets. They sync across your devices automatically.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Is my data safe offline? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Yes. TunaMat caches all your data locally so the app works without internet. When you reconnect, changes sync to the cloud automatically.</div></div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════ FOOTER ═══════ -->
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-brand">🐟 Tuna Athletics</div>
-      <p class="footer-tagline">The all-in-one class planning app for mat pilates instructors.</p>
+      <div class="footer-brand">Tuna Athletics</div>
+      <p class="footer-tagline">Class planning apps for group fitness instructors. Plan. Build. Flow.</p>
     </div>
     <div class="footer-links">
       <div class="footer-col">
-        <h4>Product</h4>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <h4>Products</h4>
+        <a href="/tunamat">TunaMat</a>
+        <a href="/app">Web App</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="#">Blog</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="mailto:hello@tunaathletics.com">Contact</a>
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
@@ -1618,21 +908,11 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    © 2026 Tuna Athletics. All rights reserved.
+    &copy; 2026 Tuna Athletics. All rights reserved.
   </div>
 </footer>
 
 <script>
-// FAQ accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
-  });
-});
-
 // Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
@@ -1661,7 +941,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.f-card, .s-card, .step, .p-card, .faq-item').forEach(el => {
+document.querySelectorAll('.f-card, .app-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
