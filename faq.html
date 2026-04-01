@@ -252,6 +252,96 @@ footer {
 .footer-col a:hover { color: #fff; }
 .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.04); text-align: center; font-size: 0.8rem; color: var(--text-muted); }
 
+/* ═══════ CONTACT FORM ═══════ */
+.contact-section {
+  position: relative; z-index: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.contact-section p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  transition: border-color 0.25s;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(255,255,255,0.18);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.contact-form textarea {
+  min-height: 120px;
+}
+
+.contact-form button {
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: none;
+  background: #fff;
+  color: #09090f;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+  align-self: flex-start;
+}
+
+.contact-form button:hover {
+  background: #e0e0e4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.06);
+}
+
+.contact-thanks {
+  display: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.15);
+  color: #34d399;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
 /* ═══════ ANIMATIONS ═══════ */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -267,6 +357,7 @@ footer {
   .hero { padding: 110px 20px 20px; }
   .hero h1 { font-size: 2rem; }
   .faq-section { padding: 0 20px 60px; margin-top: 30px; }
+  .contact-section { padding: 0 20px 60px; }
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
 }
@@ -274,6 +365,7 @@ footer {
 @media (max-width: 560px) {
   .hero h1 { font-size: 1.7rem; }
   .faq-section { padding: 0 16px 40px; }
+  .contact-section { padding: 0 16px 40px; }
   .faq-q { font-size: 0.88rem; padding: 16px 18px; }
   .faq-a-inner { padding: 0 18px 16px; font-size: 0.85rem; }
 }
@@ -336,6 +428,19 @@ footer {
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="contact-section">
+  <h2>Contact Us</h2>
+  <p>Have a question not covered above? Drop us a message.</p>
+  <form class="contact-form" id="contactForm">
+    <input type="text" id="contactName" placeholder="Your name" required>
+    <input type="email" id="contactEmail" placeholder="Your email" required>
+    <textarea id="contactMessage" placeholder="Your message..." required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <div class="contact-thanks" id="contactThanks">Message sent! We'll get back to you soon.</div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -382,6 +487,22 @@ function closeMenu() {
 window.addEventListener('scroll', () => {
   document.querySelector('nav').style.background =
     window.scrollY > 60 ? 'rgba(9,9,15,0.92)' : 'rgba(9,9,15,0.8)';
+});
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const message = document.getElementById('contactMessage').value.trim();
+  if (!name || !email || !message) return;
+
+  window.location.href = 'mailto:contact@tunaathletics.com?subject=' +
+    encodeURIComponent('Contact from ' + name) +
+    '&body=' + encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message);
+
+  this.style.display = 'none';
+  document.getElementById('contactThanks').style.display = 'block';
 });
 
 // FAQ accordion
