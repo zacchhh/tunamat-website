@@ -138,11 +138,14 @@ nav {
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 14px 28px; border-radius: 50px;
-  background: transparent; color: var(--text-secondary);
+  background: rgba(255,255,255,0.03); color: var(--text-secondary);
   font-size: 0.95rem; font-weight: 500;
-  text-decoration: none; border: 1px solid var(--border); transition: all 0.3s;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 16px rgba(255,255,255,0.03);
+  transition: all 0.3s;
 }
-.btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+.btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); box-shadow: 0 0 24px rgba(255,255,255,0.06); }
 
 /* ═══════ 3-PHONE SHOWCASE ═══════ */
 .phones-showcase {
@@ -363,15 +366,26 @@ nav {
 }
 .phone-detail-btn.mat {
   color: var(--mat-purple-light);
-  border-color: rgba(140,92,245,0.3);
+  border-color: rgba(140,92,245,0.35);
+  box-shadow: 0 0 12px rgba(140,92,245,0.08);
 }
 .phone-detail-btn.mat:hover {
-  background: rgba(140,92,245,0.1);
-  border-color: rgba(140,92,245,0.5);
+  background: rgba(140,92,245,0.12);
+  border-color: rgba(140,92,245,0.55);
+  box-shadow: 0 0 20px rgba(140,92,245,0.15);
 }
 .phone-detail-btn.mat.toggled {
   background: rgba(140,92,245,0.15);
-  border-color: rgba(140,92,245,0.5);
+  border-color: rgba(140,92,245,0.55);
+  box-shadow: 0 0 20px rgba(140,92,245,0.15);
+}
+.phone-detail-btn .toggle-icon {
+  display: inline-block;
+  transition: transform 0.3s;
+  font-size: 0.8rem;
+}
+.phone-detail-btn.toggled .toggle-icon {
+  transform: rotate(90deg);
 }
 .phone-locked-label {
   display: flex; align-items: center; gap: 5px;
@@ -432,6 +446,69 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 .f-card h3 { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
 .f-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
 
+/* ═══════ BLURRED FRONT FACE (coming soon phones) ═══════ */
+.phone-blur-front {
+  display: flex; align-items: center; justify-content: center;
+}
+.phone-blur-bg {
+  position: absolute; inset: 0;
+  border-radius: 34px;
+}
+.phone-blur-text {
+  position: relative; z-index: 2;
+  font-family: 'Sora', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ═══════ HAMBURGER MENU ═══════ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border: none;
+  background: none;
+  z-index: 110;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(9,9,15,0.97);
+  backdrop-filter: blur(20px);
+  z-index: 105;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: 'Sora', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+.mobile-menu a:hover { background: rgba(255,255,255,0.06); }
+
 /* ═══════ FOOTER ═══════ */
 footer {
   position: relative; z-index: 1;
@@ -467,6 +544,8 @@ footer {
 @media (max-width: 768px) {
   nav { padding: 14px 20px; }
   .nav-pills { display: none; }
+  .btn-nav-cta { display: none; }
+  .hamburger { display: flex; }
   section, .hero { padding-left: 20px; padding-right: 20px; }
   .hero h1 { font-size: 2.2rem; }
   .sec-title { font-size: 1.9rem; }
@@ -499,14 +578,25 @@ footer {
     Tuna Athletics
   </a>
   <div class="nav-pills">
+    <a href="/">Home</a>
     <a href="/tunamat">TunaMat</a>
     <a href="/roadmap">Roadmap</a>
-    <a href="/app">Web App</a>
+    <a href="/tunamat#faq">FAQ</a>
   </div>
   <div class="nav-right">
     <a href="/tunamat" class="btn-nav-cta">Download App</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/" onclick="closeMenu()">Home</a>
+  <a href="/tunamat" onclick="closeMenu()">TunaMat</a>
+  <a href="/roadmap" onclick="closeMenu()">Roadmap</a>
+  <a href="/tunamat#faq" onclick="closeMenu()">FAQ</a>
+  <a href="/tunamat" style="margin-top:16px;font-size:1rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">Download App</a>
+</div>
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
@@ -528,62 +618,10 @@ footer {
       <div class="phone-col" data-app="spin">
         <div class="phone-flip coming-soon">
           <div class="phone-flip-inner">
-            <!-- FRONT -->
-            <div class="phone-front">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ps-header">
-                  <span class="ps-back" style="color:var(--spin-blue);">‹ Back</span>
-                  <span class="ps-edit-btn" style="background:var(--spin-blue);">Edit</span>
-                </div>
-                <div class="ps-title">HIIT Ride</div>
-                <div class="ps-action-row">
-                  <div class="ps-fave"><div class="ps-fave-icon">♡</div></div>
-                  <div class="ps-play-btn" style="background:var(--spin-blue);">▶ Play</div>
-                  <div class="ps-analyse-btn" style="background:#2563EB;">📊 Analyse</div>
-                </div>
-                <div class="ps-duration">50m 00s</div>
-                <div class="ps-segment">
-                  <div class="ps-seg-header">
-                    <div class="ps-seg-label" style="color:var(--spin-blue-light);">1. Warm-Up Ride</div>
-                    <span class="ps-seg-time">5:00</span>
-                  </div>
-                  <div class="ps-move">
-                    <div class="ps-move-left">
-                      <span class="ps-move-name">Seated Climb</span>
-                      <span class="ps-move-badge" style="background:rgba(59,130,246,0.15);color:var(--spin-blue-light);">60 RPM</span>
-                    </div>
-                    <div class="ps-move-icon" style="background:rgba(59,130,246,0.12);color:var(--spin-blue-light);">🚴</div>
-                  </div>
-                  <div class="ps-move">
-                    <div class="ps-move-left">
-                      <span class="ps-move-name">Easy Pedal</span>
-                      <span class="ps-move-badge" style="background:rgba(59,130,246,0.15);color:var(--spin-blue-light);">70 RPM</span>
-                    </div>
-                    <div class="ps-move-icon" style="background:rgba(59,130,246,0.12);color:var(--spin-blue-light);">🚴</div>
-                  </div>
-                </div>
-                <div class="ps-segment">
-                  <div class="ps-seg-header">
-                    <div class="ps-seg-label" style="color:#fbbf24;">2. Hill Climb</div>
-                    <span class="ps-seg-time">8:00</span>
-                  </div>
-                  <div class="ps-move">
-                    <div class="ps-move-left">
-                      <span class="ps-move-name">Standing Climb</span>
-                      <span class="ps-move-badge" style="background:rgba(59,130,246,0.15);color:var(--spin-blue-light);">80 RPM</span>
-                    </div>
-                    <div class="ps-move-icon" style="background:rgba(59,130,246,0.12);color:var(--spin-blue-light);">🚴</div>
-                  </div>
-                </div>
-                <div class="ps-tab-bar">
-                  <div class="ps-tab" style="color:var(--spin-blue);"><span class="ps-tab-icon">📋</span>Classes</div>
-                  <div class="ps-tab"><span class="ps-tab-icon">🚴</span>Exercises</div>
-                  <div class="ps-create-btn" style="background:var(--spin-blue);">+</div>
-                  <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
-                  <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
-                </div>
-              </div>
+            <!-- FRONT: blurred accent -->
+            <div class="phone-front phone-blur-front" style="--blur-color:var(--spin-blue);">
+              <div class="phone-blur-bg" style="background:radial-gradient(ellipse at 40% 30%, rgba(59,130,246,0.25) 0%, rgba(59,130,246,0.08) 50%, rgba(9,9,15,0.95) 100%);"></div>
+              <div class="phone-blur-text">COMING SOON</div>
             </div>
             <!-- BACK -->
             <div class="phone-back">
@@ -603,7 +641,7 @@ footer {
 
       <!-- ── TunaMat ── -->
       <div class="phone-col" data-app="mat">
-        <div class="phone-flip" id="mat-flip">
+        <div class="phone-flip" id="mat-flip" onclick="if(!this.classList.contains('flipped'))window.location.href='/tunamat'">
           <div class="phone-flip-inner">
             <!-- FRONT -->
             <div class="phone-front">
@@ -690,10 +728,10 @@ footer {
           </div>
         </div>
         <div class="phone-btn-group">
-          <div class="phone-label" style="color:var(--mat-purple-light);">TunaMat</div>
+          <a href="/tunamat" class="phone-label" style="color:var(--mat-purple-light);text-decoration:none;">TunaMat</a>
           <div class="phone-sub-label">Mat Pilates</div>
-          <button class="phone-detail-btn mat" id="mat-toggle" onclick="toggleMatFlip()">
-            View Details
+          <button class="phone-detail-btn mat" id="mat-toggle" onclick="toggleMatFlip(event)">
+            <span class="toggle-icon">▸</span> View Details
           </button>
         </div>
       </div>
@@ -702,62 +740,10 @@ footer {
       <div class="phone-col" data-app="reformer">
         <div class="phone-flip coming-soon">
           <div class="phone-flip-inner">
-            <!-- FRONT -->
-            <div class="phone-front">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ps-header">
-                  <span class="ps-back" style="color:var(--reformer-pink);">‹ Back</span>
-                  <span class="ps-edit-btn" style="background:var(--reformer-pink);">Edit</span>
-                </div>
-                <div class="ps-title">Reformer Flow</div>
-                <div class="ps-action-row">
-                  <div class="ps-fave"><div class="ps-fave-icon">♡</div></div>
-                  <div class="ps-play-btn" style="background:var(--reformer-pink);">▶ Play</div>
-                  <div class="ps-analyse-btn" style="background:#be185d;">📊 Analyse</div>
-                </div>
-                <div class="ps-duration">55m 00s</div>
-                <div class="ps-segment">
-                  <div class="ps-seg-header">
-                    <div class="ps-seg-label" style="color:var(--reformer-pink-light);">1. Footwork Series</div>
-                    <span class="ps-seg-time">5:00</span>
-                  </div>
-                  <div class="ps-move">
-                    <div class="ps-move-left">
-                      <span class="ps-move-name">Parallel Heels</span>
-                      <span class="ps-move-badge" style="background:rgba(236,72,153,0.15);color:var(--reformer-pink-light);">10 reps</span>
-                    </div>
-                    <div class="ps-move-icon" style="background:rgba(236,72,153,0.12);color:var(--reformer-pink-light);">🤸</div>
-                  </div>
-                  <div class="ps-move">
-                    <div class="ps-move-left">
-                      <span class="ps-move-name">V-Position</span>
-                      <span class="ps-move-badge" style="background:rgba(236,72,153,0.15);color:var(--reformer-pink-light);">10 reps</span>
-                    </div>
-                    <div class="ps-move-icon" style="background:rgba(236,72,153,0.12);color:var(--reformer-pink-light);">🤸</div>
-                  </div>
-                </div>
-                <div class="ps-segment">
-                  <div class="ps-seg-header">
-                    <div class="ps-seg-label" style="color:#fbbf24;">2. Long Stretch</div>
-                    <span class="ps-seg-time">8:00</span>
-                  </div>
-                  <div class="ps-move">
-                    <div class="ps-move-left">
-                      <span class="ps-move-name">Long Stretch</span>
-                      <span class="ps-move-badge" style="background:rgba(236,72,153,0.15);color:var(--reformer-pink-light);">Hold</span>
-                    </div>
-                    <div class="ps-move-icon" style="background:rgba(236,72,153,0.12);color:var(--reformer-pink-light);">🤸</div>
-                  </div>
-                </div>
-                <div class="ps-tab-bar">
-                  <div class="ps-tab" style="color:var(--reformer-pink);"><span class="ps-tab-icon">📋</span>Flows</div>
-                  <div class="ps-tab"><span class="ps-tab-icon">🤸</span>Exercises</div>
-                  <div class="ps-create-btn" style="background:var(--reformer-pink);">+</div>
-                  <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
-                  <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
-                </div>
-              </div>
+            <!-- FRONT: blurred accent -->
+            <div class="phone-front phone-blur-front" style="--blur-color:var(--reformer-pink);">
+              <div class="phone-blur-bg" style="background:radial-gradient(ellipse at 60% 40%, rgba(236,72,153,0.25) 0%, rgba(236,72,153,0.08) 50%, rgba(9,9,15,0.95) 100%);"></div>
+              <div class="phone-blur-text">COMING SOON</div>
             </div>
             <!-- BACK -->
             <div class="phone-back">
@@ -851,12 +837,28 @@ footer {
 
 <script>
 // Toggle TunaMat flip permanently
-function toggleMatFlip() {
+function toggleMatFlip(e) {
+  e.stopPropagation();
   const flip = document.getElementById('mat-flip');
   const btn = document.getElementById('mat-toggle');
   flip.classList.toggle('flipped');
   btn.classList.toggle('toggled');
-  btn.textContent = flip.classList.contains('flipped') ? 'Show App' : 'View Details';
+  const isFlipped = flip.classList.contains('flipped');
+  btn.innerHTML = isFlipped
+    ? '<span class="toggle-icon" style="transform:rotate(90deg)">▸</span> Show App'
+    : '<span class="toggle-icon">▸</span> View Details';
+}
+
+// Hamburger menu
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobile-menu').classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 // Smooth scroll
