@@ -172,13 +172,15 @@ nav {
 
 /* Hot / highly-upvoted phase */
 .phase-node.hot .phase-card {
-  border-color: rgba(251,191,36,0.3);
-  box-shadow: 0 0 24px rgba(251,191,36,0.06);
+  border-color: rgba(251,191,36,0.4);
+  background: rgba(251,191,36,0.04);
+  box-shadow: 0 0 32px rgba(251,191,36,0.1), inset 0 0 40px rgba(251,191,36,0.02);
 }
 
 .phase-node.hot .phase-card:hover {
-  border-color: rgba(251,191,36,0.45);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 28px rgba(251,191,36,0.1);
+  border-color: rgba(251,191,36,0.55);
+  background: rgba(251,191,36,0.07);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 40px rgba(251,191,36,0.15);
 }
 
 .phase-node.hot .phase-card::after {
@@ -186,8 +188,34 @@ nav {
   position: absolute;
   top: -10px;
   right: -6px;
-  font-size: 1.1rem;
-  filter: drop-shadow(0 0 6px rgba(251,191,36,0.4));
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 8px rgba(251,191,36,0.5));
+  animation: fireFloat 2s ease-in-out infinite;
+}
+
+@keyframes fireFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.phase-node.hot .upvote-btn {
+  border-color: rgba(251,191,36,0.35);
+  background: rgba(251,191,36,0.1);
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 0.65rem;
+}
+
+.phase-node.hot .upvote-btn:hover {
+  border-color: rgba(251,191,36,0.5);
+  background: rgba(251,191,36,0.18);
+  color: #fde68a;
+}
+
+.phase-node.hot .upvote-btn.voted {
+  border-color: rgba(251,191,36,0.5);
+  background: rgba(251,191,36,0.2);
+  color: #fde68a;
 }
 
 .phase-label {
@@ -646,9 +674,9 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Creator Profiles</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Reviews</div></div>
         </div>
-        <button class="upvote-btn" data-id="phase-3" data-base="24" onclick="toggleVote(this)">
+        <button class="upvote-btn" data-id="phase-3" data-base="106" onclick="toggleVote(this)">
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
-          <span class="vote-count">24</span>
+          <span class="vote-count">106</span>
         </button>
       </div>
     </div>
