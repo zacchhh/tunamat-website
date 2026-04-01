@@ -99,7 +99,7 @@ nav {
   line-height: 1.15; margin-bottom: 12px; color: #fff;
   opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
 }
-.hero h1 .accent {
+.hero h1 .accent, .community-header h2 .accent {
   background: linear-gradient(135deg, #ffffff 0%, #b0b0b8 50%, #d0d0d8 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
@@ -127,7 +127,6 @@ nav {
   position: relative;
 }
 
-/* ═══════ PHASE NODE ═══════ */
 .phase-node {
   position: relative;
   opacity: 0;
@@ -149,6 +148,8 @@ nav {
   position: relative;
   transition: all 0.35s ease;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .phase-card:hover {
@@ -169,7 +170,6 @@ nav {
   box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.03);
 }
 
-/* ═══════ PHASE LABEL & TITLE ═══════ */
 .phase-label {
   font-size: 0.58rem;
   text-transform: uppercase;
@@ -195,6 +195,7 @@ nav {
   align-items: flex-start;
   position: relative;
   padding: 0 2px;
+  flex: 1;
 }
 
 .phase-track::before {
@@ -256,9 +257,45 @@ nav {
 .phase-card:hover .stop-label { color: var(--text-secondary); }
 .phase-node.current .stop-label { color: var(--text-secondary); }
 
-/* ═══════ FLOW CONNECTORS ═══════ */
+/* ═══════ UPVOTE BUTTON ═══════ */
+.upvote-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 12px;
+}
 
-/* Right arrows between adjacent phases (not at row ends) */
+.upvote-btn:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-secondary);
+}
+
+.upvote-btn.voted {
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.upvote-btn svg {
+  transition: transform 0.2s;
+}
+
+.upvote-btn.voted svg {
+  transform: translateY(-1px);
+}
+
+/* ═══════ FLOW CONNECTORS ═══════ */
 [data-phase="1"]::after,
 [data-phase="2"]::after,
 [data-phase="3"]::after,
@@ -274,6 +311,150 @@ nav {
   border-bottom: 1.5px solid rgba(255,255,255,0.12);
   transform: translateY(-50%) rotate(-45deg);
   z-index: 2;
+}
+
+/* ═══════ COMMUNITY SECTION ═══════ */
+.community {
+  position: relative; z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.community-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.community-header h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.community-header p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Suggestions grid */
+.suggestions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.suggestion-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.25s;
+}
+
+.suggestion-card:hover {
+  background: rgba(255,255,255,0.035);
+  border-color: var(--border-hover);
+}
+
+.suggestion-card .upvote-btn {
+  margin-top: 0;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 1px;
+  padding: 6px 8px;
+  min-width: 38px;
+  justify-content: center;
+}
+
+.suggestion-text {
+  font-size: 0.82rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.suggestion-author {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Suggest form */
+.suggest-form-wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.suggest-form-wrap h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.suggest-form {
+  display: flex;
+  gap: 10px;
+}
+
+.suggest-form input {
+  flex: 1;
+  padding: 10px 18px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  transition: border-color 0.25s;
+}
+
+.suggest-form input:focus {
+  border-color: rgba(255,255,255,0.18);
+}
+
+.suggest-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.suggest-form button {
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: none;
+  background: #fff;
+  color: #09090f;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.suggest-form button:hover {
+  background: #e0e0e4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.06);
+}
+
+.suggest-thanks {
+  display: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.15);
+  color: #34d399;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
 /* ═══════ FOOTER ═══════ */
@@ -337,11 +518,8 @@ footer {
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 1000px) {
-  .phase-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .phase-grid { grid-template-columns: repeat(2, 1fr); }
 
-  /* Hide arrows at end of 2-col rows */
   [data-phase="2"]::after,
   [data-phase="4"]::after,
   [data-phase="6"]::after,
@@ -356,21 +534,23 @@ footer {
   .hero { padding: 110px 20px 20px; }
   .hero h1 { font-size: 2rem; }
   .roadmap { padding: 0 20px 60px; margin-top: 30px; }
+  .community { padding: 0 20px 80px; }
+  .suggestions-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
 }
 
 @media (max-width: 600px) {
-  .phase-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .phase-grid { grid-template-columns: 1fr; }
   .phase-node::after { display: none !important; }
-
   .hero h1 { font-size: 1.7rem; }
   .roadmap { padding: 0 16px 40px; }
+  .community { padding: 0 16px 60px; }
   .phase-card { padding: 14px 10px 12px; }
   .stop-label { font-size: 0.5rem; }
+  .suggest-form { flex-direction: column; }
+  .suggest-form button { width: 100%; }
+  .community-header h2 { font-size: 1.3rem; }
 }
 </style>
 </head>
@@ -412,6 +592,10 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Web App</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Core Features</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-1" data-base="47" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">47</span>
+        </button>
       </div>
     </div>
 
@@ -425,6 +609,10 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">UX Polish</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Performance</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-2" data-base="31" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">31</span>
+        </button>
       </div>
     </div>
 
@@ -438,6 +626,10 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Creator Profiles</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Reviews</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-3" data-base="24" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">24</span>
+        </button>
       </div>
     </div>
 
@@ -450,6 +642,10 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Colour Profiles</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Push Notifs</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-4" data-base="19" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">19</span>
+        </button>
       </div>
     </div>
 
@@ -463,6 +659,10 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Smart Suggest</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Balance AI</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-5" data-base="38" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">38</span>
+        </button>
       </div>
     </div>
 
@@ -475,6 +675,10 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Activity Feed</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Shared Flows</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-6" data-base="15" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">15</span>
+        </button>
       </div>
     </div>
 
@@ -487,6 +691,10 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Apple Watch</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Multi-Column</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-7" data-base="22" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">22</span>
+        </button>
       </div>
     </div>
 
@@ -499,9 +707,88 @@ footer {
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">TunaReformer</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Shared Accounts</div></div>
         </div>
+        <button class="upvote-btn" data-id="phase-8" data-base="28" onclick="toggleVote(this)">
+          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+          <span class="vote-count">28</span>
+        </button>
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- COMMUNITY SUGGESTIONS -->
+<section class="community">
+  <div class="community-header">
+    <h2>Community <span class="accent">Suggestions</span></h2>
+    <p>Vote on ideas from other instructors, or suggest your own.</p>
+  </div>
+
+  <div class="suggestions-grid">
+
+    <div class="suggestion-card">
+      <button class="upvote-btn" data-id="sug-1" data-base="52" onclick="toggleVote(this)">
+        <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+        <span class="vote-count">52</span>
+      </button>
+      <div class="suggestion-text">Android version of TunaMat</div>
+      <div class="suggestion-author">@mike_j</div>
+    </div>
+
+    <div class="suggestion-card">
+      <button class="upvote-btn" data-id="sug-2" data-base="41" onclick="toggleVote(this)">
+        <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+        <span class="vote-count">41</span>
+      </button>
+      <div class="suggestion-text">Export flows as PDF handouts</div>
+      <div class="suggestion-author">@coach_riley</div>
+    </div>
+
+    <div class="suggestion-card">
+      <button class="upvote-btn" data-id="sug-3" data-base="33" onclick="toggleVote(this)">
+        <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+        <span class="vote-count">33</span>
+      </button>
+      <div class="suggestion-text">Timer presets for HIIT-style intervals</div>
+      <div class="suggestion-author">@lisa_p</div>
+    </div>
+
+    <div class="suggestion-card">
+      <button class="upvote-btn" data-id="sug-4" data-base="27" onclick="toggleVote(this)">
+        <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+        <span class="vote-count">27</span>
+      </button>
+      <div class="suggestion-text">Integration with Apple Music</div>
+      <div class="suggestion-author">@studioflow</div>
+    </div>
+
+    <div class="suggestion-card">
+      <button class="upvote-btn" data-id="sug-5" data-base="24" onclick="toggleVote(this)">
+        <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+        <span class="vote-count">24</span>
+      </button>
+      <div class="suggestion-text">Reformer-specific movement library</div>
+      <div class="suggestion-author">@pilates_pro</div>
+    </div>
+
+    <div class="suggestion-card">
+      <button class="upvote-btn" data-id="sug-6" data-base="19" onclick="toggleVote(this)">
+        <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
+        <span class="vote-count">19</span>
+      </button>
+      <div class="suggestion-text">Multi-language support</div>
+      <div class="suggestion-author">@global_flow</div>
+    </div>
+
+  </div>
+
+  <div class="suggest-form-wrap">
+    <h3>Have an idea?</h3>
+    <form class="suggest-form" id="suggestForm">
+      <input type="text" id="suggestInput" placeholder="I'd love to see..." required>
+      <button type="submit">Send Suggestion</button>
+    </form>
+    <div class="suggest-thanks" id="suggestThanks">Thanks! We'll review your suggestion.</div>
   </div>
 </section>
 
@@ -534,19 +821,67 @@ footer {
 </footer>
 
 <script>
+// Nav scroll
 window.addEventListener('scroll', () => {
   document.querySelector('nav').style.background =
     window.scrollY > 60 ? 'rgba(9,9,15,0.92)' : 'rgba(9,9,15,0.8)';
 });
 
+// Phase card reveal
 function revealCards() {
-  const cards = document.querySelectorAll('.phase-node');
-  cards.forEach((card, i) => {
+  document.querySelectorAll('.phase-node').forEach((card, i) => {
     setTimeout(() => card.classList.add('reveal'), 250 + i * 100);
   });
 }
 
 window.addEventListener('load', revealCards);
+
+// ═══════ VOTING ═══════
+function toggleVote(btn) {
+  const id = btn.dataset.id;
+  const base = parseInt(btn.dataset.base);
+  const votes = JSON.parse(localStorage.getItem('roadmap_votes') || '{}');
+
+  if (votes[id]) {
+    delete votes[id];
+    btn.classList.remove('voted');
+  } else {
+    votes[id] = true;
+    btn.classList.add('voted');
+  }
+
+  localStorage.setItem('roadmap_votes', JSON.stringify(votes));
+  btn.querySelector('.vote-count').textContent = base + (votes[id] ? 1 : 0);
+}
+
+// Restore votes on load
+(function restoreVotes() {
+  const votes = JSON.parse(localStorage.getItem('roadmap_votes') || '{}');
+  document.querySelectorAll('.upvote-btn').forEach(btn => {
+    const id = btn.dataset.id;
+    const base = parseInt(btn.dataset.base);
+    if (votes[id]) {
+      btn.classList.add('voted');
+      btn.querySelector('.vote-count').textContent = base + 1;
+    }
+  });
+})();
+
+// ═══════ SUGGEST FORM ═══════
+document.getElementById('suggestForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const text = document.getElementById('suggestInput').value.trim();
+  if (!text) return;
+
+  // Open mailto with pre-filled suggestion
+  window.location.href = 'mailto:hello@tunaathletics.com?subject=' +
+    encodeURIComponent('Feature Suggestion — Roadmap') +
+    '&body=' + encodeURIComponent(text);
+
+  // Show thanks
+  this.style.display = 'none';
+  document.getElementById('suggestThanks').style.display = 'block';
+});
 </script>
 
 </body>
