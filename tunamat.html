@@ -372,40 +372,10 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 .m-bpm-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--purple-light); font-weight: 600; margin-bottom: 4px; }
 .m-bpm-svg { width: 100%; height: auto; }
 
-/* Node graph mini */
-.m-graph { position: relative; min-height: 260px; }
-.m-graph svg.graph-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-.m-graph svg.graph-lines line { stroke: rgba(124,92,252,0.25); stroke-width: 1.2; }
-.m-graph svg.graph-lines circle { fill: rgba(124,92,252,0.4); }
-.m-pos-list { position: absolute; left: 0; top: 8px; display: flex; flex-direction: column; gap: 6px; z-index: 1; }
-.m-pos {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 5px 10px; border-radius: 8px; width: 100px;
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  font-size: 0.58rem; color: var(--text-secondary);
-}
-.m-pos.active { border-color: rgba(124,92,252,0.4); color: var(--purple-light); }
-.m-pos .cnt { font-weight: 700; font-size: 0.55rem; color: var(--purple-light); }
-.m-node {
-  position: absolute; z-index: 1;
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px; padding: 8px 10px; min-width: 110px;
-}
-.m-node.highlight { border-color: rgba(251,191,36,0.4); }
-.m-node-name { font-size: 0.68rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
-.m-node.highlight .m-node-name { color: #fbbf24; }
-.m-node-btns { display: flex; gap: 4px; }
-.m-node-btn {
-  font-size: 0.48rem; padding: 2px 7px; border-radius: 4px; font-weight: 600;
-  background: rgba(34,184,160,0.1); color: var(--teal); border: 1px solid rgba(34,184,160,0.2);
-}
-.m-linked {
-  position: absolute; z-index: 1;
-  font-size: 0.5rem; font-weight: 600; color: var(--teal);
-  background: rgba(34,184,160,0.08); border: 1px solid rgba(34,184,160,0.15);
-  border-radius: 6px; padding: 3px 8px; display: flex; align-items: center; gap: 3px;
-}
-.m-linked .link-icon { font-size: 0.55rem; }
+/* Node tree mini */
+.m-tree { display: flex; align-items: center; justify-content: center; padding: 10px 0; }
+.m-tree svg { width: 100%; height: auto; }
+@keyframes treePulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
 
 /* ═══════ PRICING ═══════ */
 .pricing-row {
@@ -815,65 +785,73 @@ footer {
       </div>
     </div>
 
-    <!-- Movement Graph -->
+    <!-- Movement Tree -->
     <div class="s-card">
-      <h3>Movement Graph</h3>
-      <p>Professionally vetted and linked — TunaMat's graphing algorithm maps how movements connect so your flows build naturally.</p>
+      <h3>Extensive Movement Library</h3>
+      <p>272+ professionally vetted movements, linked by our graphing algorithm so flows build naturally. Always growing and improving — just like you.</p>
       <div class="s-preview">
-        <div class="m-graph">
-          <svg class="graph-lines" viewBox="0 0 340 260" preserveAspectRatio="none">
-            <!-- Plank → Plank Hold -->
-            <line x1="105" y1="92" x2="150" y2="60"/>
-            <circle cx="105" cy="92" r="2.5"/>
-            <!-- Plank → Forearm Plank -->
-            <line x1="105" y1="92" x2="150" y2="16"/>
-            <!-- Plank Hold → Shoulder Taps -->
-            <line x1="210" y1="60" x2="210" y2="140"/><circle cx="210" cy="100" r="2"/>
-            <!-- Plank Hold → Mountain Climbers -->
-            <line x1="230" y1="60" x2="270" y2="140"/>
-            <!-- Forearm Plank → Plank Hold -->
-            <line x1="210" y1="30" x2="210" y2="44"/><circle cx="210" cy="37" r="2"/>
-            <!-- Shoulder Taps → down -->
-            <line x1="190" y1="168" x2="190" y2="200"/><circle cx="190" cy="184" r="2"/>
-            <!-- Supine side link -->
-            <line x1="105" y1="155" x2="150" y2="200"/>
+        <div class="m-tree">
+          <svg viewBox="0 0 320 230">
+            <!-- Lines: level 0→1 -->
+            <line x1="160" y1="24" x2="65" y2="68" stroke="rgba(124,92,252,0.2)" stroke-width="1.2"/>
+            <line x1="160" y1="24" x2="160" y2="68" stroke="rgba(124,92,252,0.2)" stroke-width="1.2"/>
+            <line x1="160" y1="24" x2="255" y2="68" stroke="rgba(124,92,252,0.2)" stroke-width="1.2"/>
+            <!-- Lines: level 1→2 -->
+            <line x1="65" y1="76" x2="30" y2="125" stroke="rgba(124,92,252,0.15)" stroke-width="1"/>
+            <line x1="65" y1="76" x2="90" y2="125" stroke="rgba(124,92,252,0.15)" stroke-width="1"/>
+            <line x1="160" y1="76" x2="140" y2="125" stroke="rgba(124,92,252,0.15)" stroke-width="1"/>
+            <line x1="160" y1="76" x2="190" y2="125" stroke="rgba(124,92,252,0.15)" stroke-width="1"/>
+            <line x1="255" y1="76" x2="230" y2="125" stroke="rgba(124,92,252,0.15)" stroke-width="1"/>
+            <line x1="255" y1="76" x2="280" y2="125" stroke="rgba(124,92,252,0.15)" stroke-width="1"/>
+            <!-- Lines: level 2→3 -->
+            <line x1="30" y1="133" x2="18" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="30" y1="133" x2="48" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="90" y1="133" x2="80" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="140" y1="133" x2="120" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="140" y1="133" x2="152" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="190" y1="133" x2="182" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="190" y1="133" x2="210" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="230" y1="133" x2="240" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="280" y1="133" x2="270" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <line x1="280" y1="133" x2="298" y2="178" stroke="rgba(124,92,252,0.1)" stroke-width="0.8"/>
+            <!-- Level 3→4 (a few) -->
+            <line x1="48" y1="185" x2="55" y2="218" stroke="rgba(124,92,252,0.07)" stroke-width="0.7"/>
+            <line x1="120" y1="185" x2="112" y2="218" stroke="rgba(124,92,252,0.07)" stroke-width="0.7"/>
+            <line x1="120" y1="185" x2="132" y2="218" stroke="rgba(124,92,252,0.07)" stroke-width="0.7"/>
+            <line x1="210" y1="185" x2="205" y2="218" stroke="rgba(124,92,252,0.07)" stroke-width="0.7"/>
+            <line x1="270" y1="185" x2="264" y2="218" stroke="rgba(124,92,252,0.07)" stroke-width="0.7"/>
+
+            <!-- Level 0: root -->
+            <circle cx="160" cy="20" r="8" fill="#7c5cfc" opacity="0.9" style="animation:treePulse 3s ease-in-out infinite"/>
+            <!-- Level 1 -->
+            <circle cx="65" cy="72" r="6" fill="#7c5cfc" opacity="0.75"/>
+            <circle cx="160" cy="72" r="6" fill="#a855f7" opacity="0.75"/>
+            <circle cx="255" cy="72" r="6" fill="#7c5cfc" opacity="0.75"/>
+            <!-- Level 2 -->
+            <circle cx="30" cy="129" r="4.5" fill="#a78bfa" opacity="0.6"/>
+            <circle cx="90" cy="129" r="4.5" fill="#7c5cfc" opacity="0.6"/>
+            <circle cx="140" cy="129" r="4.5" fill="#a78bfa" opacity="0.6"/>
+            <circle cx="190" cy="129" r="4.5" fill="#a855f7" opacity="0.6"/>
+            <circle cx="230" cy="129" r="4.5" fill="#7c5cfc" opacity="0.6"/>
+            <circle cx="280" cy="129" r="4.5" fill="#a78bfa" opacity="0.6"/>
+            <!-- Level 3 -->
+            <circle cx="18" cy="182" r="3" fill="#a78bfa" opacity="0.4"/>
+            <circle cx="48" cy="182" r="3" fill="#7c5cfc" opacity="0.4"/>
+            <circle cx="80" cy="182" r="3" fill="#a78bfa" opacity="0.4"/>
+            <circle cx="120" cy="182" r="3" fill="#a855f7" opacity="0.4"/>
+            <circle cx="152" cy="182" r="3" fill="#7c5cfc" opacity="0.4"/>
+            <circle cx="182" cy="182" r="3" fill="#a78bfa" opacity="0.4"/>
+            <circle cx="210" cy="182" r="3" fill="#7c5cfc" opacity="0.4"/>
+            <circle cx="240" cy="182" r="3" fill="#a855f7" opacity="0.4"/>
+            <circle cx="270" cy="182" r="3" fill="#a78bfa" opacity="0.4"/>
+            <circle cx="298" cy="182" r="3" fill="#7c5cfc" opacity="0.4"/>
+            <!-- Level 4 (fading out) -->
+            <circle cx="55" cy="220" r="2.2" fill="#a78bfa" opacity="0.22"/>
+            <circle cx="112" cy="220" r="2.2" fill="#7c5cfc" opacity="0.22"/>
+            <circle cx="132" cy="220" r="2.2" fill="#a78bfa" opacity="0.22"/>
+            <circle cx="205" cy="220" r="2.2" fill="#a855f7" opacity="0.22"/>
+            <circle cx="264" cy="220" r="2.2" fill="#7c5cfc" opacity="0.22"/>
           </svg>
-
-          <!-- Position list -->
-          <div class="m-pos-list">
-            <div class="m-pos">Kneeling <span class="cnt">15</span></div>
-            <div class="m-pos active">Plank <span class="cnt">23</span></div>
-            <div class="m-pos">Prone <span class="cnt">27</span></div>
-            <div class="m-pos">Supine <span class="cnt">68</span></div>
-            <div class="m-pos">Standing <span class="cnt">71</span></div>
-          </div>
-
-          <!-- Nodes -->
-          <div class="m-node" style="top:4px;left:140px;">
-            <div class="m-node-name">Forearm Plank Hold</div>
-            <div class="m-node-btns"><span class="m-node-btn">View Details</span><span class="m-node-btn">+ Flow</span></div>
-          </div>
-          <div class="m-node highlight" style="top:44px;left:140px;">
-            <div class="m-node-name">Plank Hold</div>
-            <div class="m-node-btns"><span class="m-node-btn">View Details</span><span class="m-node-btn">+ Flow</span></div>
-          </div>
-          <div class="m-node" style="top:128px;left:125px;">
-            <div class="m-node-name">Shoulder Taps</div>
-            <div class="m-node-btns"><span class="m-node-btn">View Details</span><span class="m-node-btn">+ Flow</span></div>
-          </div>
-          <div class="m-node" style="top:128px;left:240px;">
-            <div class="m-node-name">Mountain Climbers</div>
-            <div class="m-node-btns"><span class="m-node-btn">View Details</span><span class="m-node-btn">+ Flow</span></div>
-          </div>
-          <div class="m-node" style="top:196px;left:125px;">
-            <div class="m-node-name">Dead Bug</div>
-            <div class="m-node-btns"><span class="m-node-btn">View Details</span><span class="m-node-btn">+ Flow</span></div>
-          </div>
-
-          <!-- Linked badges -->
-          <div class="m-linked" style="top:10px;right:4px;"><span class="link-icon">🔗</span> Linked 2</div>
-          <div class="m-linked" style="top:52px;right:4px;"><span class="link-icon">🔗</span> Linked 6</div>
-          <div class="m-linked" style="top:136px;right:4px;"><span class="link-icon">🔗</span> Linked 3</div>
         </div>
       </div>
     </div>
