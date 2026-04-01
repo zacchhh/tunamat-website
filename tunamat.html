@@ -236,9 +236,10 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 }
 .marquee-track {
   display: flex; width: max-content;
-  animation: marquee 50s linear infinite;
+  cursor: grab; user-select: none; -webkit-user-select: none;
+  will-change: transform;
 }
-.marquee-track:hover { animation-play-state: paused; }
+.marquee-track.dragging { cursor: grabbing; }
 .marquee-set {
   display: flex; gap: 28px; flex-shrink: 0; padding-right: 28px;
 }
@@ -274,10 +275,6 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 .phone-label {
   font-size: 0.78rem; font-weight: 600; color: var(--text-secondary);
   margin-top: 14px; font-family: 'Sora', sans-serif;
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 /* ═══════ SHOWCASE ═══════ */
@@ -995,6 +992,50 @@ document.querySelectorAll('.marquee-container, .s-card, .p-card, .faq-item').for
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   observer.observe(el);
 });
+
+// ═══════ MARQUEE: auto-scroll + drag ═══════
+(function() {
+  const track = document.querySelector('.marquee-track');
+  const setEl = document.querySelector('.marquee-set');
+  let pos = 0, speed = 0.5, dragging = false, startX = 0, startPos = 0, setW;
+
+  function measure() { setW = setEl.offsetWidth; }
+  function wrap() { if (pos <= -setW) pos += setW; if (pos > 0) pos -= setW; }
+
+  function loop() {
+    if (!dragging) pos -= speed;
+    wrap();
+    track.style.transform = 'translateX(' + pos + 'px)';
+    requestAnimationFrame(loop);
+  }
+
+  // Mouse
+  track.addEventListener('mousedown', function(e) {
+    dragging = true; startX = e.clientX; startPos = pos;
+    track.classList.add('dragging'); e.preventDefault();
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    pos = startPos + (e.clientX - startX);
+  });
+  window.addEventListener('mouseup', function() {
+    if (dragging) { dragging = false; track.classList.remove('dragging'); }
+  });
+
+  // Touch
+  track.addEventListener('touchstart', function(e) {
+    dragging = true; startX = e.touches[0].clientX; startPos = pos;
+  }, { passive: true });
+  track.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    pos = startPos + (e.touches[0].clientX - startX);
+  }, { passive: true });
+  track.addEventListener('touchend', function() { dragging = false; });
+
+  measure();
+  window.addEventListener('resize', measure);
+  requestAnimationFrame(loop);
+})();
 </script>
 
 </body>
