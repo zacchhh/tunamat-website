@@ -10,25 +10,24 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg-deep: #08081a;
-  --bg-surface: #0e0e28;
-  --bg-card: #141436;
-  --bg-card-hover: #1a1a48;
-  --purple-primary: #7c5cfc;
-  --purple-light: #a78bfa;
-  --purple-glow: rgba(124,92,252,0.25);
-  --cyan: #22d3ee;
-  --teal: #22b8a0;
-  --pink: #f472b6;
-  --magenta: #c026d3;
-  --orange: #FF6B4A;
-  --text-primary: #eeedf5;
-  --text-secondary: #9593ad;
-  --text-muted: #5f5d78;
-  --border: rgba(124,92,252,0.12);
-  --border-hover: rgba(124,92,252,0.3);
-  --gradient-main: linear-gradient(135deg, #7c5cfc 0%, #a855f7 50%, #ec4899 100%);
+  --bg-deep: #09090f;
+  --bg-surface: #111115;
+  --bg-card: #161619;
+  --bg-card-hover: #1c1c20;
+  --text-primary: #f0f0f2;
+  --text-secondary: #9898a0;
+  --text-muted: #58585f;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
   --radius: 18px;
+
+  /* App-specific accent colors */
+  --mat-purple: #8C5CF5;
+  --mat-purple-light: #a78bfa;
+  --spin-blue: #3B82F6;
+  --spin-blue-light: #60a5fa;
+  --reformer-pink: #EC4899;
+  --reformer-pink-light: #f472b6;
 }
 
 html { scroll-behavior: smooth; }
@@ -45,20 +44,20 @@ body {
 /* ═══════ AMBIENT GLOWS ═══════ */
 .glow-orb {
   position: fixed; border-radius: 50%;
-  pointer-events: none; z-index: 0; filter: blur(80px);
+  pointer-events: none; z-index: 0; filter: blur(100px);
 }
-.glow-orb.one { width: 600px; height: 600px; top: -200px; left: -100px; background: rgba(124,92,252,0.08); }
-.glow-orb.two { width: 500px; height: 500px; top: 40%; right: -150px; background: rgba(168,85,247,0.06); }
-.glow-orb.three { width: 450px; height: 450px; bottom: -100px; left: 30%; background: rgba(236,72,153,0.05); }
+.glow-orb.one { width: 600px; height: 600px; top: -200px; left: -100px; background: rgba(255,255,255,0.02); }
+.glow-orb.two { width: 500px; height: 500px; top: 40%; right: -150px; background: rgba(255,255,255,0.015); }
+.glow-orb.three { width: 450px; height: 450px; bottom: -100px; left: 30%; background: rgba(255,255,255,0.01); }
 
 /* ═══════ NAV ═══════ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 10px 48px;
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(8,8,26,0.75);
+  background: rgba(9,9,15,0.8);
   backdrop-filter: blur(24px) saturate(1.4);
-  border-bottom: 1px solid rgba(124,92,252,0.06);
+  border-bottom: 1px solid var(--border);
 }
 .nav-brand {
   font-family: 'Sora', sans-serif;
@@ -69,13 +68,13 @@ nav {
 }
 .nav-brand .icon {
   width: 28px; height: 28px; border-radius: 8px;
-  background: var(--gradient-main);
+  background: linear-gradient(135deg, #fff 0%, #c0c0c8 100%);
   display: grid; place-items: center;
-  font-size: 0.6rem; font-weight: 800; color: #fff;
+  font-size: 0.6rem; font-weight: 800; color: #09090f;
 }
 .nav-pills {
   display: flex; gap: 2px;
-  background: rgba(20,20,54,0.8);
+  background: rgba(255,255,255,0.03);
   border: 1px solid var(--border);
   border-radius: 50px; padding: 3px 4px;
 }
@@ -86,22 +85,21 @@ nav {
   transition: all 0.25s;
 }
 .nav-pills a:hover, .nav-pills a.active {
-  color: #fff; background: rgba(124,92,252,0.18);
+  color: #fff; background: rgba(255,255,255,0.08);
 }
 .nav-right { display: flex; align-items: center; gap: 20px; }
 .btn-nav-cta {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 20px; border-radius: 50px;
-  background: var(--purple-primary); color: #fff;
+  background: #fff; color: #09090f;
   font-size: 0.78rem; font-weight: 600;
   text-decoration: none; border: none;
-  box-shadow: 0 4px 20px var(--purple-glow);
   transition: all 0.3s;
 }
 .btn-nav-cta:hover {
-  background: var(--purple-light);
+  background: #e0e0e4;
   transform: translateY(-1px);
-  box-shadow: 0 6px 28px rgba(124,92,252,0.35);
+  box-shadow: 0 6px 28px rgba(255,255,255,0.08);
 }
 
 /* ═══════ HERO ═══════ */
@@ -115,72 +113,59 @@ nav {
   max-width: 1300px; margin: 0 auto; width: 100%;
   display: flex; flex-direction: column; align-items: center; text-align: center;
 }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 18px 6px 8px; border-radius: 50px;
-  background: rgba(124,92,252,0.08);
-  border: 1px solid rgba(124,92,252,0.18);
-  font-size: 0.8rem; font-weight: 500; color: var(--purple-light);
-  margin-bottom: 30px;
-  opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards;
-}
-.hero-badge .dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--purple-primary);
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.5); }
-}
 .hero h1 {
   font-family: 'Sora', sans-serif;
-  font-size: 4.2rem; font-weight: 800;
-  line-height: 1.08; margin-bottom: 24px;
-  opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+  font-size: 3.4rem; font-weight: 500;
+  line-height: 1.12; margin-bottom: 24px;
+  color: #fff;
+  opacity: 0; animation: fadeUp 0.7s 0.15s ease forwards;
 }
-.grad { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero h1 .accent {
+  background: linear-gradient(135deg, #ffffff 0%, #b0b0b8 50%, #d0d0d8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
 .hero .sub {
-  font-size: 1.15rem; color: var(--text-secondary);
-  line-height: 1.75; margin-bottom: 40px; max-width: 600px;
-  opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards;
+  font-size: 1.1rem; color: var(--text-secondary);
+  line-height: 1.75; margin-bottom: 40px; max-width: 580px;
+  opacity: 0; animation: fadeUp 0.7s 0.25s ease forwards;
 }
 .hero-ctas {
   display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
-  opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards;
+  opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards;
 }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 34px; border-radius: 50px;
-  background: var(--gradient-main); color: #fff;
-  font-size: 1rem; font-weight: 600;
+  padding: 14px 30px; border-radius: 50px;
+  background: #fff; color: #09090f;
+  font-size: 0.95rem; font-weight: 600;
   text-decoration: none; border: none; cursor: pointer;
-  box-shadow: 0 6px 32px var(--purple-glow);
   transition: all 0.35s;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 44px rgba(124,92,252,0.4);
+  box-shadow: 0 10px 44px rgba(255,255,255,0.1);
+  background: #e8e8ec;
 }
 .btn-primary .arrow-circle {
-  width: 30px; height: 30px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(0,0,0,0.08);
   display: grid; place-items: center;
   transition: transform 0.3s;
+  color: #09090f;
 }
 .btn-primary:hover .arrow-circle { transform: translateX(3px); }
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 16px 30px; border-radius: 50px;
+  padding: 14px 28px; border-radius: 50px;
   background: transparent; color: var(--text-secondary);
-  font-size: 1rem; font-weight: 500;
+  font-size: 0.95rem; font-weight: 500;
   text-decoration: none;
   border: 1px solid var(--border);
   transition: all 0.3s;
 }
 .btn-ghost:hover {
-  color: #fff; border-color: var(--purple-primary);
-  background: rgba(124,92,252,0.06);
+  color: #fff; border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.04);
 }
 
 /* ═══════ 3-PHONE SHOWCASE ═══════ */
@@ -188,7 +173,7 @@ nav {
   display: flex; justify-content: center; align-items: center;
   margin-top: 70px; perspective: 1400px;
   gap: 0;
-  opacity: 0; animation: fadeUp 0.9s 0.6s ease forwards;
+  opacity: 0; animation: fadeUp 0.9s 0.5s ease forwards;
 }
 .phone-wrap {
   position: relative; transition: transform 0.5s;
@@ -205,9 +190,16 @@ nav {
   transform: rotateY(-18deg) translateX(-30px) scale(0.82);
   z-index: 1;
 }
-.phone-wrap.left .phone { box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 40px rgba(255,107,74,0.06); }
-.phone-wrap.center .phone { box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 80px rgba(124,92,252,0.1); }
-.phone-wrap.right .phone { box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 40px rgba(34,184,160,0.06); }
+.phone-wrap.left .phone { box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.04); }
+.phone-wrap.center .phone {
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(140,92,245,0.06);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.phone-wrap.center:hover .phone {
+  border-color: rgba(140,92,245,0.5);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 80px rgba(140,92,245,0.15), 0 0 0 1px rgba(140,92,245,0.3);
+}
+.phone-wrap.right .phone { box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(236,72,153,0.04); }
 
 @keyframes floatCenter {
   0%,100% { transform: translateY(0); }
@@ -246,7 +238,7 @@ nav {
 }
 
 /* phone inner elements */
-.ps-back { font-size: 0.6rem; color: var(--purple-primary); font-weight: 500; }
+.ps-back { font-size: 0.6rem; font-weight: 500; }
 .ps-edit-btn {
   font-size: 0.52rem; font-weight: 600; color: #fff;
   border-radius: 5px; padding: 2px 8px;
@@ -264,14 +256,14 @@ nav {
   border-radius: 50px; padding: 3px 10px;
   display: flex; align-items: center; gap: 3px;
 }
-.ps-duration { font-size: 0.55rem; color: var(--text-muted); text-align: center; }
+.ps-duration { font-size: 0.55rem; color: #5f5d78; text-align: center; }
 .ps-segment {
   background: rgba(255,255,255,0.03); border-radius: 8px;
   padding: 7px 9px; border: 1px solid rgba(255,255,255,0.05);
 }
 .ps-seg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 .ps-seg-label { font-size: 0.55rem; font-weight: 600; }
-.ps-seg-time { font-size: 0.5rem; color: var(--text-muted); }
+.ps-seg-time { font-size: 0.5rem; color: #5f5d78; }
 .ps-move {
   display: flex; justify-content: space-between; align-items: center;
   padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
@@ -292,8 +284,7 @@ nav {
   display: flex; justify-content: space-around; align-items: center;
   padding: 5px 0 1px; border-top: 1px solid rgba(255,255,255,0.05);
 }
-.ps-tab { display: flex; flex-direction: column; align-items: center; gap: 1px; font-size: 0.4rem; color: var(--text-muted); }
-.ps-tab.active { color: var(--purple-primary); }
+.ps-tab { display: flex; flex-direction: column; align-items: center; gap: 1px; font-size: 0.4rem; color: #5f5d78; }
 .ps-tab-icon { font-size: 0.55rem; }
 .ps-create-btn {
   width: 28px; height: 28px; border-radius: 50%;
@@ -310,8 +301,8 @@ nav {
   backdrop-filter: blur(12px);
 }
 .phone-app-badge.released {
-  background: rgba(124,92,252,0.2); color: var(--purple-light);
-  border: 1px solid rgba(124,92,252,0.3);
+  background: rgba(140,92,245,0.2); color: var(--mat-purple-light);
+  border: 1px solid rgba(140,92,245,0.3);
 }
 .phone-app-badge.soon {
   background: rgba(255,255,255,0.06); color: var(--text-muted);
@@ -323,27 +314,66 @@ nav {
   backdrop-filter: blur(2px);
   z-index: 4;
 }
-.phone-app-name {
-  text-align: center; margin-top: 10px;
-  font-family: 'Sora', sans-serif;
-  font-size: 0.85rem; font-weight: 600;
+
+/* App selector buttons below phones */
+.app-selector {
+  display: flex; gap: 12px; justify-content: center;
+  margin-top: 32px;
+  opacity: 0; animation: fadeUp 0.7s 0.7s ease forwards;
 }
-.phone-app-sub {
-  text-align: center;
-  font-size: 0.7rem; color: var(--text-muted);
+.app-selector-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 24px; border-radius: 50px;
+  font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  border: 1px solid; transition: all 0.3s;
+  position: relative;
+}
+.app-selector-btn.active {
+  background: rgba(140,92,245,0.1);
+  border-color: rgba(140,92,245,0.35);
+  color: var(--mat-purple-light);
+}
+.app-selector-btn.active:hover {
+  background: rgba(140,92,245,0.15);
+  border-color: rgba(140,92,245,0.5);
+}
+.app-selector-btn.locked {
+  background: transparent;
+  border-color: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  cursor: default;
+}
+.app-selector-btn.locked:hover {
+  border-color: rgba(255,255,255,0.1);
+}
+.app-selector-btn .lock-icon {
+  font-size: 0.7rem; opacity: 0.5;
+}
+.app-selector-btn .launch-msg {
+  position: absolute;
+  bottom: -24px; left: 50%; transform: translateX(-50%);
+  font-size: 0.62rem; color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0; transition: opacity 0.3s;
+  pointer-events: none;
+}
+.app-selector-btn .launch-msg.visible {
+  opacity: 1;
 }
 
 /* ═══════ SECTION SCAFFOLDING ═══════ */
 section { position: relative; z-index: 1; padding: 110px 48px; }
 .sec-label {
   font-size: 0.78rem; text-transform: uppercase;
-  letter-spacing: 2.5px; color: var(--purple-light);
+  letter-spacing: 2.5px; color: var(--text-muted);
   font-weight: 600; text-align: center; margin-bottom: 14px;
 }
 .sec-title {
   font-family: 'Sora', sans-serif;
-  font-size: 2.7rem; font-weight: 700;
+  font-size: 2.5rem; font-weight: 600;
   text-align: center; margin-bottom: 16px; line-height: 1.18;
+  color: #fff;
 }
 .sec-desc {
   font-size: 1.05rem; color: var(--text-secondary);
@@ -368,13 +398,13 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 .f-card::before {
   content: ''; position: absolute;
   top: 0; left: 0; right: 0; height: 2px;
-  background: var(--gradient-main);
+  background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
   opacity: 0; transition: opacity 0.4s;
 }
 .f-card:hover {
   border-color: var(--border-hover);
   transform: translateY(-5px);
-  box-shadow: 0 14px 44px rgba(124,92,252,0.1);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.3);
 }
 .f-card:hover::before { opacity: 1; }
 .f-icon {
@@ -382,104 +412,18 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
   display: grid; place-items: center;
   font-size: 1.3rem; margin-bottom: 22px;
 }
-.f-icon.ic-purple { background: rgba(124,92,252,0.12); }
-.f-icon.ic-cyan { background: rgba(34,211,238,0.1); }
-.f-icon.ic-pink { background: rgba(244,114,182,0.1); }
-.f-icon.ic-amber { background: rgba(251,191,36,0.1); }
-.f-icon.ic-green { background: rgba(52,211,153,0.1); }
-.f-icon.ic-orange { background: rgba(255,107,74,0.1); }
+.f-icon.ic-white { background: rgba(255,255,255,0.06); }
+.f-icon.ic-purple { background: rgba(140,92,245,0.1); }
+.f-icon.ic-blue { background: rgba(59,130,246,0.1); }
+.f-icon.ic-pink { background: rgba(236,72,153,0.1); }
+.f-icon.ic-amber { background: rgba(251,191,36,0.08); }
+.f-icon.ic-green { background: rgba(52,211,153,0.08); }
 .f-card h3 {
   font-family: 'Sora', sans-serif;
   font-size: 1.1rem; font-weight: 600; margin-bottom: 10px;
 }
 .f-card p {
   font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;
-}
-
-/* ═══════ APPS SECTION ═══════ */
-.apps-row {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-.app-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 40px 32px;
-  text-align: center;
-  position: relative; overflow: hidden;
-  transition: all 0.4s;
-}
-.app-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-5px);
-  box-shadow: 0 14px 44px rgba(124,92,252,0.1);
-}
-.app-card.featured {
-  border-color: rgba(124,92,252,0.3);
-  box-shadow: 0 0 60px rgba(124,92,252,0.08);
-}
-.app-card.featured::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 3px;
-  background: var(--gradient-main);
-}
-.app-icon {
-  width: 64px; height: 64px; border-radius: 16px;
-  display: grid; place-items: center;
-  font-size: 1.6rem; margin: 0 auto 18px;
-}
-.app-status {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 4px 14px; border-radius: 50px;
-  font-size: 0.68rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.5px;
-  margin-bottom: 16px;
-}
-.app-status.live { background: rgba(52,211,153,0.1); color: #34d399; }
-.app-status.soon { background: rgba(255,255,255,0.04); color: var(--text-muted); }
-.app-card h3 {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.35rem; font-weight: 700; margin-bottom: 6px;
-}
-.app-card .modality {
-  font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;
-}
-.app-card p {
-  font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;
-}
-.app-card .btn-app {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 28px; border-radius: 50px;
-  font-size: 0.88rem; font-weight: 600;
-  text-decoration: none; transition: all 0.3s;
-  cursor: pointer; border: none;
-}
-.btn-app.filled {
-  background: var(--gradient-main); color: #fff;
-  box-shadow: 0 4px 24px var(--purple-glow);
-}
-.btn-app.filled:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(124,92,252,0.35); }
-.btn-app.outline {
-  background: transparent; color: var(--text-muted);
-  border: 1px solid var(--border);
-}
-
-/* ═══════ CTA ═══════ */
-.cta-section {
-  text-align: center;
-  padding: 100px 48px;
-  background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface), var(--bg-deep));
-}
-.cta-title {
-  font-family: 'Sora', sans-serif;
-  font-size: 2.4rem; font-weight: 700;
-  margin-bottom: 16px; line-height: 1.2;
-}
-.cta-desc {
-  font-size: 1.05rem; color: var(--text-secondary);
-  max-width: 520px; margin: 0 auto 36px; line-height: 1.7;
 }
 
 /* ═══════ FOOTER ═══════ */
@@ -513,7 +457,7 @@ footer {
 .footer-bottom {
   max-width: 1200px; margin: 40px auto 0;
   padding-top: 24px;
-  border-top: 1px solid rgba(124,92,252,0.06);
+  border-top: 1px solid var(--border);
   text-align: center;
   font-size: 0.8rem; color: var(--text-muted);
 }
@@ -526,9 +470,8 @@ footer {
 
 /* ═══════ RESPONSIVE ═══════ */
 @media (max-width: 1024px) {
-  .hero h1 { font-size: 3.2rem; }
+  .hero h1 { font-size: 2.8rem; }
   .features-grid { grid-template-columns: 1fr 1fr; }
-  .apps-row { grid-template-columns: 1fr; max-width: 420px; }
   .phone-wrap.left, .phone-wrap.right { display: none; }
   .phones-showcase { perspective: none; }
   .phone-wrap.center { animation: floatCenterSimple 5s ease-in-out infinite; }
@@ -538,13 +481,13 @@ footer {
   nav { padding: 14px 20px; }
   .nav-pills { display: none; }
   section, .hero { padding-left: 20px; padding-right: 20px; }
-  .hero h1 { font-size: 2.5rem; }
-  .sec-title { font-size: 2rem; }
+  .hero h1 { font-size: 2.2rem; }
+  .sec-title { font-size: 1.9rem; }
   .features-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
-  .cta-title { font-size: 1.8rem; }
   .phones-showcase { margin-top: 40px; }
+  .app-selector { flex-direction: column; align-items: center; gap: 8px; }
 }
 </style>
 </head>
@@ -573,22 +516,18 @@ footer {
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="dot"></span>
-      TunaMat now available on iOS
-    </div>
-    <h1><span class="grad">Plan. Build. Flow.</span></h1>
-    <p class="sub">A suite of class planning apps for group fitness instructors. Powered by Spotify integration, professional-grade movement libraries, and real-time analytics — built by instructors, for instructors.</p>
+    <h1><span class="accent">Plan. Build. Flow.</span></h1>
+    <p class="sub">A suite of class planning apps for group fitness instructors. Powered by music integration, professional-grade movement libraries, and real-time analytics — built by instructors, for instructors.</p>
     <div class="hero-ctas">
-      <a href="/tunamat" class="btn-primary">
-        Explore TunaMat
+      <a href="#apps" class="btn-primary">
+        View Apps
         <span class="arrow-circle">→</span>
       </a>
       <a href="/roadmap" class="btn-ghost">View Roadmap</a>
     </div>
 
     <!-- 3 floating phones -->
-    <div class="phones-showcase">
+    <div class="phones-showcase" id="apps">
       <!-- TunaSpin (left) -->
       <div class="phone-wrap left">
         <div class="phone">
@@ -596,34 +535,34 @@ footer {
           <div class="phone-notch"></div>
           <div class="phone-screen">
             <div class="ps-header">
-              <span class="ps-back">‹ Back</span>
-              <span class="ps-edit-btn" style="background:var(--orange);">Edit</span>
+              <span class="ps-back" style="color:var(--spin-blue);">‹ Back</span>
+              <span class="ps-edit-btn" style="background:var(--spin-blue);">Edit</span>
             </div>
             <div class="ps-title">HIIT Ride</div>
             <div class="ps-action-row">
               <div class="ps-fave"><div class="ps-fave-icon">♡</div></div>
-              <div class="ps-play-btn" style="background:var(--orange);">▶ Play</div>
-              <div class="ps-analyse-btn" style="background:#c05a3a;">📊 Analyse</div>
+              <div class="ps-play-btn" style="background:var(--spin-blue);">▶ Play</div>
+              <div class="ps-analyse-btn" style="background:#2563EB;">📊 Analyse</div>
             </div>
             <div class="ps-duration">50m 00s</div>
             <div class="ps-segment">
               <div class="ps-seg-header">
-                <div class="ps-seg-label" style="color:var(--orange);">1. Warm-Up Ride</div>
+                <div class="ps-seg-label" style="color:var(--spin-blue-light);">1. Warm-Up Ride</div>
                 <span class="ps-seg-time">5:00</span>
               </div>
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Seated Climb</span>
-                  <span class="ps-move-badge" style="background:rgba(255,107,74,0.15);color:var(--orange);">60 RPM</span>
+                  <span class="ps-move-badge" style="background:rgba(59,130,246,0.15);color:var(--spin-blue-light);">60 RPM</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(255,107,74,0.12);color:var(--orange);">🚴</div>
+                <div class="ps-move-icon" style="background:rgba(59,130,246,0.12);color:var(--spin-blue-light);">🚴</div>
               </div>
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Easy Pedal</span>
-                  <span class="ps-move-badge" style="background:rgba(255,107,74,0.15);color:var(--orange);">70 RPM</span>
+                  <span class="ps-move-badge" style="background:rgba(59,130,246,0.15);color:var(--spin-blue-light);">70 RPM</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(255,107,74,0.12);color:var(--orange);">🚴</div>
+                <div class="ps-move-icon" style="background:rgba(59,130,246,0.12);color:var(--spin-blue-light);">🚴</div>
               </div>
             </div>
             <div class="ps-segment">
@@ -634,23 +573,21 @@ footer {
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Standing Climb</span>
-                  <span class="ps-move-badge" style="background:rgba(255,107,74,0.15);color:var(--orange);">80 RPM</span>
+                  <span class="ps-move-badge" style="background:rgba(59,130,246,0.15);color:var(--spin-blue-light);">80 RPM</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(255,107,74,0.12);color:var(--orange);">🚴</div>
+                <div class="ps-move-icon" style="background:rgba(59,130,246,0.12);color:var(--spin-blue-light);">🚴</div>
               </div>
             </div>
             <div class="ps-tab-bar">
-              <div class="ps-tab active" style="color:var(--orange);"><span class="ps-tab-icon">📋</span>Classes</div>
+              <div class="ps-tab" style="color:var(--spin-blue);"><span class="ps-tab-icon">📋</span>Classes</div>
               <div class="ps-tab"><span class="ps-tab-icon">🚴</span>Exercises</div>
-              <div class="ps-create-btn" style="background:var(--orange);">+</div>
+              <div class="ps-create-btn" style="background:var(--spin-blue);">+</div>
               <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
               <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
             </div>
           </div>
           <div class="phone-app-badge soon">Coming Soon</div>
         </div>
-        <div class="phone-app-name" style="color:var(--orange);">TunaSpin</div>
-        <div class="phone-app-sub">Indoor Cycling</div>
       </div>
 
       <!-- TunaMat (center - featured) -->
@@ -659,14 +596,14 @@ footer {
           <div class="phone-notch"></div>
           <div class="phone-screen">
             <div class="ps-header">
-              <span class="ps-back">‹ Back</span>
-              <span class="ps-edit-btn" style="background:var(--purple-primary);">Edit</span>
+              <span class="ps-back" style="color:var(--mat-purple);">‹ Back</span>
+              <span class="ps-edit-btn" style="background:var(--mat-purple);">Edit</span>
             </div>
             <div class="ps-title">Example Flow</div>
             <div class="ps-action-row">
               <div class="ps-fave"><div class="ps-fave-icon">♡</div><div>Fave</div></div>
-              <div class="ps-play-btn" style="background:#8C5CF5;">▶ Play</div>
-              <div class="ps-analyse-btn" style="background:var(--teal);">📊 Analyse</div>
+              <div class="ps-play-btn" style="background:var(--mat-purple);">▶ Play</div>
+              <div class="ps-analyse-btn" style="background:#22b8a0;">📊 Analyse</div>
             </div>
             <div class="ps-duration">45m 00s</div>
             <div class="ps-segment">
@@ -677,50 +614,48 @@ footer {
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Chest Opener</span>
-                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">Hold</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:#22b8a0;">Hold</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:#22b8a0;">🧘</div>
               </div>
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Cat-Cow</span>
-                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">8-10 reps</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:#22b8a0;">8-10 reps</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:#22b8a0;">🧘</div>
               </div>
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Butterfly Stretch</span>
-                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">Hold</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:#22b8a0;">Hold</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:#22b8a0;">🧘</div>
               </div>
             </div>
             <div class="ps-segment">
               <div class="ps-seg-header">
-                <div class="ps-seg-label" style="color:var(--pink);">2. Spinal Warm-Up</div>
+                <div class="ps-seg-label" style="color:var(--reformer-pink-light);">2. Spinal Warm-Up</div>
                 <span class="ps-seg-time">3:00</span>
               </div>
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Kneeling Chest Exp.</span>
-                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">8 reps</span>
+                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:#22b8a0;">8 reps</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🧘</div>
+                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:#22b8a0;">🧘</div>
               </div>
             </div>
             <div class="ps-tab-bar">
-              <div class="ps-tab active"><span class="ps-tab-icon">📋</span>Flows</div>
+              <div class="ps-tab" style="color:var(--mat-purple);"><span class="ps-tab-icon">📋</span>Flows</div>
               <div class="ps-tab"><span class="ps-tab-icon">🏃</span>Moves</div>
-              <div class="ps-create-btn" style="background:var(--purple-primary);">+</div>
+              <div class="ps-create-btn" style="background:var(--mat-purple);">+</div>
               <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
               <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
             </div>
           </div>
           <div class="phone-app-badge released">Available Now</div>
         </div>
-        <div class="phone-app-name" style="color:var(--purple-light);">TunaMat</div>
-        <div class="phone-app-sub">Mat Pilates</div>
       </div>
 
       <!-- TunaReformer (right) -->
@@ -730,34 +665,34 @@ footer {
           <div class="phone-notch"></div>
           <div class="phone-screen">
             <div class="ps-header">
-              <span class="ps-back">‹ Back</span>
-              <span class="ps-edit-btn" style="background:var(--teal);">Edit</span>
+              <span class="ps-back" style="color:var(--reformer-pink);">‹ Back</span>
+              <span class="ps-edit-btn" style="background:var(--reformer-pink);">Edit</span>
             </div>
             <div class="ps-title">Reformer Flow</div>
             <div class="ps-action-row">
               <div class="ps-fave"><div class="ps-fave-icon">♡</div></div>
-              <div class="ps-play-btn" style="background:var(--teal);">▶ Play</div>
-              <div class="ps-analyse-btn" style="background:#1a8a76;">📊 Analyse</div>
+              <div class="ps-play-btn" style="background:var(--reformer-pink);">▶ Play</div>
+              <div class="ps-analyse-btn" style="background:#be185d;">📊 Analyse</div>
             </div>
             <div class="ps-duration">55m 00s</div>
             <div class="ps-segment">
               <div class="ps-seg-header">
-                <div class="ps-seg-label" style="color:var(--teal);">1. Footwork Series</div>
+                <div class="ps-seg-label" style="color:var(--reformer-pink-light);">1. Footwork Series</div>
                 <span class="ps-seg-time">5:00</span>
               </div>
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Parallel Heels</span>
-                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">10 reps</span>
+                  <span class="ps-move-badge" style="background:rgba(236,72,153,0.15);color:var(--reformer-pink-light);">10 reps</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🤸</div>
+                <div class="ps-move-icon" style="background:rgba(236,72,153,0.12);color:var(--reformer-pink-light);">🤸</div>
               </div>
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">V-Position</span>
-                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">10 reps</span>
+                  <span class="ps-move-badge" style="background:rgba(236,72,153,0.15);color:var(--reformer-pink-light);">10 reps</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🤸</div>
+                <div class="ps-move-icon" style="background:rgba(236,72,153,0.12);color:var(--reformer-pink-light);">🤸</div>
               </div>
             </div>
             <div class="ps-segment">
@@ -768,47 +703,60 @@ footer {
               <div class="ps-move">
                 <div class="ps-move-left">
                   <span class="ps-move-name">Long Stretch</span>
-                  <span class="ps-move-badge" style="background:rgba(34,184,160,0.15);color:var(--teal);">Hold</span>
+                  <span class="ps-move-badge" style="background:rgba(236,72,153,0.15);color:var(--reformer-pink-light);">Hold</span>
                 </div>
-                <div class="ps-move-icon" style="background:rgba(34,184,160,0.12);color:var(--teal);">🤸</div>
+                <div class="ps-move-icon" style="background:rgba(236,72,153,0.12);color:var(--reformer-pink-light);">🤸</div>
               </div>
             </div>
             <div class="ps-tab-bar">
-              <div class="ps-tab active" style="color:var(--teal);"><span class="ps-tab-icon">📋</span>Flows</div>
+              <div class="ps-tab" style="color:var(--reformer-pink);"><span class="ps-tab-icon">📋</span>Flows</div>
               <div class="ps-tab"><span class="ps-tab-icon">🤸</span>Exercises</div>
-              <div class="ps-create-btn" style="background:var(--teal);">+</div>
+              <div class="ps-create-btn" style="background:var(--reformer-pink);">+</div>
               <div class="ps-tab"><span class="ps-tab-icon">🏷</span>Labels</div>
               <div class="ps-tab"><span class="ps-tab-icon">👤</span>Profile</div>
             </div>
           </div>
           <div class="phone-app-badge soon">Coming Soon</div>
         </div>
-        <div class="phone-app-name" style="color:var(--teal);">TunaReformer</div>
-        <div class="phone-app-sub">Reformer Pilates</div>
       </div>
+    </div>
+
+    <!-- App selector buttons -->
+    <div class="app-selector">
+      <button class="app-selector-btn locked" data-app="spin" onclick="showLaunchMsg(this)">
+        <span class="lock-icon">🔒</span> TunaSpin
+        <span class="launch-msg">Launching soon</span>
+      </button>
+      <a href="/tunamat" class="app-selector-btn active">
+        TunaMat
+      </a>
+      <button class="app-selector-btn locked" data-app="reformer" onclick="showLaunchMsg(this)">
+        <span class="lock-icon">🔒</span> TunaReformer
+        <span class="launch-msg">Launching soon</span>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- ═══════ PLATFORM FEATURES ═══════ -->
+<!-- ═══════ CORE FEATURES ═══════ -->
 <section id="features" style="background: linear-gradient(180deg, var(--bg-deep), var(--bg-surface) 50%, var(--bg-deep));">
   <div class="sec-label">The Platform</div>
-  <div class="sec-title">One engine powering every<br>Tuna app</div>
+  <div class="sec-title">Core Tuna Features</div>
   <p class="sec-desc">Every app in the Tuna Athletics suite shares a common set of powerful features — designed with real instructors, refined by the community.</p>
 
   <div class="features-grid">
     <div class="f-card">
       <div class="f-icon ic-green">🎵</div>
-      <h3>Spotify Integration</h3>
-      <p>Centre your class around music. Map any public playlist to your segments with BPM data for perfectly paced transitions — no Spotify login required.</p>
+      <h3>Music-First Planning</h3>
+      <p>Build your class around the music. Map any playlist to your segments with BPM data for perfectly paced transitions — designed around how instructors actually plan.</p>
     </div>
     <div class="f-card">
-      <div class="f-icon ic-purple">📚</div>
+      <div class="f-icon ic-white">📚</div>
       <h3>Professional Movement Library</h3>
       <p>Hundreds of exercises vetted by industry professionals, with rich metadata — muscle groups, movement patterns, equipment, and recommended pacing.</p>
     </div>
     <div class="f-card">
-      <div class="f-icon ic-cyan">👥</div>
+      <div class="f-icon ic-blue">👥</div>
       <h3>Community-Driven</h3>
       <p>Movement libraries are maintained and improved by the user community. Your expertise shapes the platform — create custom exercises and share knowledge.</p>
     </div>
@@ -823,64 +771,12 @@ footer {
       <p>Hit play and teach. Glanceable timers guide you through each segment with crossfade-aware pacing — the ultimate in-class companion.</p>
     </div>
     <div class="f-card">
-      <div class="f-icon ic-orange">📊</div>
+      <div class="f-icon ic-purple">📊</div>
       <h3>Real-Time Analytics</h3>
       <p>Muscle group analysis and balance feedback give you real-time insight pre-execution. Catch imbalances before class, not after.</p>
     </div>
   </div>
 </section>
-
-<!-- ═══════ OUR APPS ═══════ -->
-<section id="apps">
-  <div class="sec-label">Our Apps</div>
-  <div class="sec-title">Built for every modality</div>
-  <p class="sec-desc">Each Tuna app is purpose-built for its discipline — with the same powerful engine, tailored to the movements, pacing, and terminology you know.</p>
-
-  <div class="apps-row">
-    <div class="app-card">
-      <div class="app-icon" style="background:rgba(255,107,74,0.1);">🚴</div>
-      <div class="app-status soon">Coming Soon</div>
-      <h3>TunaSpin</h3>
-      <div class="modality">Indoor Cycling &amp; Spin</div>
-      <p>Plan spin classes with RPM targets, resistance zones, and rhythm-based segments synced to your playlist.</p>
-      <span class="btn-app outline">Notify Me</span>
-    </div>
-
-    <div class="app-card featured">
-      <div class="app-icon" style="background:rgba(124,92,252,0.12);">🧘</div>
-      <div class="app-status live">
-        <span style="width:6px;height:6px;border-radius:50%;background:#34d399;"></span>
-        Available Now
-      </div>
-      <h3>TunaMat</h3>
-      <div class="modality">Mat Pilates</div>
-      <p>272+ movements, flow builder, timed play mode, muscle group analysis, and Spotify integration — all in one native iOS app.</p>
-      <a href="/tunamat" class="btn-app filled">Explore TunaMat →</a>
-    </div>
-
-    <div class="app-card">
-      <div class="app-icon" style="background:rgba(34,184,160,0.1);">🤸</div>
-      <div class="app-status soon">Coming Soon</div>
-      <h3>TunaReformer</h3>
-      <div class="modality">Reformer Pilates</div>
-      <p>Spring settings, carriage positions, and reformer-specific exercises — the planning tool reformer instructors deserve.</p>
-      <span class="btn-app outline">Notify Me</span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ CTA ═══════ -->
-<div class="cta-section">
-  <div class="cta-title">Ready to transform your<br>class planning?</div>
-  <p class="cta-desc">Start with TunaMat — free. Plan your first flow in minutes, not hours.</p>
-  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-    <a href="/tunamat" class="btn-primary">
-      Get Started Free
-      <span class="arrow-circle">→</span>
-    </a>
-    <a href="/app" class="btn-ghost">Try the Web App</a>
-  </div>
-</div>
 
 <!-- ═══════ FOOTER ═══════ -->
 <footer>
@@ -913,6 +809,25 @@ footer {
 </footer>
 
 <script>
+// Show "Launching soon" on locked buttons
+function showLaunchMsg(btn) {
+  const msg = btn.querySelector('.launch-msg');
+  if (msg.classList.contains('visible')) {
+    msg.classList.remove('visible');
+  } else {
+    // Hide all other messages first
+    document.querySelectorAll('.launch-msg.visible').forEach(m => m.classList.remove('visible'));
+    msg.classList.add('visible');
+  }
+}
+
+// Close launch messages when clicking elsewhere
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.app-selector-btn.locked')) {
+    document.querySelectorAll('.launch-msg.visible').forEach(m => m.classList.remove('visible'));
+  }
+});
+
 // Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
@@ -925,10 +840,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 // Scroll-based nav background
 window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  nav.style.background = window.scrollY > 60
-    ? 'rgba(8,8,26,0.92)'
-    : 'rgba(8,8,26,0.75)';
+  document.querySelector('nav').style.background = window.scrollY > 60
+    ? 'rgba(9,9,15,0.95)'
+    : 'rgba(9,9,15,0.8)';
 });
 
 // Simple scroll reveal
@@ -941,7 +855,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.f-card, .app-card').forEach(el => {
+document.querySelectorAll('.f-card').forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(30px)';
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
