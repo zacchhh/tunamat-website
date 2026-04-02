@@ -641,6 +641,9 @@ footer {
     gap: 40px; margin-top: 40px;
   }
   .phone-flip { width: 240px; height: 500px; }
+  /* Hide coming-soon apps on mobile — focus on available apps */
+  .phone-col[data-app="spin"],
+  .phone-col[data-app="reformer"] { display: none; }
   /* Disable hover flip on mobile — only toggle works */
   .phone-flip:hover .phone-flip-inner { transform: none; }
   .phone-flip.flipped .phone-flip-inner { transform: rotateY(180deg); }
