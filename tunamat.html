@@ -302,30 +302,57 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
 }
 
 /* Play Mode mini */
-.m-play-header { text-align: center; margin-bottom: 8px; }
-.m-play-title { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600; color: #fff; }
+.m-play-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.m-play-exit { font-size: 0.65rem; color: var(--text-secondary); }
+.m-play-title-wrap { text-align: center; }
+.m-play-title { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600; color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); text-underline-offset: 3px; }
 .m-play-sub { font-size: 0.6rem; color: var(--text-muted); }
-.m-play-duration-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--purple-light); font-weight: 600; text-align: center; margin-bottom: 2px; }
-.m-play-duration { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; text-align: center; letter-spacing: 2px; margin-bottom: 10px; }
-.m-donut-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
-.m-donut { width: 90px; height: 90px; position: relative; }
+.m-play-pause-btn { font-size: 0.65rem; color: var(--text-secondary); }
+.m-play-duration-row { text-align: center; margin-bottom: 10px; }
+.m-play-duration-label { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--purple-light); font-weight: 600; display: inline; margin-right: 6px; }
+.m-play-duration { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; display: inline; letter-spacing: 2px; }
+.m-play-duration .frac { font-weight: 400; color: var(--text-muted); font-size: 1rem; }
+.m-segment-row { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 6px; }
+.m-segment-info { flex: 1; }
+.m-segment-name { font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.m-segment-name .num { color: var(--text-muted); font-weight: 400; }
+.m-segment-song { font-size: 0.58rem; color: var(--text-muted); margin-bottom: 3px; }
+.m-segment-time { font-size: 0.6rem; color: var(--purple-light); display: inline; margin-right: 6px; }
+.m-segment-tag { font-size: 0.5rem; font-weight: 600; color: #fbbf24; background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.25); padding: 2px 8px; border-radius: 50px; display: inline-block; }
+.m-donut { width: 80px; height: 80px; position: relative; flex-shrink: 0; }
 .m-donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .m-donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
-.m-donut-sec { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: #fff; }
+.m-donut-sec { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
 .m-donut-frac { font-size: 0.5rem; color: var(--text-muted); }
-.m-play-segment { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 2px; }
-.m-play-segment-time { font-size: 0.55rem; color: var(--text-muted); }
-.m-current {
-  text-align: center; padding: 10px 14px;
-  background: rgba(34,184,160,0.06); border-radius: 12px;
-  border: 1px solid rgba(34,184,160,0.15); margin: 8px 0;
+.m-play-arrows { text-align: center; margin-bottom: 8px; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 12px; }
+.m-move-card {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; border-radius: 10px; margin-bottom: 5px;
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
 }
-.m-current .icon { font-size: 1.5rem; margin-bottom: 4px; }
-.m-current .name { font-size: 1rem; font-weight: 600; margin-top: 2px; color: #fff; }
-.m-current .tag { font-size: 0.6rem; font-weight: 600; color: var(--teal); }
-.m-play-controls { display: flex; justify-content: center; align-items: center; gap: 18px; margin-top: 8px; }
-.m-play-ctrl { font-size: 0.65rem; color: var(--text-muted); }
-.m-play-pause { width: 36px; height: 36px; border-radius: 50%; background: var(--purple-primary); display: grid; place-items: center; font-size: 0.9rem; color: #fff; }
+.m-move-card.active {
+  background: linear-gradient(135deg, rgba(124,92,252,0.35), rgba(124,92,252,0.15));
+  border-color: rgba(52,211,153,0.5);
+}
+.m-move-left { display: flex; align-items: center; gap: 10px; }
+.m-move-num { font-size: 0.65rem; color: var(--text-muted); }
+.m-move-name { font-size: 0.8rem; font-weight: 600; color: #fff; }
+.m-move-right { text-align: right; }
+.m-move-reps { font-size: 0.65rem; font-weight: 600; color: #fbbf24; }
+.m-move-muscle { font-size: 0.55rem; color: var(--text-muted); }
+.m-upnext-divider { display: flex; align-items: center; gap: 8px; margin: 10px 0 8px; }
+.m-upnext-divider::before, .m-upnext-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+.m-upnext-divider span { font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 600; }
+.m-upnext-card {
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden;
+}
+.m-upnext-header { padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.m-upnext-song { font-size: 0.75rem; font-weight: 600; color: #fff; }
+.m-upnext-artist { font-size: 0.55rem; color: var(--text-muted); }
+.m-upnext-move { padding: 7px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 10px; }
+.m-upnext-move:last-child { border-bottom: none; }
+.m-upnext-move .num { font-size: 0.6rem; color: var(--text-muted); }
+.m-upnext-move .name { font-size: 0.7rem; color: var(--text-secondary); }
 
 /* Analysis mini */
 .m-analysis-balanced { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 700; text-align: center; color: #fff; margin-bottom: 2px; }
@@ -650,36 +677,66 @@ footer {
       <p>Your pacing has never been more on-point. Use this feature live in class so you know when to progress to the next move.</p>
       <div class="s-preview">
         <div class="m-play-header">
-          <div class="m-play-title">Example Flow</div>
-          <div class="m-play-sub">1 / 15</div>
+          <div class="m-play-exit">← Exit</div>
+          <div class="m-play-title-wrap">
+            <div class="m-play-title">Sculpt Class</div>
+            <div class="m-play-sub">3 / 16</div>
+          </div>
+          <div class="m-play-pause-btn">⏸ Pause</div>
         </div>
-        <div class="m-play-duration-label">Total Duration</div>
-        <div class="m-play-duration">0:00.99</div>
-        <div style="display:flex;gap:14px;align-items:flex-start;">
-          <div style="flex:1;">
-            <div class="m-play-segment">1. Centering &amp; Breath</div>
-            <div class="m-play-segment-time">0:00 / 3:00</div>
+        <div class="m-play-duration-row">
+          <span class="m-play-duration-label">Total Duration</span>
+          <span class="m-play-duration">0:16<span class="frac">.76</span></span>
+        </div>
+        <div class="m-segment-row">
+          <div class="m-segment-info">
+            <div class="m-segment-name"><span class="num">3.</span> Core Series</div>
+            <div class="m-segment-song">♫ Talk of the Town</div>
+            <div>
+              <span class="m-segment-time">0:11 / 3:14</span>
+              <span class="m-segment-tag">Hip Mobility</span>
+            </div>
           </div>
           <div class="m-donut">
             <svg viewBox="0 0 36 36">
               <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(124,92,252,0.12)" stroke-width="2.5"/>
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#22b8a0" stroke-width="2.5" stroke-dasharray="100" stroke-dashoffset="1" stroke-linecap="round"/>
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="var(--purple-primary)" stroke-width="2.5" stroke-dasharray="12 88" stroke-dashoffset="0" stroke-linecap="round"/>
             </svg>
             <div class="m-donut-center">
-              <div class="m-donut-sec">59</div>
-              <div class="m-donut-frac">1/1</div>
+              <div class="m-donut-frac">1/2</div>
+              <div class="m-donut-sec">1:26</div>
             </div>
           </div>
         </div>
-        <div class="m-current">
-          <div class="icon">🧘</div>
-          <div class="name">Chest Opener</div>
-          <div class="tag">Hold</div>
+        <div class="m-play-arrows">‹ ›</div>
+        <div class="m-move-card active">
+          <div class="m-move-left">
+            <span class="m-move-num">1</span>
+            <span class="m-move-name">Roll Back</span>
+          </div>
+          <div class="m-move-right">
+            <div class="m-move-reps">10–14 reps</div>
+            <div class="m-move-muscle">Abs</div>
+          </div>
         </div>
-        <div class="m-play-controls">
-          <span class="m-play-ctrl">⏮ Prev Segment</span>
-          <div class="m-play-pause">⏸</div>
-          <span class="m-play-ctrl">Next Segment ⏭</span>
+        <div class="m-move-card">
+          <div class="m-move-left">
+            <span class="m-move-num">2</span>
+            <span class="m-move-name">Dead Bug</span>
+          </div>
+          <div class="m-move-right">
+            <div class="m-move-reps">10–14 reps</div>
+            <div class="m-move-muscle">Abs</div>
+          </div>
+        </div>
+        <div class="m-upnext-divider"><span>Up Next</span></div>
+        <div class="m-upnext-card">
+          <div class="m-upnext-header">
+            <div class="m-upnext-song">Obsessed</div>
+            <div class="m-upnext-artist">♫ Obsessed</div>
+          </div>
+          <div class="m-upnext-move"><span class="num">1</span><span class="name">Bear Hold</span></div>
+          <div class="m-upnext-move"><span class="num">2</span><span class="name">Bird Dog</span></div>
         </div>
       </div>
     </div>
