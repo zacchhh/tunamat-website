@@ -89,17 +89,6 @@ nav {
 .nav-pills a:hover, .nav-pills a.active { color: #fff; background: rgba(255,255,255,0.08); }
 .nav-pills a.pill-cta { background: linear-gradient(135deg, #7c5cfc 0%, #a855f7 50%, #ec4899 100%); color: #fff; font-weight: 600; }
 .nav-pills a.pill-cta:hover { opacity: 0.88; }
-.nav-mobile-tunamat {
-  display: none;
-  font-family: 'Sora', sans-serif;
-  font-weight: 600; font-size: 0.85rem;
-  color: #a855f7; text-decoration: none;
-  padding: 6px 16px; border-radius: 50px;
-  background: rgba(140,92,245,0.1);
-  border: 1px solid rgba(140,92,245,0.25);
-  transition: all 0.25s;
-}
-.nav-mobile-tunamat:hover { background: rgba(140,92,245,0.18); }
 .nav-right { display: flex; align-items: center; gap: 20px; }
 .btn-nav-cta {
   display: inline-flex; align-items: center; gap: 6px;
@@ -650,7 +639,7 @@ footer {
   nav { padding: 12px 20px; }
   .nav-pills { display: none; }
   .btn-nav-cta { display: none; }
-  .nav-mobile-tunamat { display: inline-flex; }
+  .nav-brand { display: none; }
   .hamburger { display: flex; }
   .hero { padding: 110px 20px 20px; }
   .hero h1 { font-size: 2rem; }
@@ -683,10 +672,9 @@ footer {
     <span class="icon">TA</span>
     Tuna Athletics
   </a>
-  <a href="/tunamat" class="nav-mobile-tunamat">TunaMat</a>
   <div class="nav-pills">
-    <a href="/">Home</a>
     <a href="/tunamat" class="pill-cta">TunaMat</a>
+    <a href="/">Home</a>
     <a href="/roadmap" class="active">Roadmap</a>
     <a href="/faq">FAQ</a>
   </div>
