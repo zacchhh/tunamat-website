@@ -11,7 +11,7 @@ const MAX_PER_SEGMENT = 4
 
 export default function App() {
   const { movements, movementMap, loading, error, retry } = useMovements()
-  const [mode, setMode] = useState('category')
+  const [mode, setMode] = useState('region')
   const [segments, setSegments] = useState([])
   const [detailMovement, setDetailMovement] = useState(null)
   const [showExport, setShowExport] = useState(false)

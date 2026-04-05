@@ -263,7 +263,7 @@ export default function SegmentTray({ segments, onUpdate, onExport }) {
                         <span className="text-[9px] select-none" style={{ color: '#5E5880' }}>⠿</span>
                         <div className="flex-1 min-w-0">
                           <div className="text-[11px] font-medium truncate" style={{ color: '#E8E4F0' }}>{mov.name}</div>
-                          <div className="text-[9px] truncate" style={{ color: '#5E5880' }}>{mov.category}</div>
+                          <div className="text-[9px] truncate" style={{ color: '#5E5880' }}>{mov.region}</div>
                         </div>
                         <button
                           onClick={(e) => { e.stopPropagation(); removeMovement(segIdx, movIdx) }}

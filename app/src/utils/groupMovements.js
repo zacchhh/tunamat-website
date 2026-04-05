@@ -1,32 +1,32 @@
 const MODES = {
-  category: {
-    label: 'By Muscle Group',
-    groupKey: 'category',
-    hasSubcategory: true,
-    columnHeaders: ['Muscle Group', 'Subcategory', 'Movements', 'Detail'],
+  region: {
+    label: 'By Region',
+    groupKey: 'region',
+    hasSubregion: true,
+    columnHeaders: ['Region', 'Subregion', 'Movements', 'Detail'],
   },
   equipment: {
     label: 'By Equipment',
     groupKey: 'equipment',
-    hasSubcategory: false,
+    hasSubregion: false,
     columnHeaders: ['Equipment', 'Movements', 'Detail'],
   },
   movement_pattern: {
     label: 'By Movement Pattern',
     groupKey: 'movement_pattern',
-    hasSubcategory: false,
+    hasSubregion: false,
     columnHeaders: ['Movement Pattern', 'Movements', 'Detail'],
   },
   starting_position: {
     label: 'By Starting Position',
     groupKey: 'starting_position',
-    hasSubcategory: false,
+    hasSubregion: false,
     columnHeaders: ['Starting Position', 'Movements', 'Detail'],
   },
   plane_of_motion: {
     label: 'By Plane of Motion',
     groupKey: 'plane_of_motion',
-    hasSubcategory: false,
+    hasSubregion: false,
     columnHeaders: ['Plane of Motion', 'Movements', 'Detail'],
   },
 }
@@ -53,10 +53,10 @@ function groupByKey(movements, key) {
     .map(([label, items]) => ({ label, items, count: items.length }))
 }
 
-function getSubcategories(movements) {
+function getSubregions(movements) {
   const groups = {}
   movements.forEach((m) => {
-    const sub = m.subcategory || 'Other'
+    const sub = m.subregion || 'Other'
     if (!groups[sub]) groups[sub] = []
     groups[sub].push(m)
   })
@@ -65,4 +65,4 @@ function getSubcategories(movements) {
     .map(([label, items]) => ({ label, items, count: items.length }))
 }
 
-export { MODES, groupByKey, getSubcategories, formatLabel }
+export { MODES, groupByKey, getSubregions, formatLabel }

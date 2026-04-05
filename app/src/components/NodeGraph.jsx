@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import NodeCard from './NodeCard'
-import { MODES, groupByKey, getSubcategories } from '../utils/groupMovements'
+import { MODES, groupByKey, getSubregions } from '../utils/groupMovements'
 
 const NODE_W = 210
 const NODE_H = 46
@@ -121,10 +121,10 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
 
   const safeClick = (fn) => () => { if (!wasDrag.current) fn() }
   const groups = groupByKey(movements, config.groupKey)
-  const subcategories = selectedGroup && config.hasSubcategory ? getSubcategories(selectedGroup.items) : null
+  const subregions = selectedGroup && config.hasSubregion ? getSubregions(selectedGroup.items) : null
   let movementList = null
-  if (config.hasSubcategory && selectedSubcat) movementList = selectedSubcat.items
-  else if (!config.hasSubcategory && selectedGroup) movementList = selectedGroup.items
+  if (config.hasSubregion && selectedSubcat) movementList = selectedSubcat.items
+  else if (!config.hasSubregion && selectedGroup) movementList = selectedGroup.items
   if (movementList) movementList = [...movementList].sort((a, b) => a.name.localeCompare(b.name))
   const getValid = (mov, key) => (mov?.[key] || []).filter(id => movementMap[id])
 
@@ -235,11 +235,11 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
     const selGN = selectedGroup ? gns.find(n => n.data.label === selectedGroup.label) : null
     const selGY = selGN ? selGN.y + NODE_H / 2 : midY
 
-    if (config.hasSubcategory && subcategories && selGN) {
-      const sns = placeItems(subcategories, selGN.x, NODE_W, selGY, 1, 'subcat', '#5A4F8060', s => `sub-${s.label}`)
+    if (config.hasSubregion && subregions && selGN) {
+      const sns = placeItems(subregions, selGN.x, NODE_W, selGY, 1, 'subcat', '#5A4F8060', s => `sub-${s.label}`)
       const selSN = selectedSubcat ? sns.find(n => n.data.label === selectedSubcat.label) : null
       if (movementList && selSN) buildStack(movementList, selSN.x, NODE_W, selSN.y + NODE_H / 2, 2)
-    } else if (!config.hasSubcategory && movementList && selGN) {
+    } else if (!config.hasSubregion && movementList && selGN) {
       buildStack(movementList, selGN.x, NODE_W, selGY, 1)
     }
 
@@ -433,7 +433,7 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
     }
 
     return { nodes, lines, groupBoxes, labels, totalWidth: xCursor }
-  }, [groups, subcategories, movementList, selectedGroup, selectedSubcat, anchorId, upStack, downStack, fullStack, linkedChildren, openBranches, allTreeIds, config, containerH, movementMap])
+  }, [groups, subregions, movementList, selectedGroup, selectedSubcat, anchorId, upStack, downStack, fullStack, linkedChildren, openBranches, allTreeIds, config, containerH, movementMap])
 
   const prevWidth = useRef(0)
   useEffect(() => { if (layout.totalWidth > prevWidth.current && containerRef.current) { const cw = containerRef.current.clientWidth; const tx = Math.min(40, cw / zoom - layout.totalWidth - 40); setPan(p => ({ x: tx * zoom, y: p.y })) }; prevWidth.current = layout.totalWidth }, [layout.totalWidth, zoom])
