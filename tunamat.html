@@ -75,7 +75,7 @@ nav {
   display: flex; align-items: center; gap: 10px;
 }
 .nav-brand .nav-logo-fish {
-  height: 28px; width: auto;
+  height: 20px; width: auto;
 }
 .nav-brand .nav-logo-text {
   height: 16px; width: auto;
@@ -207,12 +207,7 @@ nav {
   transition: all 0.3s;
 }
 .btn-ghost:hover { color: #fff; border-color: var(--purple-primary); }
-.grad { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.hero-logo-wrap { display: flex; justify-content: center; }
-.hero-logo-tunamat {
-  height: 80px; width: auto;
-  filter: drop-shadow(0 0 24px rgba(124,92,252,0.5)) drop-shadow(0 0 60px rgba(168,85,247,0.3)) drop-shadow(0 0 100px rgba(236,72,153,0.15));
-}
+.grad { color: #fff; }
 
 /* ═══════ SECTIONS ═══════ */
 section { position: relative; z-index: 1; padding: 110px 48px; }
@@ -464,7 +459,7 @@ section { position: relative; z-index: 1; padding: 110px 48px; }
   font-size: 1rem; font-weight: 600; color: var(--text-primary);
   text-align: left;
 }
-.faq-q .icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(124,92,252,0.1); display: grid; place-items: center; font-size: 1.1rem; color: var(--purple-light); transition: transform 0.3s; flex-shrink: 0; }
+.faq-q .icon { width: 28px; height: 20px; border-radius: 50%; background: rgba(124,92,252,0.1); display: grid; place-items: center; font-size: 1.1rem; color: var(--purple-light); transition: transform 0.3s; flex-shrink: 0; }
 .faq-item.open .faq-q .icon { transform: rotate(45deg); }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
 .faq-item.open .faq-a { max-height: 300px; }
@@ -518,7 +513,6 @@ footer {
   .hamburger { display: flex; }
   section, .hero { padding-left: 20px; padding-right: 20px; }
   .hero h1 { font-size: 2.5rem; }
-  .hero-logo-tunamat { height: 60px; }
   .sec-title { font-size: 2rem; }
   .marquee-set { gap: 16px; padding-right: 16px; }
   .phone-frame { width: 160px; }
@@ -563,7 +557,7 @@ footer {
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
-  <h1 class="hero-logo-wrap"><img src="/logo/tunamat.png" class="hero-logo-tunamat" alt="TunaMat"></h1>
+  <h1><span class="grad">TunaMat</span></h1>
   <p class="sub">The <strong>Mat Pilates</strong> class <strong>planning</strong> app. Build flows, teach with confidence, and analyse every class.</p>
   <div class="hero-ctas">
     <a href="#" class="btn-primary">
