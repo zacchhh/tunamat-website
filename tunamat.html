@@ -74,11 +74,11 @@ nav {
   text-decoration: none;
   display: flex; align-items: center; gap: 10px;
 }
-.nav-brand .icon {
-  width: 28px; height: 28px; border-radius: 8px;
-  background: linear-gradient(135deg, #fff 0%, #c0c0c8 100%);
-  display: grid; place-items: center;
-  font-size: 0.6rem; font-weight: 800; color: #09090f;
+.nav-brand .nav-logo-fish {
+  height: 28px; width: auto;
+}
+.nav-brand .nav-logo-text {
+  height: 16px; width: auto;
 }
 .nav-pills {
   display: flex; gap: 2px;
@@ -208,6 +208,11 @@ nav {
 }
 .btn-ghost:hover { color: #fff; border-color: var(--purple-primary); }
 .grad { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-logo-wrap { display: flex; justify-content: center; }
+.hero-logo-tunamat {
+  height: 80px; width: auto;
+  filter: drop-shadow(0 0 24px rgba(124,92,252,0.5)) drop-shadow(0 0 60px rgba(168,85,247,0.3)) drop-shadow(0 0 100px rgba(236,72,153,0.15));
+}
 
 /* ═══════ SECTIONS ═══════ */
 section { position: relative; z-index: 1; padding: 110px 48px; }
@@ -513,6 +518,7 @@ footer {
   .hamburger { display: flex; }
   section, .hero { padding-left: 20px; padding-right: 20px; }
   .hero h1 { font-size: 2.5rem; }
+  .hero-logo-tunamat { height: 60px; }
   .sec-title { font-size: 2rem; }
   .marquee-set { gap: 16px; padding-right: 16px; }
   .phone-frame { width: 160px; }
@@ -531,8 +537,8 @@ footer {
 <!-- ═══════ NAV ═══════ -->
 <nav>
   <a href="/" class="nav-brand">
-    <span class="icon">TA</span>
-    Tuna Athletics
+    <img src="/logo/fish logo.svg" class="nav-logo-fish" alt="Tuna Athletics">
+    <img src="/logo/tunaathletics.svg" class="nav-logo-text" alt="Tuna Athletics">
   </a>
   <div class="nav-pills">
     <a href="/tunamat" class="pill-cta active">TunaMat</a>
@@ -557,7 +563,7 @@ footer {
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
-  <h1><span class="grad">TunaMat</span></h1>
+  <h1 class="hero-logo-wrap"><img src="/logo/tunamat.svg" class="hero-logo-tunamat" alt="TunaMat"></h1>
   <p class="sub">The <strong>Mat Pilates</strong> class <strong>planning</strong> app. Build flows, teach with confidence, and analyse every class.</p>
   <div class="hero-ctas">
     <a href="#" class="btn-primary">
