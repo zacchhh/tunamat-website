@@ -2,8 +2,8 @@ const MODES = {
   region: {
     label: 'By Region',
     groupKey: 'region',
-    hasSubregion: true,
-    columnHeaders: ['Region', 'Subregion', 'Movements', 'Detail'],
+    hasSubregion: false,
+    columnHeaders: ['Region', 'Movements', 'Detail'],
   },
   equipment: {
     label: 'By Equipment',
