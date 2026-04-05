@@ -2,8 +2,8 @@ const MODES = {
   region: {
     label: 'By Region',
     groupKey: 'region',
-    hasSubregion: false,
-    columnHeaders: ['Region', 'Movements', 'Detail'],
+    hasSubregion: true,
+    columnHeaders: ['Region', 'Subregion', 'Movements', 'Detail'],
   },
   equipment: {
     label: 'By Equipment',
@@ -56,7 +56,7 @@ function groupByKey(movements, key) {
 function getSubregions(movements) {
   const groups = {}
   movements.forEach((m) => {
-    const sub = m.subregion || 'Other'
+    const sub = m.sub_region || 'Other'
     if (!groups[sub]) groups[sub] = []
     groups[sub].push(m)
   })

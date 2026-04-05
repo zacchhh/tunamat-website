@@ -32,7 +32,7 @@ export default function MovementDetail({ movement, nodeRef, segments, onAddToSeg
         {m.name}
       </h3>
       <p className="text-[11px] font-medium mb-3" style={{ color: '#5E5880' }}>
-        {m.region} · {m.subregion}
+        {m.region} · {m.sub_region}
       </p>
 
       {m.also_known_as?.length > 0 && (
