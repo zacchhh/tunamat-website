@@ -3,57 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAQ — Tuna Athletics</title>
-<meta name="description" content="Frequently asked questions about Tuna Athletics — who we are, device support, Spotify integration, and creating custom movements and flows.">
-<meta name="keywords" content="Tuna Athletics FAQ, pilates app help, TunaMat support, device support, Spotify integration">
-<link rel="canonical" href="https://tunaathletics.com/faq">
+<title>Feedback — Tuna Athletics</title>
+<meta name="description" content="Share your feedback or get in touch with Tuna Athletics. We take every suggestion seriously and are always looking to improve.">
+<meta name="keywords" content="Tuna Athletics feedback, contact, suggestions, pilates app feedback">
+<link rel="canonical" href="https://tunaathletics.com/feedback">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://tunaathletics.com/faq">
-<meta property="og:title" content="FAQ — Tuna Athletics">
-<meta property="og:description" content="Frequently asked questions about Tuna Athletics — who we are, device support, Spotify integration, and custom movements.">
+<meta property="og:url" content="https://tunaathletics.com/feedback">
+<meta property="og:title" content="Feedback — Tuna Athletics">
+<meta property="og:description" content="Share your feedback or get in touch with Tuna Athletics. We take every suggestion seriously.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FAQ — Tuna Athletics">
-<meta name="twitter:description" content="Everything you need to know about Tuna Athletics and our apps.">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Who are Tuna Athletics?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tuna Athletics is powered by a team of experienced professionals with a diverse mix of specialties including iOS App Development, Yoga, Mat Pilates, Reformer Pilates, Spin and Design. We are dedicated to providing the best solutions to an instructor's everyday need as well as bring a social element that rewards teachers who put effort and thought into creating killer classes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What devices are supported?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "iPhones with iOS 17 or later at the moment. We are expanding to create supported iPad, Apple Watch and Android capability."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need a Spotify account for the music integration?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tuna Athletics Apps don't play from Spotify. We simply allow Users to paste a public playlist link to analyse the BPMs of each song, as well as create Segments for teachers who wish to plan classes by Song duration."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I create my own Movements and Flows?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes! We want you to create and personalise this tool so that you feel a connection to your classes."
-      }
-    }
-  ]
-}
-</script>
+<meta name="twitter:title" content="Feedback — Tuna Athletics">
+<meta name="twitter:description" content="Share your feedback or contact Tuna Athletics.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -109,7 +69,7 @@ nav {
   display: flex; align-items: center; gap: 10px;
 }
 .nav-brand .nav-logo-fish {
-  height: 20px; width: auto;
+  height: 28px; width: auto;
 }
 .nav-brand .nav-logo-text {
   height: 16px; width: auto;
@@ -210,80 +170,109 @@ nav {
   opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards;
 }
 
-/* ═══════ FAQ ═══════ */
-.faq-section {
+/* ═══════ FORM SECTIONS ═══════ */
+.form-section {
   position: relative; z-index: 1;
-  max-width: 720px;
-  margin: 50px auto 0;
-  padding: 0 40px 100px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+  text-align: center;
 }
 
-.faq-list {
+.form-section h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.form-section p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+.feedback-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.faq-item {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color 0.3s;
-}
-
-.faq-item:hover {
-  border-color: var(--border-hover);
-}
-
-.faq-q {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 20px 24px;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-family: 'Sora', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
   text-align: left;
-  cursor: pointer;
-  line-height: 1.4;
 }
 
-.faq-q .icon {
-  width: 28px; height: 20px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.04);
-  display: grid; place-items: center;
-  font-size: 1.1rem;
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  transition: border-color 0.25s;
+  resize: vertical;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  border-color: rgba(255,255,255,0.18);
+}
+
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder {
   color: var(--text-muted);
-  transition: transform 0.3s;
-  flex-shrink: 0;
 }
 
-.faq-item.open .faq-q .icon {
-  transform: rotate(45deg);
+.feedback-form textarea {
+  min-height: 120px;
 }
 
-.faq-a {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
+.feedback-form button {
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: none;
+  background: #fff;
+  color: #09090f;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+  align-self: flex-start;
 }
 
-.faq-item.open .faq-a {
-  max-height: 300px;
+.feedback-form button:hover {
+  background: #e0e0e4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.06);
 }
 
-.faq-a-inner {
-  padding: 0 24px 20px;
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
+.feedback-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-thanks {
+  display: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.15);
+  color: #34d399;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.divider {
+  position: relative; z-index: 1;
+  max-width: 520px;
+  margin: 0 auto 60px;
+  border: none;
+  border-top: 1px solid var(--border);
 }
 
 /* ═══════ FOOTER ═══════ */
@@ -315,7 +304,8 @@ footer {
 @media (max-width: 900px) {
   .hero { padding: 110px 20px 20px; }
   .hero h1 { font-size: 2rem; }
-  .faq-section { padding: 0 20px 60px; margin-top: 30px; }
+  .form-section { padding: 0 20px 40px; }
+  .divider { margin-left: 20px; margin-right: 20px; }
   .footer-inner { flex-direction: column; }
   .footer-links { flex-direction: column; gap: 28px; }
 }
@@ -329,9 +319,8 @@ footer {
 
 @media (max-width: 560px) {
   .hero h1 { font-size: 1.7rem; }
-  .faq-section { padding: 0 16px 40px; }
-  .faq-q { font-size: 0.88rem; padding: 16px 18px; }
-  .faq-a-inner { padding: 0 18px 16px; font-size: 0.85rem; }
+  .form-section { padding: 0 16px 30px; }
+  .divider { margin-left: 16px; margin-right: 16px; }
 }
 </style>
 </head>
@@ -347,8 +336,8 @@ footer {
     <a href="/tunamat" class="pill-cta">TunaMat</a>
     <a href="/">Home</a>
     <a href="/roadmap">Roadmap</a>
-    <a href="/feedback">Feedback</a>
-    <a href="/faq" class="active">FAQ</a>
+    <a href="/feedback" class="active">Feedback</a>
+    <a href="/faq">FAQ</a>
   </div>
   <div class="nav-right">
     <a href="/tunamat" class="btn-nav-cta">Download App</a>
@@ -368,30 +357,36 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Frequently Asked <span class="accent">Questions</span></h1>
-  <p class="sub">Everything you need to know about Tuna Athletics and our apps.</p>
+  <h1>We'd Love Your <span class="accent">Feedback</span></h1>
+  <p class="sub">Help us make our apps better for every teacher.</p>
 </section>
 
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q">Who are we? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Tuna Athletics is powered by a team of experienced professionals with a diverse mix of specialties including iOS App Development, Yoga, Mat Pilates, Reformer Pilates, Spin and Design. We are dedicated to providing the best solutions to an instructor's everyday need as well as bring a social element that rewards teachers who put effort and thought into creating killer classes.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">What devices are supported? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">iPhones with iOS 17 or later at the moment. We are expanding to create supported iPad, Apple Watch and Android capability.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Do I need a Spotify account for the music integration? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Tuna Athletics Apps don't play from Spotify. We simply allow Users to paste a public playlist link to analyse the BPMs of each song, as well as create Segments for teachers who wish to plan classes by Song duration.</div></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q">Can I create my own Movements and Flows? <span class="icon">+</span></button>
-      <div class="faq-a"><div class="faq-a-inner">Yes yes yes! We want you to create and personalise this tool so that you feel a connection to your classes.</div></div>
-    </div>
-  </div>
+<!-- FEEDBACK FORM -->
+<section class="form-section">
+  <h2>Feedback</h2>
+  <p>All our apps are made for teachers, by teachers. As such, we take every feedback seriously and are always looking to improve. Be it our interface, Movement mis-labelling or generic comments, we are all ears.</p>
+  <form class="feedback-form" id="feedbackForm">
+    <input type="text" id="feedbackName" placeholder="Your name (optional)">
+    <input type="email" id="feedbackEmail" placeholder="Your email (optional)">
+    <textarea id="feedbackMessage" placeholder="Your feedback..." required></textarea>
+    <button type="submit">Send Feedback</button>
+  </form>
+  <div class="form-thanks" id="feedbackThanks">Thank you for your feedback! We truly appreciate it.</div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT FORM -->
+<section class="form-section">
+  <h2>Contact Us</h2>
+  <p>Have a question or need help? Drop us a message.</p>
+  <form class="feedback-form" id="contactForm">
+    <input type="text" id="contactName" placeholder="Your name" required>
+    <input type="email" id="contactEmail" placeholder="Your email" required>
+    <textarea id="contactMessage" placeholder="Your message..." required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <div class="form-thanks" id="contactThanks">Message sent! We'll get back to you soon.</div>
 </section>
 
 <!-- FOOTER -->
@@ -424,6 +419,28 @@ footer {
 </footer>
 
 <script>
+const SUPABASE_URL = 'https://hhfexwrpsepoojekvcoz.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoZmV4d3Jwc2Vwb29qZWt2Y296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyMzcxMTQsImV4cCI6MjA4OTgxMzExNH0.ZHOuL7uMS4ETppD1xV-0Gi3NBtYYf57PlJ7scvTfDOg';
+
+async function submitToSupabase(type, name, email, message) {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/feedback', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      type: type,
+      name: name || null,
+      email: email || null,
+      message: message
+    })
+  });
+  if (!res.ok) throw new Error('Failed to submit');
+}
+
 // Mobile menu
 function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('open');
@@ -442,14 +459,48 @@ window.addEventListener('scroll', () => {
     window.scrollY > 60 ? 'rgba(9,9,15,0.92)' : 'rgba(9,9,15,0.8)';
 });
 
-// FAQ accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
-  });
+// Feedback form
+document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  try {
+    await submitToSupabase(
+      'feedback',
+      document.getElementById('feedbackName').value.trim(),
+      document.getElementById('feedbackEmail').value.trim(),
+      document.getElementById('feedbackMessage').value.trim()
+    );
+    this.style.display = 'none';
+    document.getElementById('feedbackThanks').style.display = 'block';
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Send Feedback';
+    alert('Something went wrong. Please try again.');
+  }
+});
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  try {
+    await submitToSupabase(
+      'contact',
+      document.getElementById('contactName').value.trim(),
+      document.getElementById('contactEmail').value.trim(),
+      document.getElementById('contactMessage').value.trim()
+    );
+    this.style.display = 'none';
+    document.getElementById('contactThanks').style.display = 'block';
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+    alert('Something went wrong. Please try again.');
+  }
 });
 </script>
 
