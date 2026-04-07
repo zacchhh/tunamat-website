@@ -5,6 +5,7 @@
     { "source": "/roadmap", "destination": "/roadmap.html" },
     { "source": "/feedback", "destination": "/feedback.html" },
     { "source": "/faq", "destination": "/faq.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/tunamat/webapp", "destination": "/app/index.html" },
     { "source": "/tunamat/webapp/(.*)", "destination": "/app/index.html" },
     { "source": "/app/(.*)", "destination": "/app/index.html" }
