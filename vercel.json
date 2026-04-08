@@ -6,6 +6,8 @@
     { "source": "/feedback", "destination": "/feedback.html" },
     { "source": "/faq", "destination": "/faq.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/blog/:slug", "destination": "/blog-post.html" },
     { "source": "/tunamat/webapp", "destination": "/app/index.html" },
     { "source": "/tunamat/webapp/(.*)", "destination": "/app/index.html" },
     { "source": "/app/(.*)", "destination": "/app/index.html" }
