@@ -131,9 +131,14 @@ nav {
   transition: all 0.25s;
 }
 .nav-pills a:hover, .nav-pills a.active { color: #fff; background: rgba(255,255,255,0.08); }
-.nav-pills a.active.pill-cta { background: rgba(140,92,245,0.12); border: 1px solid rgba(140,92,245,0.5); }
-.nav-pills a.pill-cta { color: #a855f7; font-weight: 600; }
-.nav-pills a.pill-cta:hover { color: #c084fc; background: rgba(255,255,255,0.08); }
+.nav-center { display: flex; align-items: center; gap: 8px; }
+.nav-tunamat-pill {
+  color: #a855f7; font-weight: 600; text-decoration: none;
+  font-size: 0.78rem; padding: 6px 16px; border-radius: 50px;
+  background: rgba(140,92,245,0.08); border: 1px solid rgba(140,92,245,0.35);
+  transition: all 0.25s;
+}
+.nav-tunamat-pill:hover { color: #c084fc; background: rgba(140,92,245,0.15); border-color: rgba(140,92,245,0.5); }
 .nav-right { display: flex; align-items: center; gap: 20px; }
 .btn-nav-cta {
   display: inline-flex; align-items: center; gap: 6px;
@@ -190,6 +195,7 @@ nav {
   transition: all 0.2s;
 }
 .mobile-menu a:hover { background: rgba(255,255,255,0.06); }
+.mobile-menu a.mobile-tunamat { color: #a855f7; }
 
 /* ═══════ HERO ═══════ */
 .hero {
@@ -325,7 +331,7 @@ footer {
 }
 @media (max-width: 768px) {
   nav { padding: 12px 20px; }
-  .nav-pills { display: none; }
+  .nav-center { display: none; }
   .btn-nav-cta { display: none; }
   .nav-brand { display: none; }
   .hamburger { display: flex; }
@@ -347,12 +353,14 @@ footer {
     <img src="/logo/fish-logo.png" class="nav-logo-fish" alt="Tuna Athletics">
     <img src="/logo/tunaathletics.png" class="nav-logo-text" alt="Tuna Athletics">
   </a>
-  <div class="nav-pills">
-    <a href="/tunamat" class="pill-cta">TunaMat</a>
-    <a href="/">Home</a>
-    <a href="/roadmap">Roadmap</a>
-    <a href="/feedback">Feedback</a>
-    <a href="/faq" class="active">FAQ</a>
+  <div class="nav-center">
+    <a href="/tunamat" class="nav-tunamat-pill">TunaMat</a>
+    <div class="nav-pills">
+      <a href="/">Home</a>
+      <a href="/roadmap">Roadmap</a>
+      <a href="/feedback">Feedback</a>
+      <a href="/faq" class="active">FAQ</a>
+    </div>
   </div>
   <div class="nav-right">
     <a href="/tunamat" class="btn-nav-cta">Download App</a>
@@ -362,8 +370,8 @@ footer {
   </div>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
+  <a href="/tunamat" class="mobile-tunamat" onclick="closeMenu()">TunaMat</a>
   <a href="/" onclick="closeMenu()">Home</a>
-  <a href="/tunamat" onclick="closeMenu()">TunaMat</a>
   <a href="/roadmap" onclick="closeMenu()">Roadmap</a>
   <a href="/feedback" onclick="closeMenu()">Feedback</a>
   <a href="/faq" onclick="closeMenu()">FAQ</a>
