@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite app",
-    "build": "vite build app --outDir ../dist/app --emptyOutDir && cp index.html dist/index.html && cp tunamat.html dist/tunamat.html && cp roadmap.html dist/roadmap.html && cp faq.html dist/faq.html && cp feedback.html dist/feedback.html && cp privacy.html dist/privacy.html && cp sitemap.xml dist/sitemap.xml && cp robots.txt dist/robots.txt && cp favicon.svg dist/favicon.svg && cp -r screenshots dist/screenshots && cp -r logo dist/logo",
+    "build": "vite build app --outDir ../dist/app --emptyOutDir && cp index.html dist/index.html && cp tunamat.html dist/tunamat.html && cp roadmap.html dist/roadmap.html && cp faq.html dist/faq.html && cp feedback.html dist/feedback.html && cp privacy.html dist/privacy.html && cp sitemap.xml dist/sitemap.xml && cp robots.txt dist/robots.txt && cp -r screenshots dist/screenshots && cp -r logo dist/logo",
     "lint": "eslint app",
     "preview": "vite preview --root dist"
   },
