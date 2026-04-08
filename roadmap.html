@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Roadmap — Tuna Athletics</title>
-<meta name="description" content="See what's next for Tuna Athletics — from the Creator Marketplace to AI-powered flow building, social features, and multi-device support.">
-<meta name="keywords" content="Tuna Athletics roadmap, pilates app features, upcoming features, creator marketplace, AI flow builder">
+<meta name="description" content="See what's next for Tuna Athletics — from creator monetisation to smart flow generation, social features, and multi-platform support.">
+<meta name="keywords" content="Tuna Athletics roadmap, pilates app features, upcoming features, creator monetisation, smart flow generator">
 <link rel="canonical" href="https://tunaathletics.com/roadmap">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tunaathletics.com/roadmap">
 <meta property="og:title" content="Roadmap — Tuna Athletics">
-<meta property="og:description" content="See what's next for Tuna Athletics — from the Creator Marketplace to AI-powered flow building and social features.">
+<meta property="og:description" content="See what's next for Tuna Athletics — from creator monetisation to smart flow generation, social features, and more.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Roadmap — Tuna Athletics">
-<meta name="twitter:description" content="See what's next for Tuna Athletics — Creator Marketplace, AI flows, social features, and more.">
+<meta name="twitter:description" content="See what's next for Tuna Athletics — creator monetisation, smart flows, social features, and more.">
 <meta property="og:image" content="https://tunaathletics.com/logo/og-image.png">
 <meta name="twitter:image" content="https://tunaathletics.com/logo/og-image.png">
 <link rel="icon" type="image/png" href="/logo/favicon-48.png">
@@ -144,7 +144,7 @@ nav {
 /* ═══════ PHASE GRID ═══════ */
 .phase-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   row-gap: 32px;
   column-gap: 18px;
   position: relative;
@@ -251,6 +251,27 @@ nav {
 }
 
 .phase-node.current .phase-label { color: #34d399; }
+
+/* Released / completed stop dots */
+.stop-dot.released {
+  background: #34d399 !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 8px rgba(52,211,153,0.4);
+  position: relative;
+}
+.stop-dot.released::after {
+  content: '\2713';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6px;
+  font-weight: 900;
+  color: #09090f;
+  line-height: 1;
+}
+.phase-node.current .stop-dot.released {
+  background: #34d399 !important;
+}
 
 .phase-title {
   font-family: 'Sora', sans-serif;
@@ -369,10 +390,8 @@ nav {
 /* ═══════ FLOW CONNECTORS ═══════ */
 [data-phase="1"]::after,
 [data-phase="2"]::after,
-[data-phase="3"]::after,
-[data-phase="5"]::after,
-[data-phase="6"]::after,
-[data-phase="7"]::after {
+[data-phase="4"]::after,
+[data-phase="5"]::after {
   content: '';
   position: absolute;
   right: -13px;
@@ -640,9 +659,7 @@ footer {
   .phase-grid { grid-template-columns: repeat(2, 1fr); }
 
   [data-phase="2"]::after,
-  [data-phase="4"]::after,
-  [data-phase="6"]::after,
-  [data-phase="8"]::after {
+  [data-phase="4"]::after {
     display: none !important;
   }
 }
@@ -725,13 +742,13 @@ footer {
 
     <!-- ═══ ROW 1 ═══ -->
     <div class="phase-node current" data-phase="1">
-      <div class="phase-card" style="--phase-color: #fff">
-        <div class="phase-label">Phase 1 — Current</div>
+      <div class="phase-card" style="--phase-color: #34d399">
+        <div class="phase-label">Phase 1 — Complete</div>
         <div class="phase-title">MVP — App Store Launch</div>
         <div class="phase-track" style="--stops: 3">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Spotify Integration</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Movement Library</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Core Features</div></div>
+          <div class="track-stop"><div class="stop-dot released"></div><div class="stop-label">Spotify Integration</div></div>
+          <div class="track-stop"><div class="stop-dot released"></div><div class="stop-label">First Batch of Movements</div></div>
+          <div class="track-stop"><div class="stop-dot released"></div><div class="stop-label">Core Features</div></div>
         </div>
         <button class="upvote-btn" data-id="phase-1" data-base="47" onclick="toggleVote(this)">
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
@@ -742,13 +759,12 @@ footer {
 
     <div class="phase-node" data-phase="2">
       <div class="phase-card" style="--phase-color: #a78bfa">
-        <div class="phase-label">Phase 2</div>
-        <div class="phase-title">Polish &amp; Content Depth</div>
-        <div class="phase-track" style="--stops: 4">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Flow Sharing</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Expanded Library</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">UX Polish</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Performance</div></div>
+        <div class="phase-label">Phase 2 — Current</div>
+        <div class="phase-title">Polish &amp; Creator Launch</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Movement Library Upgrade</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">UX Touch Up</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Creator Status (Free)</div></div>
         </div>
         <button class="upvote-btn" data-id="phase-2" data-base="31" onclick="toggleVote(this)">
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
@@ -757,15 +773,14 @@ footer {
       </div>
     </div>
 
-    <div class="phase-node hot" data-phase="3">
+    <div class="phase-node" data-phase="3">
       <div class="phase-card" style="--phase-color: #fbbf24">
         <div class="phase-label">Phase 3</div>
-        <div class="phase-title">Creator Marketplace</div>
-        <div class="phase-track" style="--stops: 4">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Marketplace</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Stripe Connect</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Creator Profiles</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Reviews</div></div>
+        <div class="phase-title">Creator Monetisation</div>
+        <div class="phase-track" style="--stops: 3">
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Creator Stripe Connect</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Discover Flows (Paid)</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Push Notifs</div></div>
         </div>
         <button class="upvote-btn" data-id="phase-3" data-base="106" onclick="toggleVote(this)">
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
@@ -774,83 +789,51 @@ footer {
       </div>
     </div>
 
-    <div class="phase-node" data-phase="4">
-      <div class="phase-card" style="--phase-color: #5eead4">
-        <div class="phase-label">Phase 4</div>
-        <div class="phase-title">Customisability</div>
-        <div class="phase-track" style="--stops: 3">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Avatars</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Colour Profiles</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Push Notifs</div></div>
-        </div>
-        <button class="upvote-btn" data-id="phase-4" data-base="19" onclick="toggleVote(this)">
-          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
-          <span class="vote-count">19</span>
-        </button>
-      </div>
-    </div>
-
     <!-- ═══ ROW 2 ═══ -->
-    <div class="phase-node" data-phase="5">
+    <div class="phase-node" data-phase="4">
       <div class="phase-card" style="--phase-color: #60a5fa">
-        <div class="phase-label">Phase 5</div>
-        <div class="phase-title">AI Flow Builder</div>
+        <div class="phase-label">Phase 4</div>
+        <div class="phase-title">Smart Flow Generator</div>
         <div class="phase-track" style="--stops: 3">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">AI Generation</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Smart Suggest</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Balance AI</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Smart Flow Generator</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Balance Analytics</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Avatars</div></div>
         </div>
-        <button class="upvote-btn" data-id="phase-5" data-base="38" onclick="toggleVote(this)">
+        <button class="upvote-btn" data-id="phase-4" data-base="38" onclick="toggleVote(this)">
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
           <span class="vote-count">38</span>
         </button>
       </div>
     </div>
 
-    <div class="phase-node" data-phase="6">
+    <div class="phase-node" data-phase="5">
       <div class="phase-card" style="--phase-color: #f472b6">
-        <div class="phase-label">Phase 6</div>
+        <div class="phase-label">Phase 5</div>
         <div class="phase-title">Social Features</div>
         <div class="phase-track" style="--stops: 3">
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Follows</div></div>
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Activity Feed</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Shared Flows</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Social Sharing</div></div>
         </div>
-        <button class="upvote-btn" data-id="phase-6" data-base="15" onclick="toggleVote(this)">
+        <button class="upvote-btn" data-id="phase-5" data-base="15" onclick="toggleVote(this)">
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
           <span class="vote-count">15</span>
         </button>
       </div>
     </div>
 
-    <div class="phase-node" data-phase="7">
+    <div class="phase-node" data-phase="6">
       <div class="phase-card" style="--phase-color: #4ade80">
-        <div class="phase-label">Phase 7</div>
-        <div class="phase-title">iPad &amp; Apple Watch</div>
+        <div class="phase-label">Phase 6</div>
+        <div class="phase-title">Multi-Platform</div>
         <div class="phase-track" style="--stops: 3">
           <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">iPad Support</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Apple Watch</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Multi-Column</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Apple Watch Support</div></div>
+          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Web App Improvements</div></div>
         </div>
-        <button class="upvote-btn" data-id="phase-7" data-base="22" onclick="toggleVote(this)">
+        <button class="upvote-btn" data-id="phase-6" data-base="22" onclick="toggleVote(this)">
           <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
           <span class="vote-count">22</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="phase-node" data-phase="8">
-      <div class="phase-card" style="--phase-color: #fb923c">
-        <div class="phase-label">Future</div>
-        <div class="phase-title">TunaSpin &amp; TunaReformer</div>
-        <div class="phase-track" style="--stops: 3">
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">TunaSpin</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">TunaReformer</div></div>
-          <div class="track-stop"><div class="stop-dot"></div><div class="stop-label">Shared Accounts</div></div>
-        </div>
-        <button class="upvote-btn" data-id="phase-8" data-base="28" onclick="toggleVote(this)">
-          <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M4 0L8 6H0L4 0Z" fill="currentColor"/></svg>
-          <span class="vote-count">28</span>
         </button>
       </div>
     </div>
