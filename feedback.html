@@ -454,6 +454,15 @@ async function submitToSupabase(type, name, email, message) {
   if (!res.ok) throw new Error('Failed to submit');
 }
 
+const NOTIFY_URL = 'https://script.google.com/a/macros/tunaathletics.com/s/AKfycbzkZugNDeYFhh_mLlibY5yp7GLBfeaTjr9WFPqsy5XeHTSq80VwEDLIEH-NyNtRX7_q/exec';
+
+function notifyEmail(type, name, email, message) {
+  fetch(NOTIFY_URL, {
+    method: 'POST',
+    body: JSON.stringify({ type, name, email, message })
+  }).catch(() => {});
+}
+
 // Mobile menu
 function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('open');
@@ -479,12 +488,11 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
   btn.disabled = true;
   btn.textContent = 'Sending...';
   try {
-    await submitToSupabase(
-      'feedback',
-      document.getElementById('feedbackName').value.trim(),
-      document.getElementById('feedbackEmail').value.trim(),
-      document.getElementById('feedbackMessage').value.trim()
-    );
+    const fName = document.getElementById('feedbackName').value.trim();
+    const fEmail = document.getElementById('feedbackEmail').value.trim();
+    const fMsg = document.getElementById('feedbackMessage').value.trim();
+    await submitToSupabase('feedback', fName, fEmail, fMsg);
+    notifyEmail('feedback', fName, fEmail, fMsg);
     this.style.display = 'none';
     document.getElementById('feedbackThanks').style.display = 'block';
   } catch (err) {
@@ -501,12 +509,11 @@ document.getElementById('contactForm').addEventListener('submit', async function
   btn.disabled = true;
   btn.textContent = 'Sending...';
   try {
-    await submitToSupabase(
-      'contact',
-      document.getElementById('contactName').value.trim(),
-      document.getElementById('contactEmail').value.trim(),
-      document.getElementById('contactMessage').value.trim()
-    );
+    const cName = document.getElementById('contactName').value.trim();
+    const cEmail = document.getElementById('contactEmail').value.trim();
+    const cMsg = document.getElementById('contactMessage').value.trim();
+    await submitToSupabase('contact', cName, cEmail, cMsg);
+    notifyEmail('contact', cName, cEmail, cMsg);
     this.style.display = 'none';
     document.getElementById('contactThanks').style.display = 'block';
   } catch (err) {
