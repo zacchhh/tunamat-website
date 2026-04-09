@@ -454,16 +454,30 @@ async function submitToSupabase(type, name, email, message) {
   if (!res.ok) throw new Error('Failed to submit');
 }
 
-const NOTIFY_URL = 'https://script.google.com/a/macros/tunaathletics.com/s/AKfycbxf-kV9pFYHeXqt0379FpVA2I8KVvrGE4WPJm5uJvgylDvt_YdBG5RvcUrtf78RU0Au/exec';
+const NOTIFY_URL = 'https://script.google.com/a/macros/tunaathletics.com/s/AKfycbwsqgc5wl0WWZwAwZz-WIL3ZJiiT7zb-opgFaevldQS6Q80ENXGVdJj8ruBgs-v_BQ/exec';
 
 function notifyEmail(type, name, email, message) {
-  const form = new FormData();
-  form.append('data', JSON.stringify({ type, name, email, message }));
-  fetch(NOTIFY_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: form
-  }).catch(() => {});
+  var iframe = document.createElement('iframe');
+  iframe.name = 'notify-frame';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = NOTIFY_URL;
+  form.target = 'notify-frame';
+  ['type', 'name', 'email', 'message'].forEach(function(key) {
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = { type, name, email, message }[key] || '';
+    form.appendChild(input);
+  });
+  document.body.appendChild(form);
+  form.submit();
+  setTimeout(function() {
+    iframe.remove();
+    form.remove();
+  }, 5000);
 }
 
 // Mobile menu
