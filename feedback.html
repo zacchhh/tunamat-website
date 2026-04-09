@@ -510,8 +510,10 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
     const fMsg = document.getElementById('feedbackMessage').value.trim();
     await submitToSupabase('feedback', fName, fEmail, fMsg);
     notifyEmail('feedback', fName, fEmail, fMsg);
-    this.style.display = 'none';
-    document.getElementById('feedbackThanks').style.display = 'block';
+    setTimeout(() => {
+      this.style.display = 'none';
+      document.getElementById('feedbackThanks').style.display = 'block';
+    }, 500);
   } catch (err) {
     btn.disabled = false;
     btn.textContent = 'Send Feedback';
@@ -531,8 +533,10 @@ document.getElementById('contactForm').addEventListener('submit', async function
     const cMsg = document.getElementById('contactMessage').value.trim();
     await submitToSupabase('contact', cName, cEmail, cMsg);
     notifyEmail('contact', cName, cEmail, cMsg);
-    this.style.display = 'none';
-    document.getElementById('contactThanks').style.display = 'block';
+    setTimeout(() => {
+      this.style.display = 'none';
+      document.getElementById('contactThanks').style.display = 'block';
+    }, 500);
   } catch (err) {
     btn.disabled = false;
     btn.textContent = 'Send Message';
