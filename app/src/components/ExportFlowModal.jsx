@@ -110,17 +110,6 @@ export default function ExportFlowModal({ segments, onClose }) {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const handleDownloadJSON = () => {
-    const flowJson = buildFlowPayload(name.trim(), description.trim(), intensity, segments)
-    const blob = new Blob([JSON.stringify(flowJson, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${name.trim().replace(/\s+/g, '-').toLowerCase()}-flow.json`
-    a.click()
-    URL.revokeObjectURL(url)
-  }
-
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center"
@@ -253,32 +242,19 @@ export default function ExportFlowModal({ segments, onClose }) {
               {deepLink}
             </div>
 
-            {/* Action buttons */}
-            <div className="flex gap-2 w-full">
-              <button
-                onClick={handleCopy}
-                className="flex-1 py-2 rounded-xl text-xs font-bold cursor-pointer transition-all border-none"
-                style={{
-                  backgroundColor: copied ? 'rgba(60,200,180,0.2)' : 'rgba(166,117,255,0.2)',
-                  border: copied ? '1px solid rgba(60,200,180,0.4)' : '1px solid rgba(166,117,255,0.4)',
-                  color: copied ? '#3CC8B4' : '#A675FF',
-                }}
-                onMouseEnter={(e) => { if (!copied) e.currentTarget.style.backgroundColor = 'rgba(166,117,255,0.35)' }}
-                onMouseLeave={(e) => { if (!copied) e.currentTarget.style.backgroundColor = 'rgba(166,117,255,0.2)' }}
-              >
-                {copied ? 'Copied!' : 'Copy Link'}
-              </button>
-
-              <button
-                onClick={handleDownloadJSON}
-                className="flex-1 py-2 rounded-xl text-xs font-bold cursor-pointer transition-all border-none"
-                style={{ backgroundColor: 'rgba(60,200,180,0.12)', border: '1px solid rgba(60,200,180,0.3)', color: '#3CC8B4' }}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(60,200,180,0.22)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(60,200,180,0.12)' }}
-              >
-                Download JSON
-              </button>
-            </div>
+            <button
+              onClick={handleCopy}
+              className="w-full py-2 rounded-xl text-xs font-bold cursor-pointer transition-all border-none"
+              style={{
+                backgroundColor: copied ? 'rgba(60,200,180,0.2)' : 'rgba(166,117,255,0.2)',
+                border: copied ? '1px solid rgba(60,200,180,0.4)' : '1px solid rgba(166,117,255,0.4)',
+                color: copied ? '#3CC8B4' : '#A675FF',
+              }}
+              onMouseEnter={(e) => { if (!copied) e.currentTarget.style.backgroundColor = 'rgba(166,117,255,0.35)' }}
+              onMouseLeave={(e) => { if (!copied) e.currentTarget.style.backgroundColor = 'rgba(166,117,255,0.2)' }}
+            >
+              {copied ? 'Copied!' : 'Copy Link'}
+            </button>
           </div>
         )}
       </div>
