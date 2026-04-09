@@ -3,26 +3,48 @@ import QRCode from 'qrcode'
 import { supabase } from '../lib/supabase'
 
 const INTENSITIES = ['recovery', 'low', 'moderate', 'high', 'peak']
+const INTENSITY_DISPLAY = { recovery: 'Recovery', low: 'Low', moderate: 'Moderate', high: 'High', peak: 'Peak' }
 
 function buildFlowPayload(name, description, intensity, segments) {
+  const flowId = crypto.randomUUID()
+  const now = new Date().toISOString()
+  const difficulty = INTENSITY_DISPLAY[intensity] || 'Moderate'
+
   return {
+    id: flowId,
+    userId: null,
     name,
     description: description || null,
-    intensity,
     tags: [],
     category: null,
-    equipment: [...new Set(segments.flatMap(s => s.movements.flatMap(m => m.equipment || [])))],
-    segments: segments.map((seg, segIdx) => ({
-      order: segIdx,
-      focus: seg.name,
-      duration: seg.movements.length * 60,
-      movements: seg.movements.map((mov, movIdx) => ({
-        movementId: mov.id,
-        order: movIdx,
-        pacing: { preset: intensity },
-        notes: null,
-      })),
-    })),
+    equipment: [],
+    difficulty,
+    segments: segments.map((seg, segIdx) => {
+      const segmentId = crypto.randomUUID()
+      return {
+        id: segmentId,
+        flowId,
+        order: segIdx,
+        focus: seg.name,
+        duration: seg.movements.length * 60,
+        spotifySongTitle: null,
+        spotifySongBPM: null,
+        movements: seg.movements.map((mov, movIdx) => ({
+          id: crypto.randomUUID(),
+          segmentId,
+          movementId: mov.id,
+          order: movIdx,
+          pacing: { preset: difficulty },
+          notes: null,
+        })),
+      }
+    }),
+    spotifyPlaylistUrl: null,
+    isFavourite: false,
+    isExample: false,
+    origin: 'created',
+    createdAt: now,
+    updatedAt: now,
   }
 }
 
@@ -57,13 +79,20 @@ export default function ExportFlowModal({ segments, onClose }) {
     setError(null)
     setStep('saving')
 
-    const payload = buildFlowPayload(name.trim(), description.trim(), intensity, segments)
+    const flowJson = buildFlowPayload(name.trim(), description.trim(), intensity, segments)
+    const shareId = crypto.randomUUID()
+    const now = new Date().toISOString()
 
-    const { data, error: dbError } = await supabase
+    const { error: dbError } = await supabase
       .from('shared_flows')
-      .insert({ name: payload.name, description: payload.description, flow_json: payload })
-      .select('id')
-      .single()
+      .insert({
+        id: shareId,
+        name: flowJson.name,
+        flow_json: flowJson,
+        custom_movements_json: [],
+        shared_by_user_id: 'web-flow-builder',
+        created_at: now,
+      })
 
     if (dbError) {
       setError(dbError.message)
@@ -71,7 +100,7 @@ export default function ExportFlowModal({ segments, onClose }) {
       return
     }
 
-    setSavedId(data.id)
+    setSavedId(shareId)
     setStep('success')
   }
 
@@ -82,8 +111,8 @@ export default function ExportFlowModal({ segments, onClose }) {
   }
 
   const handleDownloadJSON = () => {
-    const payload = buildFlowPayload(name.trim(), description.trim(), intensity, segments)
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
+    const flowJson = buildFlowPayload(name.trim(), description.trim(), intensity, segments)
+    const blob = new Blob([JSON.stringify(flowJson, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -211,7 +240,7 @@ export default function ExportFlowModal({ segments, onClose }) {
         {step === 'success' && (
           <div className="flex flex-col items-center">
             <h2 className="text-base font-bold mb-1" style={{ color: '#E8E4F0' }}>Flow Exported</h2>
-            <p className="text-xs mb-4" style={{ color: '#5E5880' }}>Scan the QR code or copy the link to import in TunaMat</p>
+            <p className="text-xs mb-4" style={{ color: '#5E5880' }}>Scan the QR code or copy the link on a device with TunaMat installed</p>
 
             {/* QR Code */}
             <canvas ref={qrRef} className="rounded-xl mb-4" />
