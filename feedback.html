@@ -454,7 +454,7 @@ async function submitToSupabase(type, name, email, message) {
   if (!res.ok) throw new Error('Failed to submit');
 }
 
-const NOTIFY_URL = 'https://script.google.com/a/macros/tunaathletics.com/s/AKfycbwsqgc5wl0WWZwAwZz-WIL3ZJiiT7zb-opgFaevldQS6Q80ENXGVdJj8ruBgs-v_BQ/exec';
+const NOTIFY_URL = 'https://script.google.com/macros/s/AKfycbwsqgc5wl0WWZwAwZz-WIL3ZJiiT7zb-opgFaevldQS6Q80ENXGVdJj8ruBgs-v_BQ/exec';
 
 function notifyEmail(type, name, email, message) {
   var iframe = document.createElement('iframe');
