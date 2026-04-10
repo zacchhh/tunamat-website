@@ -53,6 +53,7 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
   const [openBranches, setOpenBranches] = useState({})
 
   const [containerH, setContainerH] = useState(600)
+  const [smoothPan, setSmoothPan] = useState(false)
 
   useEffect(() => { const el = containerRef.current; if (el) setContainerH(el.clientHeight); const r = () => { if (el) setContainerH(el.clientHeight) }; window.addEventListener('resize', r); return () => window.removeEventListener('resize', r) }, [])
 
@@ -60,7 +61,7 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
   useEffect(() => { setSelectedGroup(null); setSelectedSubcat(null); clearAll(); setPan({ x: 40, y: 0 }); setZoom(1) }, [mode])
 
   // Pan/zoom — mouse
-  const handleMouseDown = useCallback((e) => { if (e.target.closest('[data-node]')) return; isPanning.current = true; wasDrag.current = false; panStart.current = { x: e.clientX, y: e.clientY }; panOrigin.current = { ...pan } }, [pan])
+  const handleMouseDown = useCallback((e) => { if (e.target.closest('[data-node]')) return; setSmoothPan(false); isPanning.current = true; wasDrag.current = false; panStart.current = { x: e.clientX, y: e.clientY }; panOrigin.current = { ...pan } }, [pan])
   const handleMouseMove = useCallback((e) => { if (!isPanning.current) return; const dx = e.clientX - panStart.current.x; const dy = e.clientY - panStart.current.y; if (Math.abs(dx) > 3 || Math.abs(dy) > 3) wasDrag.current = true; setPan({ x: panOrigin.current.x + dx, y: panOrigin.current.y + dy }) }, [])
   const handleMouseUp = useCallback(() => { isPanning.current = false; setTimeout(() => { wasDrag.current = false }, 0) }, [])
   useEffect(() => { window.addEventListener('mousemove', handleMouseMove); window.addEventListener('mouseup', handleMouseUp); return () => { window.removeEventListener('mousemove', handleMouseMove); window.removeEventListener('mouseup', handleMouseUp) } }, [handleMouseMove, handleMouseUp])
@@ -444,6 +445,24 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
   const prevWidth = useRef(0)
   useEffect(() => { if (layout.totalWidth > prevWidth.current && containerRef.current) { const cw = containerRef.current.clientWidth; const tx = Math.min(40, cw / zoom - layout.totalWidth - 40); setPan(p => ({ x: tx * zoom, y: p.y })) }; prevWidth.current = layout.totalWidth }, [layout.totalWidth, zoom])
 
+  // When a movement is selected as the anchor, recenter the viewport on it
+  // so users don't have to manually pan back from a far-off grid position.
+  useEffect(() => {
+    if (!anchorId || !containerRef.current) return
+    const anchorNode = layout.nodes.find(n => n.type === 'stackmov' && n.role === 'anchor')
+    if (!anchorNode) return
+    const cw = containerRef.current.clientWidth
+    const ch = containerRef.current.clientHeight
+    setSmoothPan(true)
+    setPan({
+      x: cw / 2 - (anchorNode.x + NODE_W / 2) * zoom,
+      y: ch / 2 - (anchorNode.y + MOV_H / 2) * zoom,
+    })
+    const t = setTimeout(() => setSmoothPan(false), 400)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [anchorId])
+
   const clickGroup = (g) => { setSelectedGroup(selectedGroup?.label === g.label ? null : g); setSelectedSubcat(null); clearAll() }
   const clickSubcat = (s) => { setSelectedSubcat(selectedSubcat?.label === s.label ? null : s); clearAll() }
 
@@ -462,7 +481,7 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
         <button onClick={() => { setZoom(1); setPan({ x: 40, y: 0 }) }} className="text-[10px] font-semibold cursor-pointer bg-transparent border-none rounded" style={{ color: '#5E5880' }} onMouseEnter={e => { e.currentTarget.style.color = '#A675FF' }} onMouseLeave={e => { e.currentTarget.style.color = '#5E5880' }}>Reset</button>
       </div>
 
-      <div className="absolute" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`, transformOrigin: '0 0' }}>
+      <div className="absolute" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`, transformOrigin: '0 0', transition: smoothPan ? 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)' : 'none' }}>
         <svg className="absolute pointer-events-none" style={{ left: svgBounds.minX, top: svgBounds.minY, width: svgBounds.w, height: svgBounds.h, overflow: 'visible' }} viewBox={`${svgBounds.minX} ${svgBounds.minY} ${svgBounds.w} ${svgBounds.h}`}>{svgBoxes}{svgPaths}</svg>
 
         {layout.labels.map((lbl, i) => (
