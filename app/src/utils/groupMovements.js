@@ -1,8 +1,9 @@
 const MODES = {
   all: {
     label: 'All Movements',
-    flat: true,
-    columnHeaders: ['Movements', 'Detail'],
+    letterGroup: true,
+    hasSubregion: false,
+    columnHeaders: ['Letter', 'Movements', 'Detail'],
   },
   region: {
     label: 'By Region',
@@ -58,6 +59,23 @@ function groupByKey(movements, key) {
     .map(([label, items]) => ({ label, items, count: items.length }))
 }
 
+function groupByFirstLetter(movements) {
+  const groups = {}
+  movements.forEach((m) => {
+    const first = (m.name?.trim()?.[0] || '#').toUpperCase()
+    const key = /[A-Z]/.test(first) ? first : '#'
+    if (!groups[key]) groups[key] = []
+    groups[key].push(m)
+  })
+  return Object.entries(groups)
+    .sort(([a], [b]) => {
+      if (a === '#') return 1
+      if (b === '#') return -1
+      return a.localeCompare(b)
+    })
+    .map(([label, items]) => ({ label, items, count: items.length }))
+}
+
 function getSubregions(movements) {
   const groups = {}
   movements.forEach((m) => {
@@ -70,4 +88,4 @@ function getSubregions(movements) {
     .map(([label, items]) => ({ label, items, count: items.length }))
 }
 
-export { MODES, groupByKey, getSubregions, formatLabel }
+export { MODES, groupByKey, groupByFirstLetter, getSubregions, formatLabel }

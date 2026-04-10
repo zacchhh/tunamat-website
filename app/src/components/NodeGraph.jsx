@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import NodeCard from './NodeCard'
-import { MODES, groupByKey, getSubregions } from '../utils/groupMovements'
+import { MODES, groupByKey, groupByFirstLetter, getSubregions } from '../utils/groupMovements'
 
 const NODE_W = 210
 const NODE_H = 46
@@ -121,11 +121,12 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
   }, [handleTouchStart, handleTouchMove, handleTouchEnd])
 
   const safeClick = (fn) => () => { if (!wasDrag.current) fn() }
-  const groups = config.flat ? [] : groupByKey(movements, config.groupKey)
+  const groups = config.letterGroup
+    ? groupByFirstLetter(movements)
+    : groupByKey(movements, config.groupKey)
   const subregions = selectedGroup && config.hasSubregion ? getSubregions(selectedGroup.items) : null
   let movementList = null
-  if (config.flat) movementList = movements
-  else if (config.hasSubregion && selectedSubcat) movementList = selectedSubcat.items
+  if (config.hasSubregion && selectedSubcat) movementList = selectedSubcat.items
   else if (!config.hasSubregion && selectedGroup) movementList = selectedGroup.items
   if (movementList) movementList = [...movementList].sort((a, b) => a.name.localeCompare(b.name))
   const getValid = (mov, key) => (mov?.[key] || []).filter(id => movementMap[id])
@@ -221,38 +222,33 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
     let xCursor = 0
     const advanceCol = (w) => { const x = xCursor; xCursor += w + COL_GAP; return x }
 
-    const placeItems = (items, pX, pW, pY, lv, type, color, getId, itemH = NODE_H, hideParentLine = false) => {
+    const placeItems = (items, pX, pW, pY, lv, type, color, getId, itemH = NODE_H) => {
       const c = items.length; const pos = smartLayout(c, pY, itemH); const cw = smartColWidth(c); const bx = advanceCol(cw)
       if (isGridCol(c)) {
         const sc = c > 20 ? 3 : 2; const ch = Math.ceil(c / sc) * itemH + (Math.ceil(c / sc) - 1) * NODE_GAP
         groupBoxes.push({ x: bx - GROUP_PAD, y: pY - ch / 2 - GROUP_PAD, w: cw + GROUP_PAD * 2, h: ch + GROUP_PAD * 2 })
-        if (!hideParentLine) lines.push({ x1: pX + pW, y1: pY, x2: bx - GROUP_PAD, y2: pY, color, dashed: true })
+        lines.push({ x1: pX + pW, y1: pY, x2: bx - GROUP_PAD, y2: pY, color, dashed: true })
       }
-      return items.map((item, i) => { const p = pos[i]; const n = { id: getId(item), x: bx + p.xOffset, y: p.y, data: item, type, level: lv }; nodes.push(n); if (!isGridCol(c) && !hideParentLine) lines.push({ x1: pX + pW, y1: pY, x2: n.x, y2: n.y + itemH / 2, color }); return n })
+      return items.map((item, i) => { const p = pos[i]; const n = { id: getId(item), x: bx + p.xOffset, y: p.y, data: item, type, level: lv }; nodes.push(n); if (!isGridCol(c)) lines.push({ x1: pX + pW, y1: pY, x2: n.x, y2: n.y + itemH / 2, color }); return n })
     }
 
-    // Flat mode (All Movements): no group/subcat columns, render movements directly
-    if (config.flat && movementList) {
-      buildStack(movementList, 0, 0, midY, 0, true)
-    } else {
-      // Groups + subcats
-      const gp = smartLayout(groups.length, midY); const gbx = advanceCol(smartColWidth(groups.length))
-      const gns = groups.map((g, i) => { const n = { id: `group-${g.label}`, x: gbx + gp[i].xOffset, y: gp[i].y, data: g, type: 'group', level: 0 }; nodes.push(n); return n })
-      const selGN = selectedGroup ? gns.find(n => n.data.label === selectedGroup.label) : null
-      const selGY = selGN ? selGN.y + NODE_H / 2 : midY
+    // Groups + subcats
+    const gp = smartLayout(groups.length, midY); const gbx = advanceCol(smartColWidth(groups.length))
+    const gns = groups.map((g, i) => { const n = { id: `group-${g.label}`, x: gbx + gp[i].xOffset, y: gp[i].y, data: g, type: 'group', level: 0 }; nodes.push(n); return n })
+    const selGN = selectedGroup ? gns.find(n => n.data.label === selectedGroup.label) : null
+    const selGY = selGN ? selGN.y + NODE_H / 2 : midY
 
-      if (config.hasSubregion && subregions && selGN) {
-        const sns = placeItems(subregions, selGN.x, NODE_W, selGY, 1, 'subcat', '#5A4F8060', s => `sub-${s.label}`)
-        const selSN = selectedSubcat ? sns.find(n => n.data.label === selectedSubcat.label) : null
-        if (movementList && selSN) buildStack(movementList, selSN.x, NODE_W, selSN.y + NODE_H / 2, 2)
-      } else if (!config.hasSubregion && movementList && selGN) {
-        buildStack(movementList, selGN.x, NODE_W, selGY, 1)
-      }
+    if (config.hasSubregion && subregions && selGN) {
+      const sns = placeItems(subregions, selGN.x, NODE_W, selGY, 1, 'subcat', '#5A4F8060', s => `sub-${s.label}`)
+      const selSN = selectedSubcat ? sns.find(n => n.data.label === selectedSubcat.label) : null
+      if (movementList && selSN) buildStack(movementList, selSN.x, NODE_W, selSN.y + NODE_H / 2, 2)
+    } else if (!config.hasSubregion && movementList && selGN) {
+      buildStack(movementList, selGN.x, NODE_W, selGY, 1)
     }
 
-    function buildStack(movList, pX, pW, pY, lv, hideParentLine = false) {
+    function buildStack(movList, pX, pW, pY, lv) {
       const anchor = anchorId ? movList.find(m => m.id === anchorId) : null
-      if (!anchor) { placeItems(movList, pX, pW, pY, lv, 'movement', '#5A4F8050', m => `mov-${m.id}`, MOV_H, hideParentLine); return }
+      if (!anchor) { placeItems(movList, pX, pW, pY, lv, 'movement', '#5A4F8050', m => `mov-${m.id}`, MOV_H); return }
 
       const stackX = advanceCol(NODE_W)
       const anchorIdx = upStack.length
@@ -264,7 +260,7 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
         const y = pY - MOV_H / 2 + off * stepH
         const mov = movementMap[entry.movId]; if (!mov) return
         nodes.push({ id: `stack-${entry.movId}`, x: stackX, y, data: mov, type: 'stackmov', level: lv + (entry.role === 'anchor' ? 0 : 1), role: entry.role })
-        if (entry.role === 'anchor' && !hideParentLine) lines.push({ x1: pX + pW, y1: pY, x2: stackX, y2: y + MOV_H / 2, color: '#5A4F8050' })
+        if (entry.role === 'anchor') lines.push({ x1: pX + pW, y1: pY, x2: stackX, y2: y + MOV_H / 2, color: '#5A4F8050' })
         if (i < fullStack.length - 1) lines.push({ x1: stackX + NODE_W / 2, y1: y + MOV_H, x2: stackX + NODE_W / 2, y2: y + stepH, color: '#7B6FA830' })
         if (i > 0) {
           const labelY = y - (STACK_GAP - NODE_GAP) / 2 - LABEL_H / 2
