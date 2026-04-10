@@ -261,6 +261,21 @@ export default function SegmentTray({ segments, onUpdate, onExport }) {
                         onDragEnd={onDragEnd}
                       >
                         <span className="text-[9px] select-none" style={{ color: '#5E5880' }}>⠿</span>
+                        {mov.image_url && (
+                          <div
+                            className="shrink-0 rounded overflow-hidden flex items-center justify-center"
+                            style={{ width: 28, height: 28, backgroundColor: 'rgba(160,120,255,0.08)', border: '1px solid rgba(160,120,255,0.1)' }}
+                          >
+                            <img
+                              src={mov.image_url}
+                              alt=""
+                              loading="lazy"
+                              draggable={false}
+                              className="w-full h-full object-contain"
+                              onError={(e) => { e.currentTarget.style.display = 'none' }}
+                            />
+                          </div>
+                        )}
                         <div className="flex-1 min-w-0">
                           <div className="text-[11px] font-medium truncate" style={{ color: '#E8E4F0' }}>{mov.name}</div>
                           <div className="text-[9px] truncate" style={{ color: '#5E5880' }}>{mov.region}</div>

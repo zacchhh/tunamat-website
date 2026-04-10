@@ -547,7 +547,8 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
             <div key={node.id} data-node className="absolute" style={{ left: node.x, top: node.y, width: w, zIndex: zIdx }}>
               <NodeCard label={node.data.label || node.data.name} count={count} active={isActive} level={node.level}
                 onClick={onClick} icon={icon} onQuickAdd={node.already ? undefined : qa} onShowDetail={sd}
-                variant={variant} onCollapse={collapse} pillColor={pillColor} dimmed={node.already} />
+                variant={variant} onCollapse={collapse} pillColor={pillColor} dimmed={node.already}
+                imageUrl={node.data.image_url} />
             </div>
           )
         })}
