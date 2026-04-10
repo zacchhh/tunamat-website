@@ -232,8 +232,13 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
       return items.map((item, i) => { const p = pos[i]; const n = { id: getId(item), x: bx + p.xOffset, y: p.y, data: item, type, level: lv }; nodes.push(n); if (!isGridCol(c)) lines.push({ x1: pX + pW, y1: pY, x2: n.x, y2: n.y + itemH / 2, color }); return n })
     }
 
-    // Groups + subcats
-    const gp = smartLayout(groups.length, midY); const gbx = advanceCol(smartColWidth(groups.length))
+    // Groups + subcats. Letter mode forces single column so 26 alphabet
+    // entries don't fall back to a 2-3 column grid (which overlaps the
+    // adjacent movements column when one is selected).
+    const useSingleCol = config.letterGroup
+    const gp = useSingleCol ? centerLayout(groups.length, midY) : smartLayout(groups.length, midY)
+    const gcw = useSingleCol ? NODE_W : smartColWidth(groups.length)
+    const gbx = advanceCol(gcw)
     const gns = groups.map((g, i) => { const n = { id: `group-${g.label}`, x: gbx + gp[i].xOffset, y: gp[i].y, data: g, type: 'group', level: 0 }; nodes.push(n); return n })
     const selGN = selectedGroup ? gns.find(n => n.data.label === selectedGroup.label) : null
     const selGY = selGN ? selGN.y + NODE_H / 2 : midY
@@ -458,6 +463,24 @@ export default function NodeGraph({ movements, movementMap, mode, onQuickAdd, on
     return () => clearTimeout(t)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [anchorId])
+
+  // In letter mode the alphabet column is very tall. When a letter is picked,
+  // recenter vertically on it so the adjacent movements column lines up with
+  // the viewport instead of being far off-screen.
+  useEffect(() => {
+    if (!config.letterGroup || !selectedGroup || !containerRef.current) return
+    const groupNode = layout.nodes.find(n => n.type === 'group' && n.data.label === selectedGroup.label)
+    if (!groupNode) return
+    const ch = containerRef.current.clientHeight
+    setSmoothPan(true)
+    setPan(p => ({
+      x: p.x,
+      y: ch / 2 - (groupNode.y + NODE_H / 2) * zoom,
+    }))
+    const t = setTimeout(() => setSmoothPan(false), 400)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedGroup, config.letterGroup])
 
   const clickGroup = (g) => { setSelectedGroup(selectedGroup?.label === g.label ? null : g); setSelectedSubcat(null); clearAll() }
   const clickSubcat = (s) => { setSelectedSubcat(selectedSubcat?.label === s.label ? null : s); clearAll() }
