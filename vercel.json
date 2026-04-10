@@ -8,8 +8,10 @@
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/blog", "destination": "/blog.html" },
     { "source": "/blog/:slug", "destination": "/blog-post.html" },
-    { "source": "/tunamat/webapp", "destination": "/app/index.html" },
-    { "source": "/tunamat/webapp/(.*)", "destination": "/app/index.html" },
+    { "source": "/tunamat/flowbuilder", "destination": "/app/index.html" },
+    { "source": "/tunamat/flowbuilder/(.*)", "destination": "/app/index.html" },
+    { "source": "/tunamat/webapp", "destination": "/tunamat/flowbuilder" },
+    { "source": "/tunamat/webapp/(.*)", "destination": "/tunamat/flowbuilder" },
     { "source": "/app/(.*)", "destination": "/app/index.html" }
   ]
 }
