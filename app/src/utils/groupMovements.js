@@ -1,4 +1,9 @@
 const MODES = {
+  all: {
+    label: 'All Movements',
+    flat: true,
+    columnHeaders: ['Movements', 'Detail'],
+  },
   region: {
     label: 'By Region',
     groupKey: 'region',

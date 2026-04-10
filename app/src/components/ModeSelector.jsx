@@ -1,6 +1,7 @@
 import { MODES } from '../utils/groupMovements'
 
 const MODE_ICONS = {
+  all: '☰',
   region: '◉',
   equipment: '⬡',
   movement_pattern: '↗',
