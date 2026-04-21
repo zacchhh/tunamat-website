@@ -281,6 +281,11 @@ footer {
   .policy-block p, .policy-block ul { font-size: 0.85rem; }
 }
 </style>
+<!-- Reddit Pixel -->
+<script>
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=a2_iuapw7rcg7vy",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_iuapw7rcg7vy');rdt('track', 'PageVisit');
+</script>
+<!-- End Reddit Pixel -->
 </head>
 <body>
 
@@ -367,6 +372,7 @@ footer {
     <p>We do not sell your personal information. We may share data only in the following circumstances:</p>
     <ul>
       <li><strong>Service providers:</strong> We use third-party services (such as cloud hosting) to operate our platform. These providers only access data as necessary to perform their services.</li>
+      <li><strong>Advertising partners:</strong> We use the Reddit Pixel, a tracking technology provided by Reddit, Inc., to measure the effectiveness of our advertising campaigns. The pixel collects anonymised data about page visits and interactions on our website. This data may be used by Reddit to serve targeted advertisements. For more information, see <a href="https://www.reddit.com/policies/privacy-policy" target="_blank" rel="noopener">Reddit's Privacy Policy</a>.</li>
       <li><strong>Legal requirements:</strong> We may disclose information if required by law or in response to a valid legal process.</li>
     </ul>
   </div>
@@ -455,5 +461,11 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
+<!-- Reddit Pixel: App Store click tracking -->
+<script>
+document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(link){
+  link.addEventListener('click', function(){rdt('track','Custom',{customEventName:'AppStoreClick'});});
+});
+</script>
 </body>
 </html>

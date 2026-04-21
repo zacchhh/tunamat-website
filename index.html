@@ -669,6 +669,11 @@ footer {
   .phone-flip.coming-soon .phone-flip-inner { transform: rotateY(180deg); }
 }
 </style>
+<!-- Reddit Pixel -->
+<script>
+!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=a2_iuapw7rcg7vy",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_iuapw7rcg7vy');rdt('track', 'PageVisit');
+</script>
+<!-- End Reddit Pixel -->
 </head>
 <body>
 
@@ -1090,5 +1095,11 @@ document.querySelectorAll('.f-card').forEach(el => {
 });
 </script>
 
+<!-- Reddit Pixel: App Store click tracking -->
+<script>
+document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(link){
+  link.addEventListener('click', function(){rdt('track','Custom',{customEventName:'AppStoreClick'});});
+});
+</script>
 </body>
 </html>
